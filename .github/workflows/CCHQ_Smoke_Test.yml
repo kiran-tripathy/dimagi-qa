@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python application
+name: CCHQ Smoke Test
 
 on:
   push:
@@ -24,8 +24,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install -r requires.txt
+        export DISPLAY=mymachine.com:0.0
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -33,5 +33,9 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: CCHQ Smoke Test with pytest
+      env:
+        DIMAGIQA_URL: ${{ secrets.DIMAGIQA_URL }}
+        DIMAGIQA_LOGIN_USERNAME: ${{ secrets.DIMAGIQA_LOGIN_USERNAME }}
+        DIMAGIQA_LOGIN_PASSWORD: ${{ secrets.DIMAGIQA_LOGIN_PASSWORD }}
       run: |
-        pytest --reruns 2 --reruns-delay 2 -n=2 --capture=tee-sys  --email_pytest_report Y
+        pytest --reruns 2 --reruns-delay 2 --capture=tee-sys  --email_pytest_report Y

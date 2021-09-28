@@ -18,5 +18,5 @@ the environment you want to test.
 Run tests
 
 ```sh
-pytest -v
+pytest --reruns 2 --reruns-delay 2 --capture=tee-sys  --email_pytest_report Y
 ```

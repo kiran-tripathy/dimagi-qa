@@ -6,3 +6,5 @@ selenium>=3.141.0
 webdriver-manager>=3.2.2
 openpyxl>=3.0.6
 matplotlib >= 3.3.4
+pytest-rerunfailures>=10.2
+pytest-xdist>=2.4.0
