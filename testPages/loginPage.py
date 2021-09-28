@@ -43,7 +43,7 @@ class LoginPage:
         except TimeoutException:
             pass  # ignore if alert not on page
 
-	def login(self, username, password):
+    def login(self, username, password):
         self.enter_username(username)
         self.click_continue()
         self.enter_password(password)
