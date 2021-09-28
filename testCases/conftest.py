@@ -109,7 +109,7 @@ def init_driver(request):
            # "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
             "safebrowsing.enabled": True})
-        web_driver = ChromeDriverManager().install()
+    web_driver = ChromeDriverManager().install()
 
     driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
     request.cls.driver = driver
