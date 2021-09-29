@@ -38,4 +38,4 @@ jobs:
         DIMAGIQA_LOGIN_USERNAME: ${{ secrets.DIMAGIQA_LOGIN_USERNAME }}
         DIMAGIQA_LOGIN_PASSWORD: ${{ secrets.DIMAGIQA_LOGIN_PASSWORD }}
       run: |
-        pytest --reruns 2 --reruns-delay 2 --capture=tee-sys  --email_pytest_report Y
+        pytest --reruns 2 --reruns-delay 10 --capture=tee-sys  --email_pytest_report Y
