@@ -1,10 +1,10 @@
 flake8>=3.8.4
 pandas>=1.2.2
-pytest==6.0.2
+pytest>=6.2.5
 pytest-html>=3.1.1
 selenium>=3.141.0
 webdriver-manager>=3.2.2
 openpyxl>=3.0.6
 matplotlib >= 3.3.4
-pytest-rerunfailures==9.0
-pytest-xdist==2.1.0
+pytest-rerunfailures>=10.2
+pytest-parallel>=0.10
