@@ -77,7 +77,7 @@ def _capture_screenshot():
     return driver.get_screenshot_as_base64()
 
 
-@pytest.fixture(params=[os.environ.get("CI")], scope="class")
+@pytest.fixture(params=[os.environ.get("CI")], scope="function")
 def init_driver(request):
     settings = load_settings()
     chrome_options = Options()
