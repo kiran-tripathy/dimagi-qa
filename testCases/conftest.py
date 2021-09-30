@@ -58,7 +58,7 @@ driver = None
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
     pytest_html = item.config.pluginmanager.getplugin("html")
-    outcome = yield
+    outcome = yield driver
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
 
