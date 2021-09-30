@@ -9,3 +9,4 @@ pytest-rerunfailures==10.0
 pytest-xdist>=2.3.0
 pytest==6.2.2
 pytest-forked==1.2.0
+pytest-cov==2.8.1
