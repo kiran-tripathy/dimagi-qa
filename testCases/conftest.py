@@ -53,23 +53,23 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-driver = None
+global driver = None
 
 #@pytest.mark.hookwrapper
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item):
     pytest_html = item.config.pluginmanager.getplugin("html")
-    outcome = yield driver
+    outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
 
     if report.when == "call" or report.when == "setup":
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
-            #file_name = report.nodeid.replace("::", "_") + ".png"
-            #screen_img = _capture_screenshot(file_name)
-            now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-            screen_img = driver.save_screenshot(f".\\Screenshots\\fail_{now}.png")
+            file_name = report.nodeid.replace("::", "_") + ".png"
+            screen_img = _capture_screenshot(file_name)
+#             now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+#             screen_img = driver.save_screenshot(f".\\Screenshots\\fail_{now}.png")
             #_capture_screenshot(file_name)
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
@@ -82,16 +82,16 @@ def pytest_runtest_makereport(item):
 def _capture_screenshot(name):
     return driver.get_screenshot_as_file(name)
 """
-"""
+
 def _capture_screenshot():
     return driver.get_screenshot_as_base64()
-"""
+
 
 @pytest.fixture(params=[os.environ.get("CI")], scope="class")
 def init_driver(request):
     settings = load_settings()
     chrome_options = Options()
-    global driver
+    #global driver
     if request.param == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
