@@ -55,7 +55,8 @@ def load_settings():
 
 driver = None
 
-@pytest.mark.hookwrapper
+#@pytest.mark.hookwrapper
+@pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item):
     pytest_html = item.config.pluginmanager.getplugin("html")
     outcome = yield driver
