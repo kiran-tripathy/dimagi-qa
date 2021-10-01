@@ -10,6 +10,7 @@ from UserInputs.userInputsData import UserInputsData
 
 from utilities.email_pytest_report import Email_Pytest_Report
 
+driver = None
 def load_settings_from_environment():
     """Load settings from os.environ
 
@@ -53,10 +54,8 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-driver = None
 
-@pytest.mark.hookwrapper
-#@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+@pytest.mark.hookwrapper(scope='class', autouse=True)
 def pytest_runtest_makereport(item):
     pytest_html = item.config.pluginmanager.getplugin("html")
     outcome = yield
@@ -67,13 +66,13 @@ def pytest_runtest_makereport(item):
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.replace("::", "_") + ".png"
-            screen_img = _capture_screenshot()
+            #screen_img = _capture_screenshot()
 #             now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 #             screen_img = driver.save_screenshot(f".\\Screenshots\\fail_{now}.png")
-            #_capture_screenshot(file_name)
+            _capture_screenshot(file_name)
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
-                       'onclick="window.open(this.src)" align="right"/></div>' % screen_img
+                       'onclick="window.open(this.src)" align="right"/></div>' % file_name
                 extra.append(pytest_html.extras.html(html))
         report.extra = extra
 
@@ -128,6 +127,7 @@ def init_driver(request):
     login.login(settings["login_username"], settings["login_password"])
     yield driver
     driver.close()
+    driver.quit()
 
 
 @pytest.fixture
