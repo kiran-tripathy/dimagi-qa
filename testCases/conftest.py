@@ -53,10 +53,10 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-global driver = None
+driver = None
 
-#@pytest.mark.hookwrapper
-@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+@pytest.mark.hookwrapper
+#@pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item):
     pytest_html = item.config.pluginmanager.getplugin("html")
     outcome = yield
