@@ -77,15 +77,15 @@ def pytest_runtest_makereport(item):
         report.extra = extra
 
  
-""" 
+ 
 def _capture_screenshot(name):
-    return driver.get_screenshot_as_file(name)
+    return driver.get_screenshot_as_file("ScreenShots/" +name)
 """
 
 def _capture_screenshot():
     global driver
     return driver.get_screenshot_as_base64()
-
+"""
 
 @pytest.fixture(params=[os.environ.get("CI")], scope="class")
 def init_driver(request):
