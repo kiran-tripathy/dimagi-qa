@@ -84,6 +84,7 @@ def _capture_screenshot(name):
 """
 
 def _capture_screenshot():
+    global driver
     return driver.get_screenshot_as_base64()
 
 
@@ -91,7 +92,7 @@ def _capture_screenshot():
 def init_driver(request):
     settings = load_settings()
     chrome_options = Options()
-    #global driver
+    global driver
     if request.param == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
