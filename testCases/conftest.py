@@ -67,7 +67,7 @@ def pytest_runtest_makereport(item):
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.replace("::", "_") + ".png"
-            screen_img = _capture_screenshot(file_name)
+            screen_img = _capture_screenshot()
 #             now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 #             screen_img = driver.save_screenshot(f".\\Screenshots\\fail_{now}.png")
             #_capture_screenshot(file_name)
