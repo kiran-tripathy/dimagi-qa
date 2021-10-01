@@ -7,6 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from testPages.loginPage import LoginPage
 from selenium.webdriver.chrome.options import Options
 from UserInputs.userInputsData import UserInputsData
+from datetime import datetime
 
 from utilities.email_pytest_report import Email_Pytest_Report
 
@@ -54,7 +55,7 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-@pytest.fixture(params=[os.environ.get("CI")], scope="class")
+@pytest.fixture(params=[os.environ.get("CI")], scope="function")
 def init_driver(request):
     settings = load_settings()
     chrome_options = Options()
@@ -97,7 +98,7 @@ def init_driver(request):
     driver.quit()
 
 
-@pytest.mark.hookwrapper(scope='class', autouse=True)
+@pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
     pytest_html = item.config.pluginmanager.getplugin("html")
     outcome = yield
@@ -107,7 +108,7 @@ def pytest_runtest_makereport(item):
     if report.when == "call" or report.when == "setup":
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
-            file_name = report.nodeid.replace("::", "_") + ".png"
+            file_name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + ".png" #report.nodeid.replace("::", "_") + ".png"
             screen_img = _capture_screenshot()
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
