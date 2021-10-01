@@ -54,7 +54,7 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-
+"""
 @pytest.mark.hookwrapper(scope='class', autouse=True)
 def pytest_runtest_makereport(item):
     pytest_html = item.config.pluginmanager.getplugin("html")
@@ -80,7 +80,6 @@ def pytest_runtest_makereport(item):
  
 def _capture_screenshot(name):
     return driver.get_screenshot_as_file("ScreenShots/" +name)
-"""
 
 def _capture_screenshot():
     global driver
