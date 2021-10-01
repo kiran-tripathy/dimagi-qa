@@ -52,7 +52,7 @@ def load_settings():
     settings = ConfigParser()
     settings.read(path)
     return settings["default"]
-
+"""
 driver = None
 
 #@pytest.mark.hookwrapper
@@ -79,6 +79,7 @@ def pytest_runtest_makereport(item):
  
 def _capture_screenshot(name):
     return driver.get_screenshot_as_file(name)
+"""
 """
 def _capture_screenshot():
     return driver.get_screenshot_as_base64()
