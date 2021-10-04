@@ -106,20 +106,22 @@ def pytest_runtest_makereport(item):
     extra = getattr(report, 'extra', [])
 
     if report.when == "call" or report.when == "setup":
+        feature_request = item.funcargs['request']
+        driver = feature_request.getfixturevalue('init_driver')
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + ".png" #report.nodeid.replace("::", "_") + ".png"
-            screen_img = _capture_screenshot()
+            screen_img = driver.get_screenshot_as_base64() #_capture_screenshot()
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
                 extra.append(pytest_html.extras.html(html))
         report.extra = extra
-
+"""
 def _capture_screenshot():
     global driver
     return driver.get_screenshot_as_base64()
-
+"""
 @pytest.fixture
 def email_pytest_report(request):
     "pytest fixture for device flag"
