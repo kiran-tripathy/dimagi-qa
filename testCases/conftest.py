@@ -55,7 +55,7 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def init_driver():
     settings = load_settings()
     chrome_options = Options()
