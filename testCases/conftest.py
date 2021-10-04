@@ -56,7 +56,7 @@ def load_settings():
     return settings["default"]
 
 @pytest.fixture(scope="module")
-def init_driver(request):
+def init_driver():
     settings = load_settings()
     chrome_options = Options()
     global driver
@@ -90,10 +90,10 @@ def init_driver(request):
     web_driver = ChromeDriverManager().install()
 
     driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
-    request.cls.driver = driver
-    login = LoginPage(request.cls.driver, settings["url"])
+    #request.cls.driver = driver
+    login = LoginPage(driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
-    yield
+    yield driver
     #driver.close()
     driver.quit()
 
