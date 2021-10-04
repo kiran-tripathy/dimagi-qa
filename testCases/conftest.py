@@ -55,12 +55,12 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-@pytest.fixture(params=[os.environ.get("CI")], scope="class")
+@pytest.fixture(scope="class")
 def init_driver(request):
     settings = load_settings()
     chrome_options = Options()
     global driver
-    if request.param == "true":
+    if os.environ.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
         chrome_options.add_argument('--safebrowsing-disable-download-protection')
@@ -106,8 +106,9 @@ def pytest_runtest_makereport(item, call):
     extra = getattr(report, 'extra', [])
 
     if report.when == "call" or report.when == "setup":
-        driver = feature_request.getfixturevalue('driver')
         feature_request = item.funcargs['request']
+        driver = feature_request.getfixturevalue('driver')
+        
         
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
