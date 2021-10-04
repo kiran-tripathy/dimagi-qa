@@ -99,7 +99,7 @@ def init_driver(request):
 
 
 @pytest.mark.hookwrapper
-def pytest_runtest_makereport(item):
+def pytest_runtest_makereport(item, call):
     pytest_html = item.config.pluginmanager.getplugin("html")
     outcome = yield
     report = outcome.get_result()
