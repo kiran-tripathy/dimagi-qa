@@ -55,7 +55,7 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="class")
 def init_driver():
     settings = load_settings()
     chrome_options = Options()
@@ -97,7 +97,7 @@ def init_driver():
     #driver.close()
     driver.quit()
 
-
+"""
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
  
@@ -122,7 +122,7 @@ def pytest_runtest_makereport(item):
 def _capture_screenshot():
     global driver
     return driver.get_screenshot_as_base64()
-
+"""
 @pytest.fixture
 def email_pytest_report(request):
     "pytest fixture for device flag"
