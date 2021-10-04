@@ -94,7 +94,7 @@ def init_driver(request):
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     yield driver
-    driver.close()
+    #driver.close()
     driver.quit()
 
 
@@ -106,11 +106,12 @@ def pytest_runtest_makereport(item, call):
     extra = getattr(report, 'extra', [])
 
     if report.when == "call" or report.when == "setup":
+        driver = feature_request.getfixturevalue('driver')
         feature_request = item.funcargs['request']
-        driver = feature_request.getfixturevalue('init_driver')
+        
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
-            file_name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + ".png" #report.nodeid.replace("::", "_") + ".png"
+            file_name = report.nodeid.replace("::", "_") + ".png"  # datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + ".png" #
             screen_img = driver.get_screenshot_as_base64() #_capture_screenshot()
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
