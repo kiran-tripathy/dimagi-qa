@@ -55,7 +55,7 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="module")
 def init_driver(request):
     settings = load_settings()
     chrome_options = Options()
@@ -96,21 +96,19 @@ def init_driver(request):
     yield driver
     #driver.close()
     driver.quit()
-    return driver
 
 
-@pytest.mark.hookwrapper
-def pytest_runtest_makereport(item, call):
+@pytest.mark.hookwrapper(tryfirst=True)
+def pytest_runtest_makereport(item):
+    global driver
     pytest_html = item.config.pluginmanager.getplugin("html")
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
 
     if report.when == "call" or report.when == "setup":
-        feature_request = item.funcargs['request']
-        driver = feature_request.getfixturevalue('driver')
-        
-        
+#         feature_request = item.funcargs['request']
+#         driver = feature_request.getfixturevalue('driver')        
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.replace("::", "_") + ".png"  # datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + ".png" #
