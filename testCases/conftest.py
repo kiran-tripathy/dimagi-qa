@@ -96,6 +96,7 @@ def init_driver(request):
     yield driver
     #driver.close()
     driver.quit()
+    return driver
 
 
 @pytest.mark.hookwrapper
