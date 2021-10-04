@@ -90,7 +90,7 @@ def init_driver(request):
     web_driver = ChromeDriverManager().install()
 
     driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
-    request.cls.driver = _driver
+    request.cls.driver = driver
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     yield driver
