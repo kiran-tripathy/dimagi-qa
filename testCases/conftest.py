@@ -117,6 +117,7 @@ def pytest_runtest_makereport(item, call):
                 extra.append(pytest_html.extras.html(html))
         report.extra = extra
 
+@pytest.mark.usefixtures("init_driver")       
 def _capture_screenshot():
     return driver.get_screenshot_as_base64()
 
