@@ -134,7 +134,7 @@ def pytest_runtest_makereport(item, call):
     report = (yield).get_result()
     if report.when == "call"
         setattr(item, "report", report)
-
+    return report
         
 @pytest.fixture
 def email_pytest_report(req):
