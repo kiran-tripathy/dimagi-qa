@@ -7,7 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from testPages.loginPage import LoginPage
 from selenium.webdriver.chrome.options import Options
 from UserInputs.userInputsData import UserInputsData
-from datetime import datetime
+from datetime import datetime, time
 
 from utilities.email_pytest_report import Email_Pytest_Report
 
