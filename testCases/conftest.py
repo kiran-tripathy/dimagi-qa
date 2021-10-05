@@ -95,7 +95,7 @@ def init_driver(request):
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     yield driver
-    driver.close()
+    driver.quit()
 
 
 
@@ -116,7 +116,7 @@ def pytest_runtest_makereport(item, call):
             full_path = os.path.join(report_directory, file_name)
             #if item.funcargs.get('driver'):
             print(f"[INFO] screenshot: {full_path}")
-            item.funcargs['init_driver'].get_screenshot_as_base64()
+            item.funcargs['driver'].get_screenshot_as_base64()
             if file_name:
                     html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:304px;height:228px;" ' \
                            'onclick="window.open(this.src)" align="right"/></div>' % file_name
