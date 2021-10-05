@@ -106,7 +106,7 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
-
+"""
     if report.when == 'call':
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
@@ -136,7 +136,7 @@ def pytest_runtest_makereport(item, call):
 
 def _capture_screenshot():
     return driver.get_screenshot_as_base64()
-"""
+
 @pytest.fixture
 def email_pytest_report(req):
     "pytest fixture for device flag"
