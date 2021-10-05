@@ -106,23 +106,6 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
-"""
-    if report.when == 'call':
-        xfail = hasattr(report, 'wasxfail')
-        if (report.skipped and xfail) or (report.failed and not xfail):
-            report_directory = os.path.dirname(item.config.option.htmlpath)
-            file_name = str(int(round(time.time() * 1000))) + ".png"
-            # full_path = os.path.join("C:\Screenshots", file_name)
-            full_path = os.path.join(report_directory, file_name)
-            #if item.funcargs.get('driver'):
-            print(f"[INFO] screenshot: {full_path}")
-            screen_img = driver.get_screenshot_as_base64()
-            if file_name:
-                    html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:304px;height:228px;" ' \
-                           'onclick="window.open(this.src)" align="right"/></div>' % screen_img
-                    extra.append(pytest_html.extras.html(html))
-        report.extra = extra
-        """
     if report.when == "call" or report.when == "setup": 
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
