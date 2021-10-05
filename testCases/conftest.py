@@ -13,6 +13,7 @@ import time
 from utilities.email_pytest_report import Email_Pytest_Report
 
 driver = None
+
 def load_settings_from_environment():
     """Load settings from os.environ
 
@@ -95,32 +96,46 @@ def init_driver(request):
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     yield driver
-    driver.quit()
-
-
-
-@pytest.mark.hookwrapper
-def pytest_runtest_makereport(item, call):
-    print("entering report formation")
-    pytest_html = item.config.pluginmanager.getplugin("html")
-    outcome = yield
-    report = outcome.get_result()
-    extra = getattr(report, 'extra', [])
-    if report.when == "call" or report.when == "setup": 
-        xfail = hasattr(report, 'wasxfail')
-        if (report.skipped and xfail) or (report.failed and not xfail):
+    if request.node.report
+        if request.node.report.failed
             file_name = report.nodeid.replace("::", "_") + ".png" 
-            screen_img = _capture_screenshot()
+            screen_img = driver.get_screenshot_as_base64()#_capture_screenshot()
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
                 extra.append(pytest_html.extras.html(html))
-        report.extra = extra
+    driver.quit()
 
-@pytest.mark.usefixtures("init_driver")       
-def _capture_screenshot():
-    return driver.get_screenshot_as_base64()
 
+
+# @pytest.mark.hookwrapper(tryfirst=True)
+# def pytest_runtest_makereport(self, item, call):
+#     print("entering report formation")
+#     pytest_html = item.config.pluginmanager.getplugin("html")
+#     outcome = yield
+#     report = outcome.get_result()
+#     extra = getattr(item.funcargs['init_driver'],report, 'extra', [])
+#     if report.when == "call" or report.when == "setup": 
+#         xfail = hasattr(report, 'wasxfail')
+#         if (report.skipped and xfail) or (report.failed and not xfail):
+#             file_name = report.nodeid.replace("::", "_") + ".png" 
+#             screen_img = driver.get_screenshot_as_base64()#_capture_screenshot()
+#             if file_name:
+#                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
+#                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
+#                 extra.append(pytest_html.extras.html(html))
+#     report.extra = extra
+   
+# def _capture_screenshot():
+#     return driver.get_screenshot_as_base64()
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    report = (yield).get_result()
+    if report.when == "call"
+        setattr(item, "report", report)
+
+        
 @pytest.fixture
 def email_pytest_report(req):
     "pytest fixture for device flag"
