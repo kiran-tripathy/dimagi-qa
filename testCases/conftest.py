@@ -99,13 +99,29 @@ def init_driver(request):
 
 
 @pytest.mark.hookwrapper
-def pytest_runtest_makereport(item):
+def pytest_runtest_makereport(item, call):
  
     pytest_html = item.config.pluginmanager.getplugin("html")
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
 
+    if report.when == 'call':
+        xfail = hasattr(report, 'wasxfail')
+        if (report.skipped and xfail) or (report.failed and not xfail):
+            report_directory = os.path.dirname(item.config.option.htmlpath)
+            file_name = str(int(round(time.time() * 1000))) + ".png"
+            # full_path = os.path.join("C:\Screenshots", file_name)
+            full_path = os.path.join(report_directory, file_name)
+            if item.funcargs.get('driver'):
+                print(f"[INFO] screenshot: {full_path}")
+                item.funcargs['driver'].get_screenshot_as_file(full_path)
+                if file_name:
+                    html = '<div><img src="%s" alt="screenshot" style="width:304px;height:228px;" ' \
+                           'onclick="window.open(this.src)" align="right"/></div>' % file_name
+                    extra.append(pytest_html.extras.html(html))
+        report.extra = extra
+        """
     if report.when == "call" or report.when == "setup": 
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
@@ -119,11 +135,11 @@ def pytest_runtest_makereport(item):
 
 def _capture_screenshot():
     return driver.get_screenshot_as_base64()
-
+"""
 @pytest.fixture
-def email_pytest_report(request):
+def email_pytest_report(req):
     "pytest fixture for device flag"
-    return request.config.getoption("--email_pytest_report")
+    return req.config.getoption("--email_pytest_report")
 
 # Command line options:
 def pytest_addoption(parser):
