@@ -94,8 +94,8 @@ def init_driver(request):
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     yield driver
-    #driver.close()
-    driver.quit()
+    driver.close()
+
 
 
 @pytest.mark.hookwrapper
@@ -110,7 +110,7 @@ def pytest_runtest_makereport(item):
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.replace("::", "_") + ".png" 
-            screen_img = _capture_screenshot
+            screen_img = _capture_screenshot()
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
