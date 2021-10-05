@@ -100,15 +100,14 @@ def init_driver(request):
 
 
 
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
+@pytest.mark.hookwrapper
+def pytest_runtest_makereport(item):
     print("entering report formation")
     pytest_html = item.config.pluginmanager.getplugin("html")
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
     if report.when == "call" or report.when == "setup": 
-        extra.append(pytest_html.extras.url('http://www.example.com/'))
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.replace("::", "_") + ".png" 
@@ -121,9 +120,6 @@ def pytest_runtest_makereport(item, call):
    
 def _capture_screenshot():
     return driver.get_screenshot_as_base64()
-
-
-
         
 @pytest.fixture
 def email_pytest_report(req):
