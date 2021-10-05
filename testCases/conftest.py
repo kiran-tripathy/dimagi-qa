@@ -116,10 +116,10 @@ def pytest_runtest_makereport(item, call):
             full_path = os.path.join(report_directory, file_name)
             #if item.funcargs.get('driver'):
             print(f"[INFO] screenshot: {full_path}")
-            item.funcargs['driver'].get_screenshot_as_base64()
+            screen_img = driver.get_screenshot_as_base64()
             if file_name:
                     html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:304px;height:228px;" ' \
-                           'onclick="window.open(this.src)" align="right"/></div>' % file_name
+                           'onclick="window.open(this.src)" align="right"/></div>' % screen_img
                     extra.append(pytest_html.extras.html(html))
         report.extra = extra
         """
