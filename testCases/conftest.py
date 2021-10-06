@@ -96,10 +96,11 @@ def init_driver(request):
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     yield driver
+    driver.close()
     driver.quit()
 
 
-
+"""
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
     print("entering report formation")
@@ -120,7 +121,7 @@ def pytest_runtest_makereport(item):
    
 def _capture_screenshot():
     return driver.get_screenshot_as_base64()
-        
+        """
 @pytest.fixture
 def email_pytest_report(req):
     "pytest fixture for device flag"
