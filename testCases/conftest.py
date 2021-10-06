@@ -62,7 +62,7 @@ def load_settings():
 def init_driver(request):
     settings = load_settings()
     chrome_options = Options()
-   # global driver
+    global driver
     if os.environ.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
@@ -110,10 +110,11 @@ def pytest_runtest_makereport(item):
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
     if report.when == "call" or report.when == "setup": 
+        driver = item.funcargs['init_driver']
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.replace("::", "_") + ".png" 
-            screen_img = _capture_screenshot(item.funcargs['init_driver'])
+            screen_img = _capture_screenshot(driver)
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
