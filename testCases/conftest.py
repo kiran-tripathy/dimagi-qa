@@ -13,7 +13,7 @@ from pytest_html_reporter import attach
 
 from utilities.email_pytest_report import Email_Pytest_Report
 
-driver = None
+#driver = None
 
 def load_settings_from_environment():
     """Load settings from os.environ
@@ -59,10 +59,10 @@ def load_settings():
     return settings["default"]
 
 @pytest.fixture(scope="class")
-def init_driver(request):
+def init_driver(request, self):
     settings = load_settings()
     chrome_options = Options()
-    global driver
+   # global driver
     if os.environ.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
@@ -97,7 +97,7 @@ def init_driver(request):
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     yield driver
-    attach(data=driver.get_screenshot_as_png())
+    attach(data=self.driver.get_screenshot_as_png())
     driver.close()
     driver.quit()
 
