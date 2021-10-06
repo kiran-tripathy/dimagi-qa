@@ -59,7 +59,7 @@ def load_settings():
     return settings["default"]
 
 @pytest.fixture(scope="class")
-def init_driver(request, self):
+def init_driver(request):
     settings = load_settings()
     chrome_options = Options()
    # global driver
@@ -97,7 +97,7 @@ def init_driver(request, self):
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     yield driver
-    attach(data=self.driver.get_screenshot_as_png())
+    attach(data=driver.get_screenshot_as_png())
     driver.close()
     driver.quit()
 
