@@ -109,9 +109,10 @@ def pytest_runtest_makereport(item):
     outcome = yield 
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
+    #fixture_request=item.funcargs['request']
+    driver = item.funcargs['init_driver']
     if report.when == "call" or report.when == "setup": 
-        fixture_request=item.funcargs['request']
-        driver = fixture_request.getfixturevalues('init_driver')
+        
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.replace("::", "_") + ".png" 
