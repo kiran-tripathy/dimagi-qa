@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from UserInputs.userInputsData import UserInputsData
 from datetime import datetime
 import time
-from pytest_html_reporter import attach
+# from pytest_html_reporter import attach
 
 from utilities.email_pytest_report import Email_Pytest_Report
 
