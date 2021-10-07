@@ -109,14 +109,15 @@ def pytest_runtest_makereport(item):
     outcome = yield 
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
+    print("init", item.funcargs)
     #fixture_request=item.funcargs['request']
-    driver = item.funcargs['init_driver']
+    #driver = item.funcargs['init_driver']
     if report.when == "call" or report.when == "setup": 
         
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
-            file_name = report.nodeid.replace("::", "_") + ".png" 
-            screen_img = driver.get_screenshot_as_base64()# _capture_screenshot()
+           # file_name = report.nodeid.replace("::", "_") + ".png" 
+            #screen_img = driver.get_screenshot_as_base64()# _capture_screenshot()
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
