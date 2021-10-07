@@ -10,7 +10,9 @@ from UserInputs.userInputsData import UserInputsData
 from datetime import datetime
 import time
 # from pytest_html_reporter import attach
-
+from config.conf import SCREENSHOT_DIR
+import base64
+from tools.times import datetime_strftime, timestamp
 from utilities.email_pytest_report import Email_Pytest_Report
 
 driver = None
@@ -58,6 +60,13 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
+    return rep
+
 @pytest.fixture(scope="class")
 def init_driver(request):
     settings = load_settings()
@@ -96,13 +105,23 @@ def init_driver(request):
     request.cls.driver = driver
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
-    yield driver
+    yield request.cls.driver
+#     if request.node.rep_call.failed:
+#         # Make the screen-shot if test failed:
+#         try:
+#             b.execute_script("document.body.bgColor = 'white';")
+
+#             allure.attach(b.get_screenshot_as_png(),
+#                           name=request.function.__name__,
+#                           attachment_type=allure.attachment_type.PNG)
+#         except:
+#             pass # just ignore
     driver.close()
     driver.quit()
     
 
 
-@pytest.mark.hookwrapper(autouse=True)
+@pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
     print("entering report formation")
     pytest_html = item.config.pluginmanager.getplugin("html")
@@ -111,24 +130,35 @@ def pytest_runtest_makereport(item):
     extra = getattr(report, 'extra', [])
     print(report)
     print("init", item.funcargs)
-    #fixture_request=item.funcargs['request']
-    #driver = item.funcargs['init_driver']
-#     if report.when == "call" or report.when == "setup": 
+    if report.when == "call" or report.when == "setup": 
         
-#         xfail = hasattr(report, 'wasxfail')
-#         if (report.skipped and xfail) or (report.failed and not xfail):
-#            # file_name = report.nodeid.replace("::", "_") + ".png" 
-#             file_name = None
-#             screen_img = driver.get_screenshot_as_base64()# _capture_screenshot()
-#             if file_name:
-#                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
-#                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
-#                 extra.append(pytest_html.extras.html(html))
-#     report.extra = extra
+        xfail = hasattr(report, 'wasxfail')
+        if (report.skipped and xfail) or (report.failed and not xfail):
+            file_name = report.nodeid.replace("::", "_") + ".png" 
+            #file_name = None
+            screen_img = driver.get_screenshot_as_base64()# _capture_screenshot()
+            if file_name:
+                html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
+                       'onclick="window.open(this.src)" align="right"/></div>' % screen_img
+                extra.append(pytest_html.extras.html(html))
+    report.extra = extra
    
+# def _capture_screenshot():
+#     return driver.get_screenshot_as_base64()
+
 def _capture_screenshot():
-    return driver.get_screenshot_as_base64()
-        
+    '''
+         The screenshot is saved as base64
+    '''
+    now_time = datetime_strftime("%Y%m%d%H%M%S")
+    if not os.path.exists(SCREENSHOT_DIR):
+        os.makedirs(SCREENSHOT_DIR)
+    screen_path = os.path.join(SCREENSHOT_DIR, "{}.png".format(now_time))
+    driver.save_screenshot(screen_path)
+    with open(screen_path, 'rb') as f:
+        imagebase64 = base64.b64encode(f.read())
+    return imagebase64.decode()
+
 @pytest.fixture
 def email_pytest_report(req):
     "pytest fixture for device flag"
