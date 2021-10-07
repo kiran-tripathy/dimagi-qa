@@ -103,17 +103,9 @@ def init_driver(request):
     request.cls.driver = driver
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
+    
     yield request.cls.driver
-#     if request.node.rep_call.failed:
-#         # Make the screen-shot if test failed:
-#         try:
-#             b.execute_script("document.body.bgColor = 'white';")
 
-#             allure.attach(b.get_screenshot_as_png(),
-#                           name=request.function.__name__,
-#                           attachment_type=allure.attachment_type.PNG)
-#         except:
-#             pass # just ignore
     driver.close()
     driver.quit()
     
@@ -129,7 +121,7 @@ def pytest_runtest_makereport(item):
     print(report)
     print("init", item.funcargs)
    
-    if report.when == "teardown": #report.when == "call" or 
+    if report.when == "call" or report.when == "teardown": 
         
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
