@@ -115,14 +115,14 @@ def pytest_runtest_makereport(item):
     if report.when == "call" or report.when == "setup": 
         
         xfail = hasattr(report, 'wasxfail')
-        if (report.skipped and xfail) or (report.failed and not xfail):
-           # file_name = report.nodeid.replace("::", "_") + ".png" 
-            file_name = None
-            screen_img = driver.get_screenshot_as_base64()# _capture_screenshot()
-            if file_name:
-                html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
-                       'onclick="window.open(this.src)" align="right"/></div>' % screen_img
-                extra.append(pytest_html.extras.html(html))
+#         if (report.skipped and xfail) or (report.failed and not xfail):
+#            # file_name = report.nodeid.replace("::", "_") + ".png" 
+#             file_name = None
+#             screen_img = driver.get_screenshot_as_base64()# _capture_screenshot()
+#             if file_name:
+#                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
+#                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
+#                 extra.append(pytest_html.extras.html(html))
     report.extra = extra
    
 def _capture_screenshot():
