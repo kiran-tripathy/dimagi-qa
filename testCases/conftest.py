@@ -129,7 +129,7 @@ def pytest_runtest_makereport(item):
     print(report)
     print("init", item.funcargs)
    
-    if report.when == "call" or report.when == "teardown": 
+    if report.when == "teardown": #report.when == "call" or 
         
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
@@ -142,9 +142,9 @@ def pytest_runtest_makereport(item):
                 extra.append(pytest_html.extras.html(html))
     report.extra = extra
    
-# def _capture_screenshot():
-#     return driver.get_screenshot_as_base64()
-
+def _capture_screenshot(driver):
+    return driver.get_screenshot_as_base64()
+"""
 def _capture_screenshot(driver):
     '''
          The screenshot is saved as base64
@@ -158,7 +158,7 @@ def _capture_screenshot(driver):
     with open(screen_path, 'rb') as f:
         imagebase64 = base64.b64encode(f.read())
     return imagebase64.decode()
-
+"""
 @pytest.fixture
 def email_pytest_report(req):
     "pytest fixture for device flag"
