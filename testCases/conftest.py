@@ -11,7 +11,6 @@ from datetime import datetime
 import time
 # from pytest_html_reporter import attach
 import base64
-from tools.times import datetime_strftime, timestamp
 from utilities.email_pytest_report import Email_Pytest_Report
 
 driver = None
@@ -150,7 +149,7 @@ def _capture_screenshot():
          The screenshot is saved as base64
     '''
     SCREENSHOT_DIR = UserInputsData.Screenshots
-    now_time = datetime_strftime("%Y%m%d%H%M%S")
+    now_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     if not os.path.exists(SCREENSHOT_DIR):
         os.makedirs(SCREENSHOT_DIR)
     screen_path = os.path.join(SCREENSHOT_DIR, "{}.png".format(now_time))
