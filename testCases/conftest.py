@@ -110,7 +110,7 @@ def pytest_runtest_makereport(item):
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
     if report.when == "call" or report.when == "setup": 
-        #fixture_request=item.funcargs["init_driver"]
+        fixture_request=item.funcargs['request']
         driver = fixture_request.getfixturevalues('init_driver')
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
