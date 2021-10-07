@@ -135,7 +135,7 @@ def pytest_runtest_makereport(item):
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.replace("::", "_") + ".png" 
             #file_name = None
-            screen_img = _capture_screenshot()
+            screen_img = _capture_screenshot(item.funcargs['init_driver'])
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
@@ -145,7 +145,7 @@ def pytest_runtest_makereport(item):
 # def _capture_screenshot():
 #     return driver.get_screenshot_as_base64()
 
-def _capture_screenshot():
+def _capture_screenshot(driver):
     '''
          The screenshot is saved as base64
     '''
