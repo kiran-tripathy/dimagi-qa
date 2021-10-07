@@ -129,7 +129,7 @@ def pytest_runtest_makereport(item):
     print(report)
     print("init", item.funcargs)
    
-    if report.when == "call" or report.when == "setup": 
+    if report.when == "call" or report.when == "teardown": 
         
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
