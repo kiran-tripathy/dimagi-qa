@@ -96,12 +96,11 @@ def init_driver(request):
     request.cls.driver = driver
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
-    yield
+    yield driver
     def quit():
         driver.close()
         driver.quit()
     request.addfinalizer(quit)    
-    return "init_driver"    
 
 
 @pytest.mark.hookwrapper(autouse=True)
@@ -112,10 +111,12 @@ def pytest_runtest_makereport(item):
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
     if report.when == "call" or report.when == "setup": 
+        fixture_request=item.funcargs["init_driver"]
+        driver = fixture_request.getfixturevalues('browser')
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.replace("::", "_") + ".png" 
-            screen_img = _capture_screenshot()
+            screen_img = driver.get_screenshot_as_base64()# _capture_screenshot()
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
