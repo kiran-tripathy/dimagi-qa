@@ -2,7 +2,7 @@ from testPages.groupPage import GroupPage
 from testPages.mobileWorkersPage import MobileWorkerPage
 from testPages.rolesPermissionsPage import RolesPermissionPage
 from testCases.BaseTest import BaseTest
-import pytest
+
 
 class TestCleanUps(BaseTest):
 
@@ -23,7 +23,7 @@ class TestCleanUps(BaseTest):
         clean.save_field()
         print("Deleted the user field")
 
-     def test_03_cleanup_group(self):
+    def test_03_cleanup_group(self):
         driver = self.driver
         clean = GroupPage(driver)
         clean2 = MobileWorkerPage(driver)
