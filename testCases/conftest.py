@@ -104,7 +104,7 @@ def init_driver(request):
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     
-    yield driver
+    yield request.cls.driver
 
     driver.close()
     driver.quit()
