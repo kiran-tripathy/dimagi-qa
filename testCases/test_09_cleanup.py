@@ -23,7 +23,7 @@ class TestCleanUps(BaseTest):
         clean.save_field()
         print("Deleted the user field")
 
-	@pytest.mark.xfail
+    @pytest.mark.xfail
     def test_03_cleanup_group(self):
         driver = self.driver
         clean = GroupPage(driver)
