@@ -7,8 +7,13 @@ from webdriver_manager.chrome import ChromeDriverManager
 from testPages.loginPage import LoginPage
 from selenium.webdriver.chrome.options import Options
 from UserInputs.userInputsData import UserInputsData
-
+from datetime import datetime
+import time
+# from pytest_html_reporter import attach
+import base64
 from utilities.email_pytest_report import Email_Pytest_Report
+
+driver = None
 
 def load_settings_from_environment():
     """Load settings from os.environ
@@ -53,36 +58,19 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-driver = None
-
-@pytest.mark.hookwrapper
-def pytest_runtest_makereport(item):
-    pytest_html = item.config.pluginmanager.getplugin("html")
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):
     outcome = yield
-    report = outcome.get_result()
-    extra = getattr(report, 'extra', [])
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
+    return rep
 
-    if report.when == "call" or report.when == "setup":
-        xfail = hasattr(report, 'wasxfail')
-        if (report.skipped and xfail) or (report.failed and not xfail):
-            file_name = report.nodeid.replace("::", "_") + ".png"
-            screen_img = _capture_screenshot()
-            if file_name:
-                html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
-                       'onclick="window.open(this.src)" align="right"/></div>' % screen_img
-                extra.append(pytest_html.extras.html(html))
-        report.extra = extra
-
-def _capture_screenshot():
-    return driver.get_screenshot_as_base64()
-
-
-@pytest.fixture(params=[os.environ.get("CI")], scope="class")
+@pytest.fixture(scope="class")
 def init_driver(request):
     settings = load_settings()
     chrome_options = Options()
     global driver
-    if request.param == "true":
+    if os.environ.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
         chrome_options.add_argument('--safebrowsing-disable-download-protection')
@@ -109,20 +97,64 @@ def init_driver(request):
            # "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
             "safebrowsing.enabled": True})
-        web_driver = ChromeDriverManager().install()
+    web_driver = ChromeDriverManager().install()
 
     driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
     request.cls.driver = driver
     login = LoginPage(request.cls.driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
+    
     yield driver
+
     driver.close()
+    driver.quit()
+    
 
 
+@pytest.mark.hookwrapper
+def pytest_runtest_makereport(item):
+    print("entering report formation")
+    pytest_html = item.config.pluginmanager.getplugin("html")
+    outcome = yield 
+    report = outcome.get_result()
+    extra = getattr(report, 'extra', [])
+    print(report)
+    print("init", item.funcargs)
+   
+    if report.when == "call" or report.when == "teardown": 
+        
+        xfail = hasattr(report, 'wasxfail')
+        if (report.skipped and xfail) or (report.failed and not xfail):
+            file_name = report.nodeid.replace("::", "_") + ".png" 
+            #file_name = None
+            screen_img = _capture_screenshot(item.funcargs['init_driver'])
+            if file_name:
+                html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
+                       'onclick="window.open(this.src)" align="right"/></div>' % screen_img
+                extra.append(pytest_html.extras.html(html))
+    report.extra = extra
+   
+def _capture_screenshot(driver):
+    return driver.get_screenshot_as_base64()
+"""
+def _capture_screenshot(driver):
+    '''
+         The screenshot is saved as base64
+    '''
+    SCREENSHOT_DIR = UserInputsData.Screenshots
+    now_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    if not os.path.exists(SCREENSHOT_DIR):
+        os.makedirs(SCREENSHOT_DIR)
+    screen_path = os.path.join(SCREENSHOT_DIR, "{}.png".format(now_time))
+    driver.save_screenshot(screen_path)
+    with open(screen_path, 'rb') as f:
+        imagebase64 = base64.b64encode(f.read())
+    return imagebase64.decode()
+"""
 @pytest.fixture
-def email_pytest_report(request):
+def email_pytest_report(req):
     "pytest fixture for device flag"
-    return request.config.getoption("--email_pytest_report")
+    return req.config.getoption("--email_pytest_report")
 
 # Command line options:
 def pytest_addoption(parser):
