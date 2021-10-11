@@ -9,7 +9,6 @@ from selenium.webdriver.chrome.options import Options
 from UserInputs.userInputsData import UserInputsData
 from datetime import datetime
 import time
-# from pytest_html_reporter import attach
 import base64
 from utilities.email_pytest_report import Email_Pytest_Report
 
@@ -58,12 +57,12 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-@pytest.hookimpl(hookwrapper=True, tryfirst=True)
-def pytest_runtest_makereport(item, call):
-    outcome = yield
-    rep = outcome.get_result()
-    setattr(item, "rep_" + rep.when, rep)
-    return rep
+# @pytest.hookimpl(hookwrapper=True, tryfirst=True)
+# def pytest_runtest_makereport(item, call):
+#     outcome = yield
+#     rep = outcome.get_result()
+#     setattr(item, "rep_" + rep.when, rep)
+#     return rep
 
 @pytest.fixture(scope="class")
 def init_driver(request):
@@ -101,7 +100,7 @@ def init_driver(request):
 
     driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
     request.cls.driver = driver
-    login = LoginPage(request.cls.driver, settings["url"])
+    login = LoginPage(driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
     
     yield driver
