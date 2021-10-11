@@ -19,14 +19,14 @@ class TestRolesPermissions(BaseTest):
         role.add_role()
         print("New Role Added")
 	
-	@pytest.mark.xfail
+    @pytest.mark.xfail
     def test_03_edit_role(self):
         driver = self.driver
         role = RolesPermissionPage(driver)
         role.edit_role()
         print("Role Edited Successfully")
 	
-	@pytest.mark.xfail
+    @pytest.mark.xfail
     def test_04_cleanup_role(self):
         driver = self.driver
         clean = RolesPermissionPage(driver)
