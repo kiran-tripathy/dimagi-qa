@@ -43,25 +43,25 @@ class TestReport(BaseTest):
         load = ReportPage(driver)
         load.create_report_builder_form_report()
 
-    # def test_04_save_report(self):
-    #     driver = self.driver
-    #     report = HomePage(driver)
-    #     report.reports_menu()
-    #     load = ReportPage(driver)
-    #     load.saved_report()
+    def test_04_save_report(self):
+        driver = self.driver
+        report = HomePage(driver)
+        report.reports_menu()
+        load = ReportPage(driver)
+        load.saved_report()
 
-    # def test_05_scheduled_report(self):
-    #     driver = self.driver
-    #     report = HomePage(driver)
-    #     self.driver.refresh()
-    #     try:
-    #         report.reports_menu()
-    #     except UnexpectedAlertPresentException:
-    #         alert = self.driver.switch_to.alert
-    #         alert.accept()
-    #     load = ReportPage(driver)
-    #     load.scheduled_report()
-    #     load.delete_scheduled_and_saved_reports()
+    def test_05_scheduled_report(self):
+        driver = self.driver
+        report = HomePage(driver)
+        self.driver.refresh()
+        try:
+            report.reports_menu()
+        except UnexpectedAlertPresentException:
+            alert = self.driver.switch_to.alert
+            alert.accept()
+        load = ReportPage(driver)
+        load.scheduled_report()
+        load.delete_scheduled_and_saved_reports()
 
 
 
