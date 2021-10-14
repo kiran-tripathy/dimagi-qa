@@ -55,12 +55,12 @@ class TestMobileWorker(BaseTest):
         user.reactivate_user()
         user.verify_reactivation_via_login()
 
-    # def test_07_download_workers(self):
-    #     driver = self.driver
-    #     user = MobileWorkerPage(driver)
-    #     user.download_mobile_worker()
-    #
-    # def test_08_upload_workers(self):
-    #     driver = self.driver
-    #     user = MobileWorkerPage(driver)
-    #     user.upload_mobile_worker()
+    def test_07_download_workers(self):
+        driver = self.driver
+        user = MobileWorkerPage(driver)
+        user.download_mobile_worker()
+    
+    def test_08_upload_workers(self):
+        driver = self.driver
+        user = MobileWorkerPage(driver)
+        user.upload_mobile_worker()
