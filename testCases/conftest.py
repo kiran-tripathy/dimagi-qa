@@ -57,13 +57,6 @@ def load_settings():
     settings.read(path)
     return settings["default"]
 
-# @pytest.hookimpl(hookwrapper=True, tryfirst=True)
-# def pytest_runtest_makereport(item, call):
-#     outcome = yield
-#     rep = outcome.get_result()
-#     setattr(item, "rep_" + rep.when, rep)
-#     return rep
-
 @pytest.fixture(scope="class")
 def init_driver(request):
     settings = load_settings()
@@ -94,7 +87,7 @@ def init_driver(request):
         # chrome_options.add_argument('--headless')
 
         chrome_options.add_experimental_option("prefs", {
-           # "download.default_directory": str(UserInputsData.download_path),
+            "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
             "safebrowsing.enabled": True})
     web_driver = ChromeDriverManager().install()
@@ -118,8 +111,6 @@ def pytest_runtest_makereport(item):
     outcome = yield 
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
-    print(report)
-    print("init", item.funcargs)
    
     if report.when == "call" or report.when == "teardown": 
         
@@ -136,21 +127,7 @@ def pytest_runtest_makereport(item):
    
 def _capture_screenshot(driver):
     return driver.get_screenshot_as_base64()
-"""
-def _capture_screenshot(driver):
-    '''
-         The screenshot is saved as base64
-    '''
-    SCREENSHOT_DIR = UserInputsData.Screenshots
-    now_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    if not os.path.exists(SCREENSHOT_DIR):
-        os.makedirs(SCREENSHOT_DIR)
-    screen_path = os.path.join(SCREENSHOT_DIR, "{}.png".format(now_time))
-    driver.save_screenshot(screen_path)
-    with open(screen_path, 'rb') as f:
-        imagebase64 = base64.b64encode(f.read())
-    return imagebase64.decode()
-"""
+
 @pytest.fixture
 def email_pytest_report(req):
     "pytest fixture for device flag"
