@@ -3,7 +3,7 @@ from testPages.messagingPage import MessagingPage
 from testCases.BaseTest import BaseTest
 
 
-class MessagingTests(BaseTest):
+class TestMessaging(BaseTest):
 
     def test_01_dashboard(self):
         driver = self.driver
