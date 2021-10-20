@@ -97,9 +97,10 @@ class ExportDataPage:
         self.archived_restored_dropdown = '//*[@id="select2-report_filter_archive_or_restore-container"]'
         self.archived_forms_option = '/html/body/span/span/span[2]/ul/li[2]'
 
-    def wait_to_click(self, *locator, timeout=20):
+    def wait_to_click(self, *locator, timeout=40):
         clickable = ec.element_to_be_clickable(locator)
-        WebDriverWait(self.driver, timeout).until(clickable).click()
+        element = WebDriverWait(self.driver, timeout).until(clickable)
+        element.click()
 
     def wait_to_clear(self, *locator, timeout=5):
         try:
