@@ -5,6 +5,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.common import exceptions 
 from UserInputs.userInputsData import UserInputsData
 import pandas as pd
 from testCases.conftest import load_settings
@@ -97,10 +98,13 @@ class ExportDataPage:
         self.archived_restored_dropdown = '//*[@id="select2-report_filter_archive_or_restore-container"]'
         self.archived_forms_option = '/html/body/span/span/span[2]/ul/li[2]'
 
-    def wait_to_click(self, *locator, timeout=40):
-        clickable = ec.element_to_be_clickable(locator)
-        element = WebDriverWait(self.driver, timeout).until(clickable)
-        element.click()
+    def wait_to_click(self, *locator, timeout=20):
+        try:
+            clickable = ec.element_to_be_clickable(locator)
+            WebDriverWait(self.driver, timeout).until(clickable).click()
+        except exceptions.StaleElementReferenceException,e:        
+            clickable = ec.staleness_of(locator)
+            WebDriverWait(self.driver, timeout).until(clickable).click()
 
     def wait_to_clear(self, *locator, timeout=5):
         try:
