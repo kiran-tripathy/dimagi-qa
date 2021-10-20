@@ -4,6 +4,7 @@ from selenium.common.exceptions import NoSuchElementException, StaleElementRefer
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.select import Select
 
 from UserInputs.generateUserInputs import fetch_random_string
 from UserInputs.userInputsData import UserInputsData
@@ -33,6 +34,7 @@ class MessagingPage:
         self.select_value_dropdown = "(//ul[@class='select2-results__options']/li)[1]"
         self.broadcast_message = "(//textarea[@data-bind='value: nonTranslatedMessage'])[2]"
         self.send_broadcast = "//button[@data-bind='text: saveBroadcastText()']"
+        self.broadcast_select = "//div[@id='immediate-broadcasts']//select[@class='form-control']"
         self.broadcast_created = "//a[text()='" + "broadcast_" + fetch_random_string() + "']"
         # Conditional Alerts
         self.cond_alerts = "Conditional Alerts"
@@ -150,6 +152,10 @@ class MessagingPage:
                                                                              + fetch_random_string())
         self.wait_to_click(By.XPATH, self.send_broadcast)
         self.driver.refresh()
+        
+        select = Select(self.driver.find_element(By.XPATH, self.broadcast_select))
+        select.select_by_value('100')
+        
         try:
             assert True == WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((
                 By.XPATH, self.broadcast_created))).is_displayed()
