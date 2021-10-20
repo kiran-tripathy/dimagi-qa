@@ -61,8 +61,8 @@ class ReportPage:
         self.next_button_id = "js-next-data-source"
         self.save_and_view_button_id = "btnSaveView"
         self.form_or_cases = "//select[@data-bind='value: sourceType']"
-#         self.select_form_type = "//option[@value='form']"
-#         self.select_app = "//option[text()='Village Health']"
+        self.select_form_type = "//option[@value='form']"
+        self.select_app = "//option[text()='Village Health']"
         self.application = "//select[@data-bind='value: application']"
         self.select_form_type_value = "form"
         self.select_app_value = "Village Health"
@@ -182,11 +182,7 @@ class ReportPage:
     def create_report_builder_case_report(self):
         self.wait_to_click(By.ID, self.create_new_rep_id)
         self.driver.find_element(By.ID, self.report_name_textbox_id).send_keys(self.report_name_case)
-        # self.driver.find_element(By.XPATH, self.select_app).click()
-        select_source = Select(self.driver.find_element(By.XPATH, self.form_or_cases))
-        select_source.select_by_value(self.select_form_type_value)
-        select_application = Select(self.driver.find_element(By.XPATH, self.application))
-        select_application.select_by_visible_text(self.select_app_value)
+        self.driver.find_element(By.XPATH, self.select_app).click()
         self.wait_to_click(By.ID, self.next_button_id)
         self.wait_to_click(By.ID, self.save_and_view_button_id)
         self.check_if_report_loaded()
@@ -194,9 +190,11 @@ class ReportPage:
 
     def create_report_builder_form_report(self):
         self.wait_to_click(By.ID, self.create_new_rep_id)
-        self.wait_to_click(By.XPATH, self.form_or_cases)
-        self.wait_to_click(By.XPATH, self.select_form_type)
         self.driver.find_element(By.ID, self.report_name_textbox_id).send_keys(self.report_name_form)
+        select_source = Select(self.driver.find_element(By.XPATH, self.form_or_cases))
+        select_source.select_by_value(self.select_form_type_value)
+        select_application = Select(self.driver.find_element(By.XPATH, self.application))
+        select_application.select_by_visible_text(self.select_app_value)
         self.wait_to_click(By.ID, self.next_button_id)
         self.wait_to_click(By.ID, self.save_and_view_button_id)
         self.check_if_report_loaded()
