@@ -91,7 +91,8 @@ class ExportDataPage:
         self.manage_forms_link = '//*[@id="hq-sidebar"]/nav/ul[2]/li[3]/a'
         self.apply_button = '//*[@id="apply-btn"]'
         self.select_all_checkbox = "//input[@name='select_all']"
-        self.checkbox1 = "(//input[@class='xform-checkbox'])[1]"
+        # self.checkbox1 = "//input[@class='xform-checkbox'][1]"
+        self.checkbox1 = "//*[@id='form_options']//*[@type='checkbox']"
         self.archive_button = '//*[@id="submitForms"]'
         self.success_message = "//div[@class='alert alert-success']"
         self.view_form_link = "//a[@class='ajax_dialog']"
@@ -461,12 +462,14 @@ class ExportDataPage:
         # Forms archival
         self.wait_to_click(By.XPATH, self.manage_forms_link)
         self.wait_to_click(By.XPATH, self.apply_button)
+        time.sleep(2)
         self.wait_to_click(By.XPATH, self.checkbox1)
         self.wait_to_click(By.XPATH, self.archive_button)
         assert WebDriverWait(self.driver, 20).until(ec.presence_of_element_located((
             By.XPATH, self.success_message))).is_displayed()
         print("Forms archival successful!!")
-
+        time.sleep(2)
+        
         # View Normal Forms
         self.wait_to_click(By.XPATH, self.manage_forms_link)
         self.wait_to_click(By.XPATH, self.apply_button)
