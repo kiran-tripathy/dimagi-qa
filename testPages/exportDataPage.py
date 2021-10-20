@@ -102,7 +102,7 @@ class ExportDataPage:
         try:
             clickable = ec.element_to_be_clickable(locator)
             WebDriverWait(self.driver, timeout).until(clickable).click()
-        except exceptions.StaleElementReferenceException,e:        
+        except exceptions.StaleElementReferenceException:        
             clickable = ec.staleness_of(locator)
             WebDriverWait(self.driver, timeout).until(clickable).click()
 
