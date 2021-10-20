@@ -9,4 +9,4 @@ app_password = "ydfxtggbtggodgrn"
 smtp_ssl_host = 'smtp.gmail.com'
 smtp_ssl_port = 465
 sender = 'kbordoloi@dimagi.com'
-targets = ['kbordoloi@dimagi.com']
+targets = ['kbordoloi@dimagi.com','ktripathi@dimagi.com','btalbot@dimagi.com']
