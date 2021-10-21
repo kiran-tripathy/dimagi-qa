@@ -98,12 +98,14 @@ class ExportDataPage:
         self.view_form_link = "//a[@class='ajax_dialog']"
         self.archived_restored_dropdown = '//*[@id="select2-report_filter_archive_or_restore-container"]'
         self.archived_forms_option = '/html/body/span/span/span[2]/ul/li[2]'
+        self.manage_forms_return = '//span[contains(text(),"Return to")]/a[.="Manage Forms"]'
 
-    def wait_to_click(self, *locator, timeout=30):
-        time.sleep(5)
-        clickable = ec.element_to_be_clickable(locator)
-        WebDriverWait(self.driver, timeout).until(clickable).click()
-
+    def wait_to_click(self, *locator, timeout=20):
+        try:
+            clickable = ec.element_to_be_clickable(locator)
+            WebDriverWait(self.driver, timeout).until(clickable).click()
+        except Exception as e:
+            print(e)
 
     def wait_to_clear(self, *locator, timeout=5):
         try:
@@ -471,6 +473,7 @@ class ExportDataPage:
         time.sleep(2)
         
         # View Normal Forms
+        self.wait_to_click(By.XPATH, self.manage_forms_return)
         self.wait_to_click(By.XPATH, self.manage_forms_link)
         self.wait_to_click(By.XPATH, self.apply_button)
         self.wait_to_click(By.XPATH, self.view_form_link)
