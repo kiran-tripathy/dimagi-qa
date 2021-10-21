@@ -101,6 +101,7 @@ class ExportDataPage:
         self.manage_forms_return = '//span[contains(text(),"Return to")]/a[.="Manage Forms"]'
 
     def wait_to_click(self, *locator, timeout=20):
+        time.sleep(5)
         clickable = ec.element_to_be_clickable(locator)
         WebDriverWait(self.driver, timeout).until(clickable).click()
 
