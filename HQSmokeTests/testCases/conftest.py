@@ -100,7 +100,7 @@ def init_driver(request):
     driver.quit()
     
 
-@pytest.hookimpl(hookwrapper=True)
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
 # @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
     print("entering report formation")
@@ -149,5 +149,5 @@ def pytest_terminal_summary(terminalreporter, exitstatus):
             # Initialize the Email_Pytest_Report object
             email_obj = Email_Pytest_Report()
             # Send html formatted email body message with pytest report as an attachment
-            email_obj.send_test_report_email(html_body_flag=True, attachment_flag=True, report_file_path='default')
+            email_obj.send_test_report_email(html_body_flag=True, attachment_flag=True, report_file_path='HQSmokeTests/report.html')
             print("send email: Yes")
