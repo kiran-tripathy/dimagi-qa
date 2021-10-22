@@ -7,9 +7,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from HQSmokeTests.testPages.loginPage import LoginPage
 from selenium.webdriver.chrome.options import Options
 from HQSmokeTests.UserInputs.userInputsData import UserInputsData
-from datetime import datetime
-import time
-import base64
 from HQSmokeTests.utilities.email_pytest_report import Email_Pytest_Report
 
 driver = None
@@ -144,7 +141,9 @@ def pytest_terminal_summary(terminalreporter, exitstatus):
     "add additional section in terminal summary reporting."
     print("entering the terminal summery")
     if not hasattr(terminalreporter.config, 'workerinput'):
+        print("terminalreporter has workerinput")
         if terminalreporter.config.getoption("--email_pytest_report").lower() == 'y':
+            print("send email: Yes")
             # Initialize the Email_Pytest_Report object
             email_obj = Email_Pytest_Report()
             # Send html formatted email body message with pytest report as an attachment
