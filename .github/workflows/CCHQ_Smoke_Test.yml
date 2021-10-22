@@ -38,7 +38,7 @@ jobs:
         DIMAGIQA_LOGIN_USERNAME: ${{ secrets.DIMAGIQA_LOGIN_USERNAME }}
         DIMAGIQA_LOGIN_PASSWORD: ${{ secrets.DIMAGIQA_LOGIN_PASSWORD }}
       run: |
-        pytest -v HQSmokeTests/testCases/ --reruns 2 --capture=tee-sys
+        pytest -v --reruns 2 --capture=tee-sys
     - name: Archive test results
       if: failure()
       uses: actions/upload-artifact@v2
