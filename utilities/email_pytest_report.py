@@ -12,6 +12,7 @@ Note:
 * To generate pytest_report.html file use following command from the root of repo e.g. py.test --html = log/pytest_report.html
 * To generate pytest_report.log file use following command from the root of repo e.g. py.test -k example_form -r F -v > log/pytest_report.log
 """
+import datetime
 import smtplib
 import os,sys
 from email.mime.text import MIMEText
@@ -142,10 +143,11 @@ class Email_Pytest_Report:
             #add attachment to email
             attachment = self.get_attachment(report_file_path)
             message.attach(attachment)
-
+        
+        time_date=datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
         message['From'] = self.sender
         message['To'] = ', '.join(self.targets)
-        message['Subject'] = 'Script generated test report' # Update email subject here
+        message['Subject'] = 'Script generated test report '+ time_date # Update email subject here
 
         #Send Email
         server = smtplib.SMTP_SSL(self.smtp_ssl_host, self.smtp_ssl_port)
