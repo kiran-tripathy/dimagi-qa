@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.common import exceptions 
 from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 import pandas as pd
-from HQSmokeTests.testCases.conftest import load_settings
+from conftest import load_settings
 
 
 def latest_download_file():
