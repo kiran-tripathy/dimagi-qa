@@ -3,7 +3,7 @@ from selenium.common.exceptions import UnexpectedAlertPresentException, TimeoutE
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from UserInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
 
 
 class GroupPage:

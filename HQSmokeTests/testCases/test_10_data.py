@@ -1,6 +1,6 @@
-from testPages.dataPage import DataPage
-from testPages.exportDataPage import ExportDataPage
-from testCases.BaseTest import BaseTest
+from HQSmokeTests.testPages.dataPage import DataPage
+from HQSmokeTests.testPages.exportDataPage import ExportDataPage
+from HQSmokeTests.testCases.BaseTest import BaseTest
 
 
 class TestData(BaseTest):

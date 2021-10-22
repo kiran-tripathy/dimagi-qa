@@ -7,7 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.select import Select
 
-from UserInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
 
 
 class ReportPage:

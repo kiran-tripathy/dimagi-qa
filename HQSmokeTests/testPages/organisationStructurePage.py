@@ -5,8 +5,8 @@ from selenium.common.exceptions import TimeoutException, StaleElementReferenceEx
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from UserInputs.generateUserInputs import fetch_random_string
-from UserInputs.userInputsData import UserInputsData
+from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 from datetime import date
 
 

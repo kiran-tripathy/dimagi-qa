@@ -1,6 +1,6 @@
-from testPages.homePage import HomePage
-from testPages.rolesPermissionsPage import RolesPermissionPage
-from testCases.BaseTest import BaseTest
+from HQSmokeTests.testPages.homePage import HomePage
+from HQSmokeTests.testPages.rolesPermissionsPage import RolesPermissionPage
+from HQSmokeTests.testCases.BaseTest import BaseTest
 import pytest
 
 class TestRolesPermissions(BaseTest):

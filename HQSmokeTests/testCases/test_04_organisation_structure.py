@@ -1,6 +1,6 @@
-from testPages.homePage import HomePage
-from testPages.organisationStructurePage import OrganisationStructurePage
-from testCases.BaseTest import BaseTest
+from HQSmokeTests.testPages.homePage import HomePage
+from HQSmokeTests.testPages.organisationStructurePage import OrganisationStructurePage
+from HQSmokeTests.testCases.BaseTest import BaseTest
 
 
 class TestOrganisationStructure(BaseTest):

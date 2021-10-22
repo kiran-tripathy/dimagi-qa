@@ -1,7 +1,7 @@
-from testPages.groupPage import GroupPage
-from testPages.mobileWorkersPage import MobileWorkerPage
-from testPages.rolesPermissionsPage import RolesPermissionPage
-from testCases.BaseTest import BaseTest
+from HQSmokeTests.testPages.groupPage import GroupPage
+from HQSmokeTests.testPages.mobileWorkersPage import MobileWorkerPage
+from HQSmokeTests.testPages.rolesPermissionsPage import RolesPermissionPage
+from HQSmokeTests.testCases.BaseTest import BaseTest
 
 
 class TestCleanUps(BaseTest):

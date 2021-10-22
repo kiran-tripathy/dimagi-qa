@@ -4,13 +4,13 @@ from pathlib import Path
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from testPages.loginPage import LoginPage
+from HQSmokeTests.testPages.loginPage import LoginPage
 from selenium.webdriver.chrome.options import Options
-from UserInputs.userInputsData import UserInputsData
+from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 from datetime import datetime
 import time
 import base64
-from utilities.email_pytest_report import Email_Pytest_Report
+from HQSmokeTests.utilities.email_pytest_report import Email_Pytest_Report
 
 driver = None
 

@@ -6,9 +6,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common import exceptions 
-from UserInputs.userInputsData import UserInputsData
+from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 import pandas as pd
-from testCases.conftest import load_settings
+from HQSmokeTests.testCases.conftest import load_settings
 
 
 def latest_download_file():

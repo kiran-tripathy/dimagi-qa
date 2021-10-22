@@ -1,6 +1,6 @@
-from testPages.homePage import HomePage
-from testPages.webappsPermissionPage import WebAppPermissionPage
-from testCases.BaseTest import BaseTest
+from HQSmokeTests.testPages.homePage import HomePage
+from HQSmokeTests.testPages.webappsPermissionPage import WebAppPermissionPage
+from HQSmokeTests.testCases.BaseTest import BaseTest
 
 
 class TestWebAppPermissions(BaseTest):

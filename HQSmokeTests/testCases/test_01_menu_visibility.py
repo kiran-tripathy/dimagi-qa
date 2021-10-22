@@ -1,6 +1,6 @@
-from testPages.homePage import HomePage
-from testCases.BaseTest import BaseTest
-from UserInputs.userInputsData import UserInputsData
+from HQSmokeTests.testPages.homePage import HomePage
+from HQSmokeTests.testCases.BaseTest import BaseTest
+from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 
 
 class TestMenuVisibility(BaseTest):

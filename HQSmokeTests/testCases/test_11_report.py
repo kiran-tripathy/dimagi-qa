@@ -1,8 +1,8 @@
 from selenium.common.exceptions import UnexpectedAlertPresentException
 
-from testPages.homePage import HomePage
-from testPages.reportPage import ReportPage
-from testCases.BaseTest import BaseTest
+from HQSmokeTests.testPages.homePage import HomePage
+from HQSmokeTests.testPages.reportPage import ReportPage
+from HQSmokeTests.testCases.BaseTest import BaseTest
 
 
 class TestReport(BaseTest):

@@ -6,9 +6,9 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.select import Select
 
-from UserInputs.generateUserInputs import fetch_random_string
-from UserInputs.userInputsData import UserInputsData
-from testPages.organisationStructurePage import latest_download_file
+from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.UserInputs.userInputsData import UserInputsData
+from HQSmokeTests.testPages.organisationStructurePage import latest_download_file
 
 
 class MessagingPage:

@@ -1,6 +1,6 @@
-from testPages.homePage import HomePage
-from testPages.messagingPage import MessagingPage
-from testCases.BaseTest import BaseTest
+from HQSmokeTests.testPages.homePage import HomePage
+from HQSmokeTests.testPages.messagingPage import MessagingPage
+from HQSmokeTests.testCases.BaseTest import BaseTest
 
 
 class TestMessaging(BaseTest):

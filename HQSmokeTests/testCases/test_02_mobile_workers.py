@@ -1,6 +1,6 @@
-from testPages.mobileWorkersPage import MobileWorkerPage
-from testCases.BaseTest import BaseTest
-from UserInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.testPages.mobileWorkersPage import MobileWorkerPage
+from HQSmokeTests.testCases.BaseTest import BaseTest
+from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
 
 
 class TestMobileWorker(BaseTest):

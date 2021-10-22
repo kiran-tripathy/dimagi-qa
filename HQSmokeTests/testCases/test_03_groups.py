@@ -1,6 +1,6 @@
-from testPages.homePage import HomePage
-from testPages.groupPage import GroupPage
-from testCases.BaseTest import BaseTest
+from HQSmokeTests.testPages.homePage import HomePage
+from HQSmokeTests.testPages.groupPage import GroupPage
+from HQSmokeTests.testCases.BaseTest import BaseTest
 
 
 class TestGroups(BaseTest):

@@ -1,5 +1,5 @@
-from testPages.applicationPage import ApplicationPage
-from testCases.BaseTest import BaseTest
+from HQSmokeTests.testPages.applicationPage import ApplicationPage
+from HQSmokeTests.testCases.BaseTest import BaseTest
 
 
 class TestApplication(BaseTest):
