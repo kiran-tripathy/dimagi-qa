@@ -40,7 +40,6 @@ jobs:
         DIMAGIQA_LOGIN_USERNAME: ${{ secrets.DIMAGIQA_LOGIN_USERNAME }}
         DIMAGIQA_LOGIN_PASSWORD: ${{ secrets.DIMAGIQA_LOGIN_PASSWORD }}
       run: |
-        echo "client_payload: ${{ toJson(github.event.client_payload) }}"
         pytest -v --reruns 2 --capture=tee-sys --email_pytest_report Y
     - name: Archive test results
       if: failure()
