@@ -103,8 +103,8 @@ def init_driver(request):
     driver.quit()
     
 
-
-@pytest.mark.hookwrapper
+@pytest.hookimpl(hookwrapper=True)
+# @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
     print("entering report formation")
     pytest_html = item.config.pluginmanager.getplugin("html")
