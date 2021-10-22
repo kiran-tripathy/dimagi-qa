@@ -135,7 +135,7 @@ def pytest_addoption(parser):
     parser.addoption("--email_pytest_report",
                  dest="email_pytest_report",
                  help="Email pytest report: Y or N",
-                 default="N")
+                 default="Y")
 
 def pytest_terminal_summary(terminalreporter, exitstatus):
     "add additional section in terminal summary reporting."
