@@ -42,7 +42,7 @@ class Email_Pytest_Report:
         "get test report data from pytest_report.html or pytest_report.txt or from user provided file"
         if html_body_flag == True and report_file_path == 'default':
             #To generate pytest_report.html file use following command e.g. py.test --html = log/pytest_report.html
-            test_report_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'..','','HQSmokeTests/report.html'))#Change report file name & address here
+            test_report_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'..','','report.html'))#Change report file name & address here
         elif html_body_flag == False and report_file_path == 'default':
             #To generate pytest_report.log file add ">pytest_report.log" at end of py.test command e.g. py.test -k example_form -r F -v > log/pytest_report.log
             test_report_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'..','','pytest_report.log'))#Change report file name & address here
@@ -64,7 +64,7 @@ class Email_Pytest_Report:
         "Get attachment and attach it to mail"
         if attachment_file_path == 'default':
             #To generate report.html file use following command e.g. py.test --html = report.html
-            attachment_report_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'..','','HQSmokeTests/report.html'))#Change report file name & address here
+            attachment_report_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'..','','report.html'))#Change report file name & address here
         else:
             attachment_report_file = attachment_file_path
         #check file exist or not
