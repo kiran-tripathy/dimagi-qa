@@ -43,11 +43,14 @@ class Email_Pytest_Report:
         if html_body_flag == True and report_file_path == 'default':
             #To generate pytest_report.html file use following command e.g. py.test --html = log/pytest_report.html
             test_report_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'..','','report.html'))#Change report file name & address here
+            print(test_report_file)
         elif html_body_flag == False and report_file_path == 'default':
             #To generate pytest_report.log file add ">pytest_report.log" at end of py.test command e.g. py.test -k example_form -r F -v > log/pytest_report.log
             test_report_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'..','','pytest_report.log'))#Change report file name & address here
+            print(test_report_file)
         else:
             test_report_file = report_file_path
+            print(test_report_file)
         #check file exist or not
         if not os.path.exists(test_report_file):
             raise Exception("File '%s' does not exist. Please provide valid file"%test_report_file)
@@ -65,8 +68,10 @@ class Email_Pytest_Report:
         if attachment_file_path == 'default':
             #To generate report.html file use following command e.g. py.test --html = report.html
             attachment_report_file = os.path.abspath(os.path.join(os.path.dirname(__file__),'..','','report.html'))#Change report file name & address here
+            print(attachment_report_file)
         else:
             attachment_report_file = attachment_file_path
+            print(attachment_report_file)
         #check file exist or not
         if not os.path.exists(attachment_report_file):
             raise Exception("File '%s' does not exist. Please provide valid file"%attachment_report_file)
