@@ -100,7 +100,7 @@ def init_driver(request):
     driver.quit()
     
 
-@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+@pytest.hookimpl(hookwrapper=True)
 # @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
     print("entering report formation")
@@ -137,13 +137,14 @@ def pytest_addoption(parser):
     parser.addoption("--email_pytest_report",
                  dest="email_pytest_report",
                  help="Email pytest report: Y or N",
-                 default="N")
+                 default="Y")
 
 def pytest_terminal_summary(terminalreporter, exitstatus):
     "add additional section in terminal summary reporting."
     print("entering the terminal summery")
     if not hasattr(terminalreporter.config, 'workerinput'):
         print("terminalreporter has workerinput")
+        print(terminalreporter.config.getoption("--email_pytest_report"))
         if terminalreporter.config.getoption("--email_pytest_report").lower() == 'y':
             print("creating email")
             # Initialize the Email_Pytest_Report object
