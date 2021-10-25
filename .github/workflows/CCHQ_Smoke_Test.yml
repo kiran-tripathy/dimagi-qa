@@ -44,5 +44,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test-result-report
-        path: /home/runner/work/dimagi-qa/dimagi-qa/HQSmokeTests/report.html
+        path: /home/runner/work/dimagi-qa/dimagi-qa/report.html
         retention-days: 2
