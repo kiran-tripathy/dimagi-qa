@@ -150,5 +150,5 @@ def pytest_terminal_summary(terminalreporter, exitstatus):
             # Initialize the Email_Pytest_Report object
             email_obj = Email_Pytest_Report()
             # Send html formatted email body message with pytest report as an attachment
-            email_obj.send_test_report_email(html_body_flag=True, attachment_flag=True, report_file_path='default')
+            email_obj.send_test_report_email(html_body_flag=True, attachment_flag=True, report_file_path='report.html')
             print("send email: Yes")
