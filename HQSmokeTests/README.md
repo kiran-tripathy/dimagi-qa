@@ -20,5 +20,9 @@ For example- targets = ['abc@email.com', 'efc@email.com']
 Run tests
 
 ```sh
-pytest --reruns 2 --reruns-delay 2 --capture=tee-sys  --email_pytest_report Y
+command to execute the scripts with 2 reruns
+pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
+
+command to execute the scripts with 2 reruns and in parallel
+pytest -v -n auto --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
 ```
