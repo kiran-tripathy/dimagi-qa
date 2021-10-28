@@ -36,6 +36,7 @@ class MessagingPage:
         self.send_broadcast = "//button[@data-bind='text: saveBroadcastText()']"
         self.broadcast_select = "//div[@id='immediate-broadcasts']//select[@class='form-control']"
         self.broadcast_created = "//a[text()='" + "broadcast_" + fetch_random_string() + "']"
+        self.next_btn="//div[@id='immediate-broadcasts']//a[@data-bind='click: nextPage']"
         # Conditional Alerts
         self.cond_alerts = "Conditional Alerts"
         self.add_cond_alert = "New Conditional Alert"
@@ -156,9 +157,18 @@ class MessagingPage:
         select = Select(self.driver.find_element(By.XPATH, self.broadcast_select))
         select.select_by_value('100')
         
+        time.sleep(5)
+        
         try:
-            assert True == WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((
-                By.XPATH, self.broadcast_created))).is_displayed()
+            while False:
+                if self.driver.find_element(By.XPATH, self.broadcast_created).is_displayed() == False:
+                    self.wait_to_click(By.XPATH, self.next_btn)
+                    time.sleep(5)
+                    continue
+                else:
+                    assert True
+#             assert True == WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((
+#                 By.XPATH, self.broadcast_created))).is_displayed()
         except StaleElementReferenceException:
             assert True == WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((
                 By.XPATH, self.broadcast_created))).is_displayed()
