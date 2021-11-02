@@ -2,7 +2,11 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [ formplayer_cypress ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  repository_dispatch:
+    types: [ deploy_success ]
     
 jobs:
   cypress-run:
@@ -14,7 +18,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          working-directory: CyPressTest
+          working-directory: FormplayerTests
           record: true
           spec: ./cypress/integration/testCases/*
         env:
@@ -27,5 +31,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: test-run-videos
-          path: /home/runner/work/dimagi-qa/dimagi-qa/CyPressTest/cypress/videos/testCases/*
+          path: /home/runner/work/dimagi-qa/dimagi-qa/FormplayerTests/cypress/videos/testCases/*
           retention-days: 2

@@ -1,5 +1,5 @@
-report.html
-settings.cfg
+HQSmokeTests/report.html
+HQSmokeTests/settings.cfg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -131,17 +131,30 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#Ignoring compliled files
+#Ignoring compliled files of HQSmokeTests
 .idea/
-Pages/__pycache__/
-TestBase/__pycache__/
-TestScripts/__pycache__/
+HQSmokeTests/Pages/__pycache__/
+HQSmokeTests/TestBase/__pycache__/
+HQSmokeTests/TestScripts/__pycache__/
 TestSuites/__pycache__/
-Pages/generatedUserInputs.csv
+HQSmokeTests/Pages/generatedUserInputs.csv
 TestSuites/generatedUserInputs.csv
-TestScripts/generatedUserInputs.csv
+HQSmokeTests/TestScripts/generatedUserInputs.csv
 AutomationTestReports/
 output.json
 pytest_html_report.html
 archive
 assets
+
+#Ignoring compliled files of FormplayerTests
+
+# dependencies
+FormplayerTests/node_modules
+
+# misc
+FormplayerTests/cypress.env.json
+FormplayerTests/npm-debug.log
+FormplayerTests/videos
+FormplayerTests/test.ts
+FormplayerTests/screenshots
+FormplayerTests/.vscode

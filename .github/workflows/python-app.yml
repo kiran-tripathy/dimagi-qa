@@ -7,9 +7,9 @@ on:
   push:
     branches: [ CCHQ_Smoke_Test ]
   pull_request:
-    branches: [ CCHQ_Smoke_Test ] 
+    branches: [ CCHQ_Smoke_Test ]
   workflow_dispatch:
-  
+
 jobs:
   build:
 
@@ -34,7 +34,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: CCHQ Smoke Test with pytest
       env:
-        DIMAGIQA_URL: ${{ github.event.client_payload.environment }}
+        DIMAGIQA_URL: ${{ secrets.DIMAGIQA_URL }}
         DIMAGIQA_LOGIN_USERNAME: ${{ secrets.DIMAGIQA_LOGIN_USERNAME }}
         DIMAGIQA_LOGIN_PASSWORD: ${{ secrets.DIMAGIQA_LOGIN_PASSWORD }}
       run: |
