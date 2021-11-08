@@ -67,7 +67,7 @@ class ReportPage:
         self.select_form_type_value = "form"
         self.select_app_value = "Village Health"
         self.select_source_id= "//select[@id='id_source']"
-        self.select_source_id_form_value= "pregnancy"#"Case List / Registration Form"
+        self.select_source_id_form_value= "Case List / Registration Form"
         self.select_source_id_case_value = "commcare-user"
 
         # Saved Reports
