@@ -67,7 +67,8 @@ class ReportPage:
         self.select_form_type_value = "form"
         self.select_app_value = "Village Health"
         self.select_source_id= "//select[@id='id_source']"
-        self.select_source_id_index= "2"
+        self.select_source_id_form_value= "pregnancy"#"Case List / Registration Form"
+        self.select_source_id_case_value = "commcare-user"
 
         # Saved Reports
         self.new_saved_report_name = "name"
@@ -186,7 +187,7 @@ class ReportPage:
         self.driver.find_element(By.ID, self.report_name_textbox_id).send_keys(self.report_name_case)
         self.driver.find_element(By.XPATH, self.select_app).click()
         select_source = Select(self.driver.find_element(By.XPATH, self.select_source_id))
-        select_source.select_by_index(self.select_source_id_index)
+        select_source.select_by_visible_text(self.select_source_id_case_value)
         self.wait_to_click(By.ID, self.next_button_id)
         self.wait_to_click(By.ID, self.save_and_view_button_id)
         self.check_if_report_loaded()
@@ -200,7 +201,7 @@ class ReportPage:
         select_application = Select(self.driver.find_element(By.XPATH, self.application))
         select_application.select_by_visible_text(self.select_app_value)
         select_source = Select(self.driver.find_element(By.XPATH, self.select_source_id))
-        select_source.select_by_index(self.select_source_id_index)
+        select_source.select_by_visible_text(self.select_source_id_form_value)
         self.wait_to_click(By.ID, self.next_button_id)
         self.wait_to_click(By.ID, self.save_and_view_button_id)
         self.check_if_report_loaded()
