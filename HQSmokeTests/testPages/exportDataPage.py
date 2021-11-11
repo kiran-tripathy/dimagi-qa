@@ -466,14 +466,14 @@ class ExportDataPage:
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.checkbox1)
         self.wait_to_click(By.XPATH, self.archive_button)
-        assert WebDriverWait(self.driver, 20).until(ec.presence_of_element_located((
+        assert WebDriverWait(self.driver, 40).until(ec.presence_of_element_located((
             By.XPATH, self.success_message))).is_displayed()
         print("Forms archival successful!!")
-        time.sleep(2)
+        time.sleep(5)
         
         # View Normal Forms
         self.wait_to_click(By.XPATH, self.manage_forms_return)
-        self.wait_to_click(By.XPATH, self.manage_forms_link)
+        #self.wait_to_click(By.XPATH, self.manage_forms_link)
         self.wait_to_click(By.XPATH, self.apply_button)
         self.wait_to_click(By.XPATH, self.view_form_link)
         self.switch_to_next_tab()
@@ -500,7 +500,7 @@ class ExportDataPage:
         try:
             self.wait_to_click(By.XPATH, self.checkbox1)
             self.wait_to_click(By.XPATH, self.archive_button)
-            assert WebDriverWait(self.driver, 20).until(ec.presence_of_element_located((
+            assert WebDriverWait(self.driver, 40).until(ec.presence_of_element_located((
                 By.XPATH, self.success_message))).is_displayed()
             print("Forms archival successful!!")
         except TimeoutException:
