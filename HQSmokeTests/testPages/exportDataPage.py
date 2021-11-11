@@ -471,19 +471,8 @@ class ExportDataPage:
         print("Forms archival successful!!")
         time.sleep(5)
         
-        # View Normal Forms
-        self.wait_to_click(By.XPATH, self.manage_forms_return)
-        #self.wait_to_click(By.XPATH, self.manage_forms_link)
-        self.wait_to_click(By.XPATH, self.apply_button)
-        self.wait_to_click(By.XPATH, self.view_form_link)
-        self.switch_to_next_tab()
-        normal_form_data = self.driver.page_source
-        assert normal_form_data != ""  # This condition can be improvised
-        print("normal_form has data")
-        self.driver.close()
-        self.switch_back_to_prev_tab()
-
         # View Archived Forms
+        self.wait_to_click(By.XPATH, self.manage_forms_link)
         self.wait_to_click(By.XPATH, self.archived_restored_dropdown)
         self.wait_to_click(By.XPATH, self.archived_forms_option)
         self.wait_to_click(By.XPATH, self.apply_button)
@@ -505,3 +494,17 @@ class ExportDataPage:
             print("Forms archival successful!!")
         except TimeoutException:
             print(TimeoutException)
+
+        # View Normal Forms
+        self.wait_to_click(By.XPATH, self.manage_forms_link)
+        self.wait_to_click(By.XPATH, self.apply_button)
+        self.wait_to_click(By.XPATH, self.view_form_link)
+        self.switch_to_next_tab()
+        normal_form_data = self.driver.page_source
+        assert normal_form_data != ""  # This condition can be improvised
+        print("normal_form has data")
+        self.driver.close()
+        self.switch_back_to_prev_tab()
+
+        
+       
