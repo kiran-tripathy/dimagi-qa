@@ -62,7 +62,7 @@ def settings(environment_settings):
 
 @pytest.fixture(scope="session")
 def driver(request, settings):
-    chrome_options = Options()
+    chrome_options = ChromeOptions()
     if settings.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
@@ -93,7 +93,7 @@ def driver(request, settings):
             "safebrowsing.enabled": True})
         # web_driver = Service(ChromeDriverManager().install())
         # driver = webdriver.Chrome(service=web_driver, options=chrome_options)
-    web_driver = Service(executable_path=ChromeDriverManager().install())
+    web_driver = Service(executable_path=(ChromeDriverManager().install()))
     driver = webdriver.Chrome(service=web_driver, options=chrome_options)
     print("Chrome version:", driver.capabilities['browserVersion'])
     login = LoginPage(driver, settings["url"])
@@ -110,7 +110,7 @@ def pytest_runtest_makereport(item):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
-    print(item.funcargs)
+    print(item.getfixtures)
     # drv = item.funcargs["driver"]
     if report.when == "call" or report.when == "teardown":
         print(report.when)

@@ -36,11 +36,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: CCHQ Smoke Test with pytest
       env:
-        DIMAGIQA_URL: ${{ github.event.client_payload.environment }} # ${{ secrets.DIMAGIQA_URL }}
+        DIMAGIQA_URL: ${{ secrets.DIMAGIQA_URL }} #${{ github.event.client_payload.environment }} 
         DIMAGIQA_LOGIN_USERNAME: ${{ secrets.DIMAGIQA_LOGIN_USERNAME }}
         DIMAGIQA_LOGIN_PASSWORD: ${{ secrets.DIMAGIQA_LOGIN_PASSWORD }}
       run: |
-        echo "client_payload: ${{ toJson(github.event.client_payload) }}"
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
