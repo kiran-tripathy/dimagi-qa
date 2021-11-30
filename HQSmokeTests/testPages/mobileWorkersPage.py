@@ -163,7 +163,7 @@ class MobileWorkerPage:
     def enter_value_for_created_user_field(self):
         self.wait_to_click(By.ID, self.additional_info_dropdown)
         self.wait_to_click(By.XPATH, self.select_value_dropdown)
-        assert self.driver.find_element_by_xpath(self.user_file_additional_info).is_displayed()
+        assert self.driver.find_element(By.XPATH, self.user_file_additional_info).is_displayed()
         time.sleep(1)
 
     def update_information(self):

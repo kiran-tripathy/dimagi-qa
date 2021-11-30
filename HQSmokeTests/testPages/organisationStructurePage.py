@@ -129,7 +129,7 @@ class OrganisationStructurePage:
         self.driver.find_element(By.XPATH, self.loc_property_xpath).send_keys("location_field_" + fetch_random_string())
         self.driver.find_element(By.XPATH, self.loc_label_xpath).clear()
         self.driver.find_element(By.XPATH, self.loc_label_xpath).send_keys("location_field_" + fetch_random_string())
-        # self.driver.find_element_by_xpath(self.choice_selection).click() # required when reg exp FF enabled
+        # self.driver.find_element(By.XPATH, self.choice_selection).click() # required when reg exp FF enabled
         self.driver.find_element(By.XPATH, self.add_choice_btn_xpath).click()
         self.driver.find_element(By.XPATH, self.choice_xpath).send_keys("location_field_" + fetch_random_string())
         self.driver.find_element(By.ID, self.save_btn_id).click()

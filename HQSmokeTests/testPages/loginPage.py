@@ -20,21 +20,21 @@ class LoginPage:
         # self.driver = driver
 
     def enter_username(self, username):
-        self.driver.find_element_by_id(self.username_textbox_id).clear()
-        self.driver.find_element_by_id(self.username_textbox_id).send_keys(username)
+        self.driver.find_element(By.ID, self.username_textbox_id).clear()
+        self.driver.find_element(By.ID, self.username_textbox_id).send_keys(username)
 
     def click_continue(self):
         try:
-            self.driver.find_element_by_xpath(self.continue_button_xpath).click()
+            self.driver.find_element(By.XPATH, self.continue_button_xpath).click()
         except (NoSuchElementException, ElementNotInteractableException):
             print("Non SSO workflow")
 
     def enter_password(self, password):
-        self.driver.find_element_by_id(self.password_textbox_id).clear()
-        self.driver.find_element_by_id(self.password_textbox_id).send_keys(password)
+        self.driver.find_element(By.ID, self.password_textbox_id).clear()
+        self.driver.find_element(By.ID, self.password_textbox_id).send_keys(password)
 
     def click_submit(self):
-        self.driver.find_element_by_xpath(self.submit_button_xpath).click()
+        self.driver.find_element(By.XPATH, self.submit_button_xpath).click()
 
     def accept_alert(self):
         try:
