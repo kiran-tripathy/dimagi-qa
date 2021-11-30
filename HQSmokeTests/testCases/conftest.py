@@ -108,7 +108,8 @@ def pytest_runtest_makereport(item):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
-    drv = item.funcargs["driver"]
+    print(item.funcargs)
+    # drv = item.funcargs["driver"]
     if report.when == "call" or report.when == "teardown":
         print(report.when)
         xfail = hasattr(report, 'wasxfail')
@@ -116,7 +117,7 @@ def pytest_runtest_makereport(item):
             print("report skipped or failed")
             file_name = report.nodeid.replace("::", "_") + ".png"
             # file_name = None
-            screen_img = _capture_screenshot(drv)
+            screen_img = _capture_screenshot(item.funcargs["driver"])
             if file_name:
                 html = '<div><img src="data:image/png;base64,%s" alt="screenshot" style="width:600px;height:300px;" ' \
                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
@@ -125,8 +126,8 @@ def pytest_runtest_makereport(item):
         print("extra added to report")
 
 
-def _capture_screenshot(drv):
-    return drv.get_screenshot_as_base64()
+def _capture_screenshot(driver):
+    return driver.get_screenshot_as_base64()
 
 
 '''
