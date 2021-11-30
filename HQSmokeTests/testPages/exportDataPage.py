@@ -466,24 +466,13 @@ class ExportDataPage:
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.checkbox1)
         self.wait_to_click(By.XPATH, self.archive_button)
-        assert WebDriverWait(self.driver, 20).until(ec.presence_of_element_located((
+        assert WebDriverWait(self.driver, 40).until(ec.presence_of_element_located((
             By.XPATH, self.success_message))).is_displayed()
         print("Forms archival successful!!")
-        time.sleep(2)
+        time.sleep(5)
         
-        # View Normal Forms
-        self.wait_to_click(By.XPATH, self.manage_forms_return)
-        self.wait_to_click(By.XPATH, self.manage_forms_link)
-        self.wait_to_click(By.XPATH, self.apply_button)
-        self.wait_to_click(By.XPATH, self.view_form_link)
-        self.switch_to_next_tab()
-        normal_form_data = self.driver.page_source
-        assert normal_form_data != ""  # This condition can be improvised
-        print("normal_form has data")
-        self.driver.close()
-        self.switch_back_to_prev_tab()
-
         # View Archived Forms
+        self.wait_to_click(By.XPATH, self.manage_forms_link)
         self.wait_to_click(By.XPATH, self.archived_restored_dropdown)
         self.wait_to_click(By.XPATH, self.archived_forms_option)
         self.wait_to_click(By.XPATH, self.apply_button)
@@ -500,8 +489,22 @@ class ExportDataPage:
         try:
             self.wait_to_click(By.XPATH, self.checkbox1)
             self.wait_to_click(By.XPATH, self.archive_button)
-            assert WebDriverWait(self.driver, 20).until(ec.presence_of_element_located((
+            assert WebDriverWait(self.driver, 40).until(ec.presence_of_element_located((
                 By.XPATH, self.success_message))).is_displayed()
             print("Forms archival successful!!")
         except TimeoutException:
             print(TimeoutException)
+
+        # View Normal Forms
+        self.wait_to_click(By.XPATH, self.manage_forms_link)
+        self.wait_to_click(By.XPATH, self.apply_button)
+        self.wait_to_click(By.XPATH, self.view_form_link)
+        self.switch_to_next_tab()
+        normal_form_data = self.driver.page_source
+        assert normal_form_data != ""  # This condition can be improvised
+        print("normal_form has data")
+        self.driver.close()
+        self.switch_back_to_prev_tab()
+
+        
+       
