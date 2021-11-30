@@ -7,8 +7,8 @@ from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 from HQSmokeTests.testPages.loginPage import LoginPage
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 global driver
 
@@ -94,15 +94,12 @@ def driver(request, settings):
         # driver = webdriver.Chrome(service=web_driver, options=chrome_options)
     web_driver = Service(ChromeDriverManager().setup())
     driver = webdriver.Chrome(service=web_driver, options=chrome_options)
-	print("Chrome version:", driver.capabilities['browserVersion'])
+    print("Chrome version:", driver.capabilities['browserVersion'])
     login = LoginPage(driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
-
     yield driver
-
     driver.close()
     driver.quit()
-
 
 @pytest.hookimpl(hookwrapper=True)
 # @pytest.mark.hookwrapper
