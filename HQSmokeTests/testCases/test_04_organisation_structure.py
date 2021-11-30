@@ -1,60 +1,64 @@
 from HQSmokeTests.testPages.homePage import HomePage
 from HQSmokeTests.testPages.organisationStructurePage import OrganisationStructurePage
-from HQSmokeTests.testCases.BaseTest import BaseTest
+
+def test_01_open_organisation_page(driver):
+
+    menu = HomePage(driver)
+    visible = OrganisationStructurePage(driver)
+    menu.users_menu()
+    visible.organisation_menu_open()
+    print("Opened Organisation StructurePage Page")
 
 
-class TestOrganisationStructure(BaseTest):
+def test_02_create_location(driver):
 
-    def test_01_open_organisation_page(self):
-        driver = self.driver
-        menu = HomePage(driver)
-        visible = OrganisationStructurePage(driver)
-        menu.users_menu()
-        visible.organisation_menu_open()
-        print("Opened Organisation StructurePage Page")
+    create = OrganisationStructurePage(driver)
+    create.create_location()
+    print("Location created")
 
-    def test_02_create_location(self):
-        driver = self.driver
-        create = OrganisationStructurePage(driver)
-        create.create_location()
-        print("Location created")
 
-    def test_03_edit_location(self):
-        driver = self.driver
-        edit = OrganisationStructurePage(driver)
-        edit.edit_location()
-        print("Location edited")
+def test_03_edit_location(driver):
 
-    def test_04_edit_location_fields(self):
-        driver = self.driver
-        edit = OrganisationStructurePage(driver)
-        edit.edit_location_fields()
-        print("Location field created")
+    edit = OrganisationStructurePage(driver)
+    edit.edit_location()
+    print("Location edited")
 
-    def test_05_visibilty_of_location_fields_in_locations(self):
-        driver = self.driver
-        edit = OrganisationStructurePage(driver)
-        edit.selection_location_field_for_location_created()
-        print("Selected location field created, for the location")
 
-    def test_06_creation_organization_level(self):
-        driver = self.driver
-        org = OrganisationStructurePage(driver)
-        org.create_org_level()
+def test_04_edit_location_fields(driver):
 
-    def test_07_download_locations(self):
-        driver = self.driver
-        menu = HomePage(driver)
-        menu.users_menu()
-        org = OrganisationStructurePage(driver)
-        org.download_locations()
+    edit = OrganisationStructurePage(driver)
+    edit.edit_location_fields()
+    print("Location field created")
 
-    def test_08_upload_locations(self):
-        driver = self.driver
-        org = OrganisationStructurePage(driver)
-        org.upload_locations()
 
-    def test_09_cleanup(self):
-        driver = self.driver
-        org = OrganisationStructurePage(driver)
-        org.cleanup()
+def test_05_visibilty_of_location_fields_in_locations(driver):
+
+    edit = OrganisationStructurePage(driver)
+    edit.selection_location_field_for_location_created()
+    print("Selected location field created, for the location")
+
+
+def test_06_creation_organization_level(driver):
+
+    org = OrganisationStructurePage(driver)
+    org.create_org_level()
+
+
+def test_07_download_locations(driver):
+
+    menu = HomePage(driver)
+    menu.users_menu()
+    org = OrganisationStructurePage(driver)
+    org.download_locations()
+
+
+def test_08_upload_locations(driver):
+
+    org = OrganisationStructurePage(driver)
+    org.upload_locations()
+
+
+def test_09_cleanup(driver):
+
+    org = OrganisationStructurePage(driver)
+    org.cleanup()

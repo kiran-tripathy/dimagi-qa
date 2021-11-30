@@ -1,30 +1,30 @@
 from HQSmokeTests.testPages.applicationPage import ApplicationPage
-from HQSmokeTests.testCases.BaseTest import BaseTest
+
+def test_01_create_new_app(driver):
+
+    load = ApplicationPage(driver)
+    load.create_new_application()
 
 
-class TestApplication(BaseTest):
+def test_02_form_builder_explore(driver):
 
-    def test_01_create_new_app(self):
-        driver = self.driver
-        load = ApplicationPage(driver)
-        load.create_new_application()
+    load = ApplicationPage(driver)
+    load.form_builder_exploration()
 
-    def test_02_form_builder_explore(self):
-        driver = self.driver
-        load = ApplicationPage(driver)
-        load.form_builder_exploration()
 
-    def test_03_form_xml_download_upload(self):
-        driver = self.driver
-        load = ApplicationPage(driver)
-        load.form_xml_download_upload()
+def test_03_form_xml_download_upload(driver):
 
-    def test_04_settings_exploration(self):
-        driver = self.driver
-        load = ApplicationPage(driver)
-        load.app_settings_exploration()
+    load = ApplicationPage(driver)
+    load.form_xml_download_upload()
 
-    def test_05_delete_app(self):
-        driver = self.driver
-        load = ApplicationPage(driver)
-        load.delete_application()
+
+def test_04_settings_exploration(driver):
+
+    load = ApplicationPage(driver)
+    load.app_settings_exploration()
+
+
+def test_05_delete_app(driver):
+
+    load = ApplicationPage(driver)
+    load.delete_application()
