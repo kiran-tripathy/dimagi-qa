@@ -43,44 +43,44 @@ jobs:
         echo "client_payload: ${{ toJson(github.event.client_payload) }}"
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
     - name: Send mail
-  uses: dawidd6/action-send-mail@v3
-  with:
-    # Required mail server address:
-    server_address: imap.gmail.com
-    # Required mail server port:
-    server_port: 465
-    # Optional (recommended): mail server username:
-    username: kbordoloi@dimagi.com # ${{secrets.MAIL_USERNAME}}
-    # Optional (recommended) mail server password:
-    password: ydfxtggbtggodgrn # ${{secrets.MAIL_PASSWORD}}
-    # Required mail subject:
-    subject: Github Actions job result
-    # Required recipients' addresses:
-    to: qa@dimagi.com
-    # Required sender full name (address can be skipped):
-    from: QA Team Dimagi # <user@example.com>
-    # Optional whether this connection use TLS (default is true if server_port is 465)
-    secure: true
-    # Optional plain body:
-    body: Build job of ${{github.repository}} completed successfully!
-    # Optional HTML body read from file:
-    html_body: /home/runner/work/dimagi-qa/dimagi-qa/email.html
-    # Optional carbon copy recipients:
-    cc: 
-    # Optional blind carbon copy recipients:
-    bcc: 
-    # Optional recipient of the email response:
-    reply_to: luke@example.com
-    # Optional Message ID this message is replying to:
-    in_reply_to: <random-luke@example.com>
-    # Optional unsigned/invalid certificates allowance:
-    ignore_cert: true
-    # Optional converting Markdown to HTML (set content_type to text/html too):
-    convert_markdown: true
-    # Optional attachments:
-    attachments: /home/runner/work/dimagi-qa/dimagi-qa/report.html
-    # Optional priority: 'high', 'normal' (default) or 'low'
-    priority: low
+      uses: dawidd6/action-send-mail@v3
+      with:
+        # Required mail server address:
+        server_address: imap.gmail.com
+        # Required mail server port:
+        server_port: 465
+        # Optional (recommended): mail server username:
+        username: kbordoloi@dimagi.com # ${{secrets.MAIL_USERNAME}}
+        # Optional (recommended) mail server password:
+        password: ydfxtggbtggodgrn # ${{secrets.MAIL_PASSWORD}}
+        # Required mail subject:
+        subject: Github Actions job result
+        # Required recipients' addresses:
+        to: qa@dimagi.com
+        # Required sender full name (address can be skipped):
+        from: QA Team Dimagi # <user@example.com>
+        # Optional whether this connection use TLS (default is true if server_port is 465)
+        secure: true
+        # Optional plain body:
+        body: Build job of ${{github.repository}} completed successfully!
+        # Optional HTML body read from file:
+        html_body: /home/runner/work/dimagi-qa/dimagi-qa/email.html
+        # Optional carbon copy recipients:
+        cc: 
+        # Optional blind carbon copy recipients:
+        bcc: 
+        # Optional recipient of the email response:
+        reply_to: luke@example.com
+        # Optional Message ID this message is replying to:
+        in_reply_to: <random-luke@example.com>
+        # Optional unsigned/invalid certificates allowance:
+        ignore_cert: true
+        # Optional converting Markdown to HTML (set content_type to text/html too):
+        convert_markdown: true
+        # Optional attachments:
+        attachments: /home/runner/work/dimagi-qa/dimagi-qa/report.html
+        # Optional priority: 'high', 'normal' (default) or 'low'
+        priority: low
     - name: Archive test results
       if: failure()
       uses: actions/upload-artifact@v2
