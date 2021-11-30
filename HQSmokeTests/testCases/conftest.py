@@ -92,7 +92,7 @@ def driver(request, settings):
             "safebrowsing.enabled": True})
         # web_driver = Service(ChromeDriverManager().install())
         # driver = webdriver.Chrome(service=web_driver, options=chrome_options)
-    web_driver = Service(ChromeDriverManager().setup())
+    web_driver = Service(executable_path=ChromeDriverManager().install())
     driver = webdriver.Chrome(service=web_driver, options=chrome_options)
     print("Chrome version:", driver.capabilities['browserVersion'])
     login = LoginPage(driver, settings["url"])
