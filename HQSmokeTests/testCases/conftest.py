@@ -8,6 +8,7 @@ from HQSmokeTests.testPages.loginPage import LoginPage
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 
 global driver
 
@@ -89,7 +90,7 @@ def driver(request, settings):
             "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
             "safebrowsing.enabled": True})
-    web_driver = ChromeDriverManager().install()
+    web_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
     login = LoginPage(driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
