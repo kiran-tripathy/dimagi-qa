@@ -10,7 +10,6 @@ from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 import pandas as pd
 from HQSmokeTests.testCases.conftest import settings
 
-
 def latest_download_file():
     os.chdir(UserInputsData.download_path)
     files = sorted(os.listdir(os.getcwd()), key=os.path.getmtime)
