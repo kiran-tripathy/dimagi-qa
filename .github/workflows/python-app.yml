@@ -50,9 +50,9 @@ jobs:
         # Required mail server port:
         server_port: 465
         # Optional (recommended): mail server username:
-        username: kbordoloi@dimagi.com # ${{secrets.MAIL_USERNAME}}
+        username: ${{secrets.DIMAGI_MAIL_USERNAME}}
         # Optional (recommended) mail server password:
-        password: ydfxtggbtggodgrn # ${{secrets.MAIL_PASSWORD}}
+        password: ${{secrets.DIMAGI_MAIL_PASSWORD}}
         # Required mail subject:
         subject: Github Actions job result
         # Required recipients' addresses:
