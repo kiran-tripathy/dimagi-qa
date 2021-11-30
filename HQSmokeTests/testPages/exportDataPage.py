@@ -122,7 +122,7 @@ class ExportDataPage:
         window_before = winHandles[0]
         self.driver.switch_to.window(window_before)
 
-    def get_url_paste_browser_case(self):
+    def get_url_paste_browser_case(self, settings):
         self.wait_to_click(By.XPATH, self.copy_odatafeed_link)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.edit_button)
@@ -133,8 +133,8 @@ class ExportDataPage:
         self.driver.back()
         self.driver.execute_script("window.open('');")  # Open a new tab
         self.switch_to_next_tab()
-        username = load_settings()["login_username"]
-        password = load_settings()["login_password"]
+        username = settings["login_username"]
+        password = settings["login_password"]
         final_URL_case = f"https://{username}:{password}@{odata_feed_link_case[8:]}"
         print(final_URL_case)
         self.driver.get(final_URL_case)
