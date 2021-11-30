@@ -108,7 +108,7 @@ def pytest_runtest_makereport(item):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
-    drv = item.funcargs['driver']
+    drv = item.funcargs["driver"]
     if report.when == "call" or report.when == "teardown":
         print(report.when)
         xfail = hasattr(report, 'wasxfail')
