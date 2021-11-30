@@ -62,7 +62,7 @@ def settings(environment_settings):
 
 @pytest.fixture(scope="session")
 def driver(request, settings):
-    chrome_options = ChromeOptions()
+    chrome_options = webdriver.ChromeOptions()
     if settings.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
