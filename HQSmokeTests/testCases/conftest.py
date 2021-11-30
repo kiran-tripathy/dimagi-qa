@@ -110,7 +110,7 @@ def pytest_runtest_makereport(item):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
-    print(item.getfixtures)
+    print(item.fixturenames)
     # drv = item.funcargs["driver"]
     if report.when == "call" or report.when == "teardown":
         print(report.when)
