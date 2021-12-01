@@ -39,7 +39,7 @@ jobs:
         DIMAGIQA_LOGIN_USERNAME: ${{ secrets.DIMAGIQA_LOGIN_USERNAME }}
         DIMAGIQA_LOGIN_PASSWORD: ${{ secrets.DIMAGIQA_LOGIN_PASSWORD }}
       run: |
-        pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html -k test_01_reports_menu_visibility
+        pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
     - name: Send mail
       if: always()
       uses: dawidd6/action-send-mail@v3
