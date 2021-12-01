@@ -10,7 +10,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-# from xvfbwrapper import Xvfb
+from xvfbwrapper import Xvfb
 
 global driver
 
@@ -64,10 +64,9 @@ def settings(environment_settings):
 @pytest.fixture(scope="session")
 def driver(request, settings):
     # os.environ['DISPLAY'] = ":10.0"
-    print("DISPLAY:",os.environ.get('DISPLAY'))
     chrome_options = webdriver.ChromeOptions()
-    # xvfb = Xvfb(width=1280, height=720)
-    # xvfb.start()
+    xvfb = Xvfb(width=1280, height=720)
+    xvfb.start()
     if settings.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
@@ -103,7 +102,8 @@ def driver(request, settings):
     driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
     # web_driver = Service(executable_path=(ChromeDriverManager().install()))
     # driver = webdriver.Chrome(service=web_driver, options=chrome_options)
-    print(driver.get(Path))
+    print("PATH:",driver)
+    print("DISPLAY:", os.environ.get('DISPLAY'))
     print("Chrome version:", driver.capabilities['browserVersion'])
     login = LoginPage(driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
