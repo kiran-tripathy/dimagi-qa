@@ -68,6 +68,7 @@ def driver(request, settings):
     chrome_options = webdriver.ChromeOptions()
     xvfb = Xvfb(width=1280, height=720)
     xvfb.start()
+    print(settings)
     if settings.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
