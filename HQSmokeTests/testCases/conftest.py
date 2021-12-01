@@ -39,6 +39,7 @@ def environment_settings():
 def settings(environment_settings):
     if os.environ.get("CI") == "true":
         settings = environment_settings
+        print(settings)
         if not settings:
             raise RuntimeError(
                 f"Environment variables not set:\n"
