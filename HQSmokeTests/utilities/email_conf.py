@@ -2,13 +2,13 @@ from HQSmokeTests.testCases.conftest import settings
 
 # imap host and email details
 imaphost = "imap.gmail.com"
-username = settings['DIMAGI_MAIL_USERNAME']
+username = "kbordoloi@dimagi.com"
 
 # using app password due to 2FA
-app_password = settings['DIMAGI_MAIL_PASSWORD']
+app_password = "ydfxtggbtggodgrn"
 
 # details for sending the email
 smtp_ssl_host = 'smtp.gmail.com'
 smtp_ssl_port = 465
-sender = settings['DIMAGI_MAIL_USERNAME']
+sender = "kbordoloi@dimagi.com"
 targets = ['kbordoloi@dimagi.com','qa@dimagi.com']
