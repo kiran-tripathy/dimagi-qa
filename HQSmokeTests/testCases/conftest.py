@@ -94,7 +94,7 @@ def driver(request, settings):
             "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
             "safebrowsing.enabled": True})
-    web_driver = Service(executable_path=ChromeDriverManager().install())
+    web_driver = Service(executable_path=ChromeDriverManager().install(), service_args=['--verbose'], log_path="chrome.log")
     driver = webdriver.Chrome(service=web_driver, options=chrome_options)
 
     print("Chrome version:", driver.capabilities['browserVersion'])
