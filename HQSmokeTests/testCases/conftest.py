@@ -5,12 +5,13 @@ from pathlib import Path
 import pytest
 from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 from HQSmokeTests.testPages.loginPage import LoginPage
+from HQSmokeTests.utilities.email_pytest_report import Email_Pytest_Report
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from HQSmokeTests.utilities.email_pytest_report import Email_Pytest_Report
 from xvfbwrapper import Xvfb
+
 global driver
 
 
@@ -63,7 +64,7 @@ def settings(environment_settings):
 @pytest.fixture(scope="session")
 def driver(request, settings):
     chrome_options = webdriver.ChromeOptions()
-	xvfb = Xvfb(width=1280, height=720)
+    xvfb = Xvfb(width=1280, height=720)
     xvfb.start()
     if settings.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
