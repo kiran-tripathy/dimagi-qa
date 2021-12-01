@@ -50,15 +50,15 @@ jobs:
         # Required mail server port:
         server_port: 465
         # Optional (recommended): mail server username:
-        username: ${{secrets.DIMAGI_MAIL_USERNAME}}
+        username: ${{secrets.DIMAGIQA_MAIL_USERNAME}}
         # Optional (recommended) mail server password:
-        password: ${{secrets.DIMAGI_MAIL_PASSWORD}}
+        password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
         subject: Github Actions job result
         # Required recipients' addresses:
         to: qa@dimagi.com
         # Required sender full name (address can be skipped):
-        from: ${{secrets.DIMAGI_MAIL_USERNAME}} # <user@example.com>
+        from: ${{secrets.DIMAGIQA_MAIL_USERNAME}} # <user@example.com>
         # Optional whether this connection use TLS (default is true if server_port is 465)
         secure: true
         # Optional plain body:
