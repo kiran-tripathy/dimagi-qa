@@ -8,8 +8,4 @@ openpyxl>=3.0.6
 matplotlib >= 3.3.4
 pytest-rerunfailures>=10.2
 pytest-xdist>=2.4.0
-<<<<<<< HEAD
 pytest-xdist[psutil]
-=======
-pytest-xdist[psutil]
->>>>>>> b35ab6d6d90fdb66283d0720991b0d235c9028ce
