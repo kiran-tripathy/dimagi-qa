@@ -23,21 +23,25 @@ def environment_settings():
                 DIMAGIQA_URL
                 DIMAGIQA_LOGIN_USERNAME
                 DIMAGIQA_LOGIN_PASSWORD
+                DIMAGIQA_MAIL_USERNAME
+                DIMAGIQA_MAIL_PASSWORD
 
             See https://docs.github.com/en/actions/reference/encrypted-secrets
             for instructions on how to set them.
             """
     settings = {}
-    for name in ["url", "login_username", "login_password","mail_username","mail_password"]:
+    for name in ["url", "login_username", "login_password", "mail_username", "mail_password"]:
         var = f"DIMAGIQA_{name.upper()}"
         if var in os.environ:
             settings[name] = os.environ[var]
+    print(settings)
     return settings
 
 
 @pytest.fixture(scope="session")
 def settings(environment_settings):
     if os.environ.get("CI") == "true":
+        settings["CI"] = "true"
         settings = environment_settings
         print(settings)
         if not settings:
@@ -46,6 +50,8 @@ def settings(environment_settings):
                 "  DIMAGIQA_URL\n"
                 "  DIMAGIQA_LOGIN_USERNAME\n"
                 "  DIMAGIQA_LOGIN_PASSWORD\n\n"
+                "  DIMAGIQA_MAIL_USERNAME\n"
+                "  DIMAGIQA_MAIL_PASSWORD\n\n"
                 "See https://docs.github.com/en/actions/reference/encrypted-secrets "
                 "for instructions on how to set them."
             )
@@ -66,8 +72,8 @@ def settings(environment_settings):
 def driver(request, settings):
     # os.environ['DISPLAY'] = ":10.0"
     chrome_options = webdriver.ChromeOptions()
-    xvfb = Xvfb(width=1280, height=720)
-    xvfb.start()
+    # xvfb = Xvfb(width=1920, height=1080)
+    # xvfb.start()
     print(settings)
     if settings.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
@@ -100,10 +106,11 @@ def driver(request, settings):
             "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
             "safebrowsing.enabled": True})
-    web_driver = ChromeDriverManager().install()
-    driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
-    # web_driver = Service(executable_path=(ChromeDriverManager().install()))
-    # driver = webdriver.Chrome(service=web_driver, options=chrome_options)
+    # web_driver = ChromeDriverManager().install()
+    # driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
+    web_driver = Service(executable_path=ChromeDriverManager().install(), service_args=['--verbose'],
+                         log_path="chrome.log")
+    driver = webdriver.Chrome(service=web_driver, options=chrome_options)
     print("PATH:",driver)
     print("DISPLAY:", os.environ.get('DISPLAY'))
     print("Chrome version:", driver.capabilities['browserVersion'])
