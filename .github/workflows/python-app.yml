@@ -27,7 +27,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r HQSmokeTests/requires.txt
-        export DISPLAY=mymachine.com:0.0
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -40,7 +39,7 @@ jobs:
         DIMAGIQA_LOGIN_USERNAME: ${{ secrets.DIMAGIQA_LOGIN_USERNAME }}
         DIMAGIQA_LOGIN_PASSWORD: ${{ secrets.DIMAGIQA_LOGIN_PASSWORD }}
       run: |
-        pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
+        pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html -k test_01_reports_menu_visibility
     - name: Send mail
       if: always()
       uses: dawidd6/action-send-mail@v3
@@ -80,3 +79,6 @@ jobs:
         name: test-result-report
         path: /home/runner/work/dimagi-qa/dimagi-qa/report.html
         retention-days: 2
+    - name: show logs
+      if: always()
+      run: cat chrome.log
