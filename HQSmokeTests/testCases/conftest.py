@@ -94,12 +94,9 @@ def driver(request, settings):
             "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
             "safebrowsing.enabled": True})
-    web_driver = ChromeDriverManager().install()
-    driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
-    # web_driver = Service(executable_path=(ChromeDriverManager().install()))
-    # driver = webdriver.Chrome(service=web_driver, options=chrome_options)
-    print("PATH:",driver)
-    print("DISPLAY:", os.environ.get('DISPLAY'))
+    web_driver = Service(executable_path=ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=web_driver, options=chrome_options)
+
     print("Chrome version:", driver.capabilities['browserVersion'])
     login = LoginPage(driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
