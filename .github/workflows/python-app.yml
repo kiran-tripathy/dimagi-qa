@@ -72,7 +72,7 @@ jobs:
         # Optional attachments:
         attachments: /home/runner/work/dimagi-qa/dimagi-qa/report.html
         # Optional priority: 'high', 'normal' (default) or 'low'
-        priority: low
+        priority: normal
     - name: Archive test results
       if: failure()
       uses: actions/upload-artifact@v2
