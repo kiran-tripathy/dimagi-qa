@@ -66,14 +66,6 @@ jobs:
         # Optional HTML body read from file:
         html_body: /home/runner/work/dimagi-qa/dimagi-qa/email.html
         # Optional carbon copy recipients:
-        cc: 
-        # Optional blind carbon copy recipients:
-        bcc: 
-        # Optional recipient of the email response:
-        reply_to: luke@example.com
-        # Optional Message ID this message is replying to:
-        in_reply_to: <random-luke@example.com>
-        # Optional unsigned/invalid certificates allowance:
         ignore_cert: true
         # Optional converting Markdown to HTML (set content_type to text/html too):
         convert_markdown: true
