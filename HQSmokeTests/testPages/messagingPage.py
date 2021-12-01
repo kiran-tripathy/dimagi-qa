@@ -1,14 +1,13 @@
 import time
 
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support.select import Select
-
 from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
 from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 from HQSmokeTests.testPages.organisationStructurePage import latest_download_file
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class MessagingPage:
@@ -115,7 +114,9 @@ class MessagingPage:
     def wait_to_click(self, *locator, timeout=10):
         try:
             clickable = ec.element_to_be_clickable(locator)
-            WebDriverWait(self.driver, timeout).until(clickable).click()
+            element = WebDriverWait(self.driver, timeout).until((clickable))
+            element.click()
+
         except TimeoutException:
             print(TimeoutException)
 

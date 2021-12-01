@@ -1,13 +1,12 @@
 import time
 
+from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, StaleElementReferenceException, \
     UnexpectedAlertPresentException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.select import Select
-
-from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class ReportPage:
@@ -92,7 +91,8 @@ class ReportPage:
     def wait_to_click(self, *locator, timeout=10):
         try:
             clickable = ec.element_to_be_clickable(locator)
-            WebDriverWait(self.driver, timeout).until(clickable).click()
+            element = WebDriverWait(self.driver, timeout).until((clickable))
+            element.click()
         except (NoSuchElementException, TimeoutException):
             print(NoSuchElementException, TimeoutException)
 

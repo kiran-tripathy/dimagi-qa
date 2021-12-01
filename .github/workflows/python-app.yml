@@ -42,10 +42,11 @@ jobs:
       run: |
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
     - name: Send mail
+      if: always()
       uses: dawidd6/action-send-mail@v3
       with:
         # Required mail server address:
-        server_address: imap.gmail.com
+        server_address: smtp.gmail.com
         # Required mail server port:
         server_port: 465
         # Optional (recommended): mail server username:

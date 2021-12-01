@@ -102,7 +102,8 @@ class ExportDataPage:
     def wait_to_click(self, *locator, timeout=20):
         time.sleep(5)
         clickable = ec.element_to_be_clickable(locator)
-        WebDriverWait(self.driver, timeout).until(clickable).click()
+        element = WebDriverWait(self.driver, timeout).until((clickable))
+		element.click()
 
 
     def wait_to_clear(self, *locator, timeout=5):

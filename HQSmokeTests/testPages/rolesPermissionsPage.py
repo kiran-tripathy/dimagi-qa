@@ -1,9 +1,10 @@
+import time
+
+from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
-import time
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class RolesPermissionPage:
@@ -24,7 +25,8 @@ class RolesPermissionPage:
 
     def wait_to_click(self, *locator, timeout=3):
         clickable = ec.element_to_be_clickable(locator)
-        WebDriverWait(self.driver, timeout).until(clickable).click()
+        element = WebDriverWait(self.driver, timeout).until((clickable))
+        element.click()
 
     def roles_menu_click(self):
         self.wait_to_click(By.XPATH, self.roles_menu_xpath)

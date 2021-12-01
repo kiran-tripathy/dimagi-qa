@@ -1,13 +1,14 @@
+import datetime
 import os
 import time
-import datetime
-from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
+from datetime import date
+
 from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
 from HQSmokeTests.UserInputs.userInputsData import UserInputsData
-from datetime import date
+from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 def latest_download_file():
@@ -80,7 +81,8 @@ class OrganisationStructurePage:
     def wait_to_click(self, *locator, timeout=10):
         try:
             clickable = ec.element_to_be_clickable(locator)
-            WebDriverWait(self.driver, timeout).until(clickable).click()
+            element = WebDriverWait(self.driver, timeout).until((clickable))
+            element.click()
         except TimeoutException:
             print(TimeoutException)
 
