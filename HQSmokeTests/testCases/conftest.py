@@ -63,7 +63,7 @@ def settings(environment_settings):
 
 @pytest.fixture(scope="session")
 def driver(request, settings):
-    
+    os.environ['DISPLAY'] = ":10:0"
     print("DISPLAY:",os.environ.get('DISPLAY'))
     chrome_options = webdriver.ChromeOptions()
     # xvfb = Xvfb(width=1280, height=720)
