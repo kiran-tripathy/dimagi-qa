@@ -44,7 +44,6 @@ def settings(environment_settings):
     if os.environ.get("CI") == "true":
         settings["CI"] = "true"
         settings = environment_settings
-        settings["CI"] = "true"
         print(settings)
         if not settings:
             raise RuntimeError(
