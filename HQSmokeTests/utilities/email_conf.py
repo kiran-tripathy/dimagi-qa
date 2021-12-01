@@ -1,5 +1,3 @@
-from HQSmokeTests.testCases.conftest import settings
-
 # imap host and email details
 imaphost = "imap.gmail.com"
 username = "kbordoloi@dimagi.com"
