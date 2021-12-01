@@ -43,9 +43,13 @@ class LoginPage:
         except TimeoutException:
             pass  # ignore if alert not on page
 
+    def assert_logged_in(self):
+        assert "Log In" not in self.driver.title, "Login failed"
+
     def login(self, username, password):
         self.enter_username(username)
         self.click_continue()
         self.enter_password(password)
         self.click_submit()
         self.accept_alert()
+        self.assert_logged_in()
