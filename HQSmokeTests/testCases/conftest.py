@@ -28,7 +28,7 @@ def environment_settings():
             for instructions on how to set them.
             """
     settings = {}
-    for name in ["url", "login_username", "login_password"]:
+    for name in ["url", "login_username", "login_password","mail_username","mail_password"]:
         var = f"DIMAGIQA_{name.upper()}"
         if var in os.environ:
             settings[name] = os.environ[var]
