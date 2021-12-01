@@ -10,7 +10,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from xvfbwrapper import Xvfb
+# from xvfbwrapper import Xvfb
 
 global driver
 
@@ -80,7 +80,7 @@ def driver(request, settings):
         chrome_options.add_argument('disable-extensions')
         chrome_options.add_argument('--safebrowsing-disable-download-protection')
         chrome_options.add_argument('--safebrowsing-disable-extension-blacklist')
-        # chrome_options.add_argument('window-size=1920,1080')
+        chrome_options.add_argument('window-size=1920,1080')
         chrome_options.add_argument("--disable-setuid-sandbox")
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--start-maximized')
