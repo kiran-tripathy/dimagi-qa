@@ -1,14 +1,14 @@
-import os
-from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 import datetime
+import os
 import time
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.common import exceptions 
-from HQSmokeTests.UserInputs.userInputsData import UserInputsData
+
 import pandas as pd
-from HQSmokeTests.testCases.conftest import settings
+from HQSmokeTests.UserInputs.userInputsData import UserInputsData
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.wait import WebDriverWait
+
 
 def latest_download_file():
     os.chdir(UserInputsData.download_path)
@@ -103,7 +103,7 @@ class ExportDataPage:
         time.sleep(5)
         clickable = ec.element_to_be_clickable(locator)
         element = WebDriverWait(self.driver, timeout).until((clickable))
-		element.click()
+        element.click()
 
 
     def wait_to_clear(self, *locator, timeout=5):
