@@ -58,7 +58,7 @@ jobs:
         # Required recipients' addresses:
         to: qa@dimagi.com
         # Required sender full name (address can be skipped):
-        from: QA Team Dimagi # <user@example.com>
+        from: ${{secrets.DIMAGI_MAIL_USERNAME}} # <user@example.com>
         # Optional whether this connection use TLS (default is true if server_port is 465)
         secure: true
         # Optional plain body:

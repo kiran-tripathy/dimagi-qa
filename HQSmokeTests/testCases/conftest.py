@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from HQSmokeTests.utilities.email_pytest_report import Email_Pytest_Report
-
+from xvfbwrapper import Xvfb
 global driver
 
 
@@ -63,6 +63,8 @@ def settings(environment_settings):
 @pytest.fixture(scope="session")
 def driver(request, settings):
     chrome_options = webdriver.ChromeOptions()
+	xvfb = Xvfb(width=1280, height=720)
+    xvfb.start()
     if settings.get("CI") == "true":
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('disable-extensions')
