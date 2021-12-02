@@ -128,7 +128,7 @@ class ExportDataPage:
         window_before = winHandles[0]
         self.driver.switch_to.window(window_before)
 
-    def get_url_paste_browser_case(self, settings):
+    def get_url_paste_browser_case(self):
         self.wait_to_click(By.XPATH, self.copy_odatafeed_link)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.edit_button)
@@ -145,7 +145,7 @@ class ExportDataPage:
         print(final_URL_case)
         self.driver.get(final_URL_case)
 
-    def get_url_paste_browser_form(self, settings):
+    def get_url_paste_browser_form(self):
         self.wait_to_click(By.XPATH, self.copy_odatafeed_link)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.edit_button)
