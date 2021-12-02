@@ -25,8 +25,8 @@ class RolesPermissionPage:
 
     def wait_to_click(self, *locator, timeout=3):
         clickable = ec.element_to_be_clickable(locator)
-        element = WebDriverWait(self.driver, timeout).until((clickable))
-        element.click()
+        WebDriverWait(self.driver, timeout).until(clickable).click()
+        
 
     def roles_menu_click(self):
         self.wait_to_click(By.XPATH, self.roles_menu_xpath)

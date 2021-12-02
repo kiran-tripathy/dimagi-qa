@@ -66,8 +66,8 @@ class ApplicationPage:
 
     def wait_to_click(self, *locator, timeout=10):
         clickable = ec.element_to_be_clickable(locator)
-        element = WebDriverWait(self.driver, timeout).until((clickable))
-        element.click()
+        WebDriverWait(self.driver, timeout).until(clickable).click()
+        
 
     def create_new_application(self):
         self.wait_to_click(By.ID, self.applications_menu_id)

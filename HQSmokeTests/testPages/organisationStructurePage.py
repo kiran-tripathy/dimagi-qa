@@ -81,8 +81,8 @@ class OrganisationStructurePage:
     def wait_to_click(self, *locator, timeout=10):
         try:
             clickable = ec.element_to_be_clickable(locator)
-            element = WebDriverWait(self.driver, timeout).until((clickable))
-            element.click()
+            WebDriverWait(self.driver, timeout).until(clickable).click()
+            
         except TimeoutException:
             print(TimeoutException)
 
