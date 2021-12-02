@@ -99,6 +99,11 @@ class ExportDataPage:
         self.archived_forms_option = '/html/body/span/span/span[2]/ul/li[2]'
         self.manage_forms_return = '//span[contains(text(),"Return to")]/a[.="Manage Forms"]'
 
+        # bulk export delete
+        self.select_all_btn='//button[@data-bind="click: selectAll"]'
+        self.delete_selected_exports='//a[@href= "#bulk-delete-export-modal"]'
+        self.bulk_delete_confirmation_btn='//button[@data-bind="click: BulkExportDelete"]'
+
     def wait_to_click(self, *locator, timeout=20):
         time.sleep(5)
         clickable = ec.element_to_be_clickable(locator)
@@ -213,6 +218,11 @@ class ExportDataPage:
         print("Downloaded file has the required data!")
         self.driver.close()
         self.switch_back_to_prev_tab()
+
+    def delete_bulk_exports(self):
+        self.wait_to_click(By.XPATH, self.select_all_btn)
+        self.wait_to_click(By.XPATH, self.delete_selected_exports)
+        self.wait_to_click(By.XPATH, self.bulk_delete_confirmation_btn)
 
     # Test Case 20_b - Verify Export functionality for Cases
     def add_case_exports(self):
