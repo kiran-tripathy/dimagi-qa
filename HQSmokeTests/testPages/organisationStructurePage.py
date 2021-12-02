@@ -19,8 +19,10 @@ def latest_download_file():
         print(files)
         for filename in files:
             if filename.endswith(".xlsx"):
-                newest = filename
-                # newest = max(files, key=os.path.getctime)
+                # newest = filename
+                newest = sorted(files, key=os.path.getctime)[-1]
+                if newest != filename:
+                    newest = sorted(files, key=os.path.getctime)[-2]
                 print("File downloaded: " + newest)
                 return newest
     finally:
@@ -83,7 +85,7 @@ class OrganisationStructurePage:
         try:
             clickable = ec.element_to_be_clickable(locator)
             WebDriverWait(self.driver, timeout).until(clickable).click()
-            
+
         except TimeoutException:
             print(TimeoutException)
 
@@ -120,7 +122,7 @@ class OrganisationStructurePage:
             self.driver.find_element(By.LINK_TEXT, self.org_menu_link_text).click()
             self.driver.refresh()
             assert WebDriverWait(self.driver, 5).until(ec.visibility_of_element_located((
-                 By.XPATH, self.renamed_location))).is_displayed()
+                By.XPATH, self.renamed_location))).is_displayed()
         except StaleElementReferenceException:
             print(StaleElementReferenceException)
 
