@@ -17,14 +17,22 @@ def latest_download_file():
         os.chdir(UserInputsData.download_path)
         files = sorted(os.listdir(os.getcwd()), key=os.path.getctime)
         print(files)
+        if files[-1].endswith(".log"):
+            newest = sorted(files, key=os.path.getctime)[-2]
+        elif files[-1].endswith(".xlsx"):
+            newest = sorted(files, key=os.path.getctime)[-1]
+        print("File downloaded: " + newest)
+        return newest
+        '''
         for filename in files:
             if filename.endswith(".xlsx"):
                 # newest = filename
                 newest = max(files, key=os.path.getctime)
-                if newest.endswith("log"):
+                if newest.endswith(".log"):
                     newest = sorted(files, key=os.path.getctime)[-2]
                 print("File downloaded: " + newest)
                 return newest
+                '''
     finally:
         print("Restoring the path...")
         os.chdir(cwd)
