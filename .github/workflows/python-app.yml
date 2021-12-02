@@ -44,7 +44,6 @@ jobs:
       run: |
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
     - name: Send mail
-      if: always()
       uses: dawidd6/action-send-mail@v3
       with:
         # Required mail server address:
@@ -60,17 +59,9 @@ jobs:
         # Required recipients' addresses:
         to: qa@dimagi.com
         # Required sender full name (address can be skipped):
-        from: ${{secrets.DIMAGIQA_MAIL_USERNAME}} # <user@example.com>
-        # Optional whether this connection use TLS (default is true if server_port is 465)
-        secure: true
+        from: no-reply <no-reply@dimagi.com> # <user@example.com>
         # Optional plain body:
         body: Build job of ${{github.repository}} completed successfully!
-        # Optional HTML body read from file:
-        html_body: /home/runner/work/dimagi-qa/dimagi-qa/email.html
-        # Optional carbon copy recipients:
-        ignore_cert: true
-        # Optional converting Markdown to HTML (set content_type to text/html too):
-        convert_markdown: true
         # Optional attachments:
         attachments: /home/runner/work/dimagi-qa/dimagi-qa/report.html
         # Optional priority: 'high', 'normal' (default) or 'low'
@@ -84,4 +75,4 @@ jobs:
         retention-days: 2
     - name: show logs
       if: always()
-      run: cat chrome.log
+      run: cat /home/runner/work/dimagi-qa/dimagi-qa/logs/chrome.log
