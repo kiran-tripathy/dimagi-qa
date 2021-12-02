@@ -21,6 +21,8 @@ def latest_download_file():
             newest = sorted(files, key=os.path.getctime)[-2]
         elif files[-1].endswith(".xlsx"):
             newest = sorted(files, key=os.path.getctime)[-1]
+        else:
+            newest = max(files, key=os.path.getctime)
         print("File downloaded: " + newest)
         return newest
         '''

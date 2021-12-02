@@ -110,7 +110,7 @@ def driver(request, settings):
     # web_driver = ChromeDriverManager().install()
     # driver = webdriver.Chrome(executable_path=web_driver, options=chrome_options)
     web_driver = Service(executable_path=ChromeDriverManager().install(), service_args=['--verbose'],
-                         log_path="chrome.log")
+                         log_path="logs/chrome.log")
     driver = webdriver.Chrome(service=web_driver, options=chrome_options)
     print("Chrome version:", driver.capabilities['browserVersion'])
     login = LoginPage(driver, settings["url"])
