@@ -19,7 +19,8 @@ def latest_download_file():
         print(files)
         for filename in files:
             if filename.endswith(".xlsx"):
-                newest = max(files, key=os.path.getctime)
+                newest = filename
+                # newest = max(files, key=os.path.getctime)
                 print("File downloaded: " + newest)
                 return newest
     finally:
