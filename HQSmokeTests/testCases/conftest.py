@@ -10,6 +10,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+
 # from xvfbwrapper import Xvfb
 
 
@@ -86,7 +87,7 @@ def driver(request, settings):
         chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument('--remote-debugging-port=9222')
         chrome_options.add_argument('--headless')
-		chrome_options.set_capability("browserVersion","94.0.4606")
+        chrome_options.set_capability("browserVersion", "94.0.4606")
         chrome_options.add_experimental_option("prefs", {
             "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
@@ -111,7 +112,6 @@ def driver(request, settings):
     web_driver = Service(executable_path=ChromeDriverManager().install(), service_args=['--verbose'],
                          log_path="chrome.log")
     driver = webdriver.Chrome(service=web_driver, options=chrome_options)
-
     print("Chrome version:", driver.capabilities['browserVersion'])
     login = LoginPage(driver, settings["url"])
     login.login(settings["login_username"], settings["login_password"])
