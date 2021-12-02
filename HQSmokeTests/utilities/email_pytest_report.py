@@ -24,17 +24,17 @@ import mimetypes
 from email import encoders
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HQSmokeTests.utilities.email_conf as conf_file
-
+#from HQSmokeTests.testCases.conftest import settings
 
 class Email_Pytest_Report:
     "Class to email pytest report"
 
-    def __init__(self):
+    def __init__(self, settings):
         self.smtp_ssl_host = conf_file.smtp_ssl_host
         self.smtp_ssl_port = conf_file.smtp_ssl_port
-        self.username = conf_file.username
-        self.password = conf_file.app_password
-        self.sender = conf_file.sender
+        self.username = settings['mail_username']
+        self.password = settings['mail_password']
+        self.sender = settings['mail_username']
         self.targets = conf_file.targets
 
 
