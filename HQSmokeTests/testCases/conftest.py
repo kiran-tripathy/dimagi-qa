@@ -162,7 +162,7 @@ def pytest_addoption(parser):
                  default="Y")
 
 
-def pytest_terminal_summary(terminalreporter, exitstatus, settings):
+def pytest_terminal_summary(terminalreporter, exitstatus):
     "add additional section in terminal summary reporting."
     print("entering the terminal summery")
     if not hasattr(terminalreporter.config, 'workerinput'):
