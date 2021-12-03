@@ -32,8 +32,10 @@ class Email_Pytest_Report:
     def __init__(self):
         self.smtp_ssl_host = conf_file.smtp_ssl_host
         self.smtp_ssl_port = conf_file.smtp_ssl_port
-        
+		self.username = conf_file.username
+        self.password = conf_file.app_password        
         self.targets = conf_file.targets
+		self.sender = conf_file.sender
 
 
     def get_test_report_data(self,html_body_flag= True,report_file_path= 'default'):
@@ -107,7 +109,7 @@ class Email_Pytest_Report:
         return attachment
 
 
-    def send_test_report_email(self,username, password, html_body_flag = True,attachment_flag = False,report_file_path = 'default'):
+    def send_test_report_email(self, html_body_flag = True,attachment_flag = False,report_file_path = 'default'):
         "send test report email"
         #1. Get html formatted email body data from report_file_path file (log/pytest_report.html) and do not add it as an attachment
         if html_body_flag == True and attachment_flag == False:
@@ -148,14 +150,14 @@ class Email_Pytest_Report:
             message.attach(attachment)
         
         time_date=datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-        message['From'] = username
+        message['From'] = self.sender
         message['To'] = ', '.join(self.targets)
         message['Subject'] = 'Script generated test report '+ time_date # Update email subject here
 
         #Send Email
         server = smtplib.SMTP_SSL(self.smtp_ssl_host, self.smtp_ssl_port)
-        server.login(username, password)
-        server.sendmail(username, self.targets, message.as_string())
+        server.login(self.username, self.password)
+        server.sendmail(self.username, self.targets, message.as_string())
         server.quit()
         print("email sent")
 
