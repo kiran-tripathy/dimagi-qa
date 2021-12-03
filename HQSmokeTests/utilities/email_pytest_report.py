@@ -107,7 +107,7 @@ class Email_Pytest_Report:
         return attachment
 
 
-    def send_test_report_email(self,html_body_flag = True,attachment_flag = False,report_file_path = 'default', username, password):
+    def send_test_report_email(self,username, password, html_body_flag = True,attachment_flag = False,report_file_path = 'default'):
         "send test report email"
         #1. Get html formatted email body data from report_file_path file (log/pytest_report.html) and do not add it as an attachment
         if html_body_flag == True and attachment_flag == False:
@@ -148,7 +148,7 @@ class Email_Pytest_Report:
             message.attach(attachment)
         
         time_date=datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-        message['From'] = self.sender
+        message['From'] = username
         message['To'] = ', '.join(self.targets)
         message['Subject'] = 'Script generated test report '+ time_date # Update email subject here
 
