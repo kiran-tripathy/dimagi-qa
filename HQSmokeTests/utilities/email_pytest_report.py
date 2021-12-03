@@ -29,12 +29,10 @@ import HQSmokeTests.utilities.email_conf as conf_file
 class Email_Pytest_Report:
     "Class to email pytest report"
 
-    def __init__(self, mail_username, mail_password):
+    def __init__(self):
         self.smtp_ssl_host = conf_file.smtp_ssl_host
         self.smtp_ssl_port = conf_file.smtp_ssl_port
-        self.username = mail_username
-        self.password = mail_password
-        self.sender = mail_username
+        
         self.targets = conf_file.targets
 
 
@@ -109,7 +107,7 @@ class Email_Pytest_Report:
         return attachment
 
 
-    def send_test_report_email(self,html_body_flag = True,attachment_flag = False,report_file_path = 'default'):
+    def send_test_report_email(self,html_body_flag = True,attachment_flag = False,report_file_path = 'default', username, password):
         "send test report email"
         #1. Get html formatted email body data from report_file_path file (log/pytest_report.html) and do not add it as an attachment
         if html_body_flag == True and attachment_flag == False:
@@ -156,8 +154,8 @@ class Email_Pytest_Report:
 
         #Send Email
         server = smtplib.SMTP_SSL(self.smtp_ssl_host, self.smtp_ssl_port)
-        server.login(self.username, self.password)
-        server.sendmail(self.sender, self.targets, message.as_string())
+        server.login(username, password)
+        server.sendmail(username, self.targets, message.as_string())
         server.quit()
         print("email sent")
 
