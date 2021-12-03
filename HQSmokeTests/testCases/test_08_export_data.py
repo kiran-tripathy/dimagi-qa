@@ -45,13 +45,14 @@ def test_05_excel_dashboard_integration(driver):
     export.deletion()
 
 
-def test_06_powerBI_tableau_integration(driver):
-
+def test_06_powerBI_tableau_integration(driver, settings):
+    username = settings["login_username"]
+    password = settings["login_password"]
     export = ExportDataPage(driver)
     export.data_tab()
-    export.power_bi_tableau_integration_form()
+    export.power_bi_tableau_integration_form(username,password)
     export.deletion()
-    export.power_bi_tableau_integration_case()
+    export.power_bi_tableau_integration_case(username,password)
     export.deletion()
 
 

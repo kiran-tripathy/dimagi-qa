@@ -121,14 +121,17 @@ class ExportDataPage:
     def switch_to_next_tab(self):
         winHandles = self.driver.window_handles
         window_after = winHandles[1]
-        self.driver.switch_to.new_window(window_after)
+        self.driver.switch_to.window(window_after)
+
+    def switch_to_new_tab(self):
+        self.driver.switch_to.new_window('tab')
 
     def switch_back_to_prev_tab(self):
         winHandles = self.driver.window_handles
         window_before = winHandles[0]
-        self.driver.switch_to.new_window(window_before)
+        self.driver.switch_to.window(window_before)
 
-    def get_url_paste_browser_case(self):
+    def get_url_paste_browser_case(self, username,password):
         self.wait_to_click(By.XPATH, self.copy_odatafeed_link)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.edit_button)
@@ -138,14 +141,11 @@ class ExportDataPage:
         odata_feed_link_case = "https://staging.commcarehq.org/a/qa-automation/api/v0.5/odata/cases/" + ID + "/feed/"
         self.driver.back()
         self.driver.execute_script("window.open('');")  # Open a new tab
-        self.switch_to_next_tab()
-        username = settings["login_username"]
-        password = settings["login_password"]
+        self.switch_to_new_tab()
         final_URL_case = f"https://{username}:{password}@{odata_feed_link_case[8:]}"
-        print(final_URL_case)
         self.driver.get(final_URL_case)
 
-    def get_url_paste_browser_form(self):
+    def get_url_paste_browser_form(self, username,password):
         self.wait_to_click(By.XPATH, self.copy_odatafeed_link)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.edit_button)
@@ -154,10 +154,7 @@ class ExportDataPage:
         ID = get_url.split("/")[10]
         odata_feed_link_form = "https://staging.commcarehq.org/a/qa-automation/api/v0.5/odata/forms/" + ID + "/feed/"
         self.driver.back()
-        self.driver.execute_script("window.open('');")  # Open a new tab
-        self.switch_to_next_tab()
-        username = settings["login_username"]
-        password = settings["login_password"]
+        self.switch_to_new_tab()
         final_URL_form = f"https://{username}:{password}@{odata_feed_link_form[8:]}"
         print(final_URL_form)
         self.driver.get(final_URL_form)
@@ -415,7 +412,7 @@ class ExportDataPage:
             print(StaleElementReferenceException)
 
     # Test Case - 28 - Power BI / Tableau Integration, Form
-    def power_bi_tableau_integration_form(self):
+    def power_bi_tableau_integration_form(self, username,password):
         self.wait_to_click(By.LINK_TEXT, self.powerBI_tab_int_link)
         self.wait_to_click(By.XPATH, self.add_export_button)
         self.wait_to_click(By.XPATH, self.model_dropdown)
@@ -433,7 +430,7 @@ class ExportDataPage:
         self.driver.find_element(By.XPATH, self.export_settings_create).click()
         print("Odata Form Feed created!!")
         self.driver.refresh()
-        self.get_url_paste_browser_form()
+        self.get_url_paste_browser_form(username,password)
         odata_feed_data = self.driver.page_source
         assert odata_feed_data != ""
         print("Odata form feed has data")
@@ -441,7 +438,7 @@ class ExportDataPage:
         self.switch_back_to_prev_tab()
 
     # Test Case - 27 - Power BI / Tableau Integration, Case`
-    def power_bi_tableau_integration_case(self):
+    def power_bi_tableau_integration_case(self, username,password):
         self.driver.refresh()
         self.wait_to_click(By.LINK_TEXT, self.powerBI_tab_int_link)
         self.wait_to_click(By.XPATH, self.add_export_button)
@@ -460,7 +457,7 @@ class ExportDataPage:
         self.driver.find_element(By.XPATH, self.export_settings_create).click()
         print("Odata Case Feed created!!")
         self.driver.refresh()
-        self.get_url_paste_browser_case()
+        self.get_url_paste_browser_case(username,password)
         odata_feed_data = self.driver.page_source
         assert odata_feed_data != ""  # This condition can be improvised
         print("Odata case feed has data")
