@@ -121,12 +121,12 @@ class ExportDataPage:
     def switch_to_next_tab(self):
         winHandles = self.driver.window_handles
         window_after = winHandles[1]
-        self.driver.switch_to.window(window_after)
+        self.driver.switch_to.new_window(window_after)
 
     def switch_back_to_prev_tab(self):
         winHandles = self.driver.window_handles
         window_before = winHandles[0]
-        self.driver.switch_to.window(window_before)
+        self.driver.switch_to.new_window(window_before)
 
     def get_url_paste_browser_case(self):
         self.wait_to_click(By.XPATH, self.copy_odatafeed_link)
