@@ -13,15 +13,17 @@ Note:
 * To generate pytest_report.log file use following command from the root of repo e.g. py.test -k example_form -r F -v > log/pytest_report.log
 """
 import datetime
-import smtplib
-import os,sys
-from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
-from email.mime.audio import MIMEAudio
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
 import mimetypes
+import os
+import smtplib
+import sys
 from email import encoders
+from email.mime.audio import MIMEAudio
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HQSmokeTests.utilities.email_conf as conf_file
 
@@ -32,10 +34,10 @@ class Email_Pytest_Report:
     def __init__(self):
         self.smtp_ssl_host = conf_file.smtp_ssl_host
         self.smtp_ssl_port = conf_file.smtp_ssl_port
-		self.username = conf_file.username
-        self.password = conf_file.app_password        
+        self.username = conf_file.username
+        self.password = conf_file.app_password
         self.targets = conf_file.targets
-		self.sender = conf_file.sender
+        self.sender = conf_file.sender
 
 
     def get_test_report_data(self,html_body_flag= True,report_file_path= 'default'):
