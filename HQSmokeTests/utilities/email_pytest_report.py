@@ -118,7 +118,7 @@ class Email_Pytest_Report:
         return attachment
 
 
-    def send_test_report_email(self,username, password html_body_flag = True,attachment_flag = False,report_file_path = 'default'):
+    def send_test_report_email(self,username, password, html_body_flag = True,attachment_flag = False,report_file_path = 'default'):
         "send test report email"
         #1. Get html formatted email body data from report_file_path file (log/pytest_report.html) and do not add it as an attachment
         if html_body_flag == True and attachment_flag == False:
