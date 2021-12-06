@@ -25,20 +25,26 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import HQSmokeTests.utilities.email_conf as conf_file
+import HQSmokeTests.utilities.email_conf as email_conf
 
 
 class Email_Pytest_Report:
     "Class to email pytest report"
 
     def __init__(self):
-        self.smtp_ssl_host = conf_file.smtp_ssl_host
-        self.smtp_ssl_port = conf_file.smtp_ssl_port
-        self.username = conf_file.username
-        self.password = conf_file.app_password
-        self.targets = conf_file.targets
-        self.sender = conf_file.sender
-
+        # self.smtp_ssl_host = conf_file.smtp_ssl_host
+        # self.smtp_ssl_port = conf_file.smtp_ssl_port
+        # self.username = conf_file.username
+        # self.password = conf_file.app_password
+        # self.targets = conf_file.targets
+        # self.sender = conf_file.sender
+        conf_file = email_conf(self)
+        self.smtp_ssl_host = conf_file[self.smtp_ssl_host]
+        self.smtp_ssl_port = conf_file[self.smtp_ssl_port]
+        self.username = conf_file[self.username]
+        self.password = conf_file[self.app_password]
+        self.sender = conf_file[self.sender]
+        self.targets = conf_file[self.targets]
 
     def get_test_report_data(self,html_body_flag= True,report_file_path= 'default'):
         "get test report data from pytest_report.html or pytest_report.txt or from user provided file"

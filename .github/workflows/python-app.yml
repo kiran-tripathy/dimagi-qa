@@ -45,6 +45,7 @@ jobs:
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
+      if: always()
       with:
         # Required mail server address:
         server_address: smtp.gmail.com
@@ -75,4 +76,4 @@ jobs:
         retention-days: 2
     - name: show logs
       if: always()
-      run: cat /home/runner/work/dimagi-qa/dimagi-qa/logs/chrome.log
+      run: cat */logs/chrome.log
