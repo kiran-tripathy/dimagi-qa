@@ -33,11 +33,11 @@ class Email_Pytest_Report:
     "Class to email pytest report"
 
     def __init__(self):
-        self.smtp_ssl_host = conf_file.smtp_ssl_host
-        self.smtp_ssl_port = conf_file.smtp_ssl_port
+        self.smtp_ssl_host = email_conf.smtp_ssl_host
+        self.smtp_ssl_port = email_conf.smtp_ssl_port
         # self.username = conf_file.username
         # self.password = conf_file.app_password
-        self.targets = conf_file.targets
+        self.targets = email_conf.targets
         # self.sender = conf_file.sender
         # conf_file = email_conf(self)
         # self.smtp_ssl_host = conf_file[self.smtp_ssl_host]

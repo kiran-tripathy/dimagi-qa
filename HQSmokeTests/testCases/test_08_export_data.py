@@ -7,6 +7,7 @@ def test_01_form_exports(driver):
     export.add_form_exports()
     export.form_exports()
     export.validate_downloaded_form_exports()
+    export.delete_bulk_exports()
 
 
 def test_02_case_exports(driver):
@@ -16,6 +17,7 @@ def test_02_case_exports(driver):
     export.add_case_exports()
     export.case_exports()
     export.validate_downloaded_case_exports()
+    export.delete_bulk_exports()
 
 
 def test_03_sms_exports(driver):
@@ -57,8 +59,8 @@ def test_06_powerBI_tableau_integration(driver, settings):
 
 
 def test_07_manage_forms(driver):
-
     export = ExportDataPage(driver)
     driver.refresh()
     export.data_tab()
     export.manage_forms()
+
