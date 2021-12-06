@@ -64,7 +64,7 @@ jobs:
         # Optional plain body:
         body: Build job of ${{github.repository}} completed successfully!
         # Optional HTML body read from file:
-        html_body: file://email.html
+        html_body: file:///home/runner/work/dimagi-qa/dimagi-qa/email.html
         # Optional attachments:
         attachments: /home/runner/work/dimagi-qa/dimagi-qa/report.html
         # Optional priority: 'high', 'normal' (default) or 'low'
