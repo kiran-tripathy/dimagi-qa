@@ -23,7 +23,7 @@ from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from HQSmokeTests.utilities.email_conf import conf_file
+from HQSmokeTests.utilities.email_conf import email_conf
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
