@@ -77,6 +77,8 @@ class ExportDataPage:
         self.case_type_dropdown = '//*[@id="div_id_case_type"]/div/span/span[1]/span'
         self.select_case_type = '//*[@id="select2-id_case_type-results"]/li'
         self.update_data = "//button[@data-toggle='modal'][1]"
+        self.form_update_data = "(//span[contains(text(),'Form Export DSE')]//following::button[@data-toggle='modal'])[1]"
+        self.case_update_data = "(//span[contains(text(),'Case Export DSE')]//following::button[@data-toggle='modal'])[1]"
         self.update_data_conf = "//button[@data-bind='click: emailedExport.updateData']"
         self.copy_dashfeed_link = "(//span[contains(@data-bind, 'copyLinkRequested')])[1]"
         self.dashboard_feed_link = "//span[@class='input-group-btn']//preceding::a[@class='btn btn-info btn-xs']"
@@ -289,7 +291,7 @@ class ExportDataPage:
         self.driver.find_element(By.XPATH, self.export_name).send_keys(UserInputsData.form_export_name)
         self.wait_to_click(By.XPATH, self.create_DSE_checkbox)
         self.wait_to_click(By.XPATH, self.export_settings_create)
-        self.wait_to_click(By.XPATH, self.update_data)
+        self.wait_to_click(By.XPATH, self.form_update_data)
         self.wait_to_click(By.XPATH, self.update_data_conf)
         time.sleep(2)
         self.driver.refresh()
@@ -314,7 +316,7 @@ class ExportDataPage:
         self.driver.find_element(By.XPATH, self.export_name).send_keys(UserInputsData.case_export_name)
         self.wait_to_click(By.XPATH, self.create_DSE_checkbox)
         self.wait_to_click(By.XPATH, self.export_settings_create)
-        self.wait_to_click(By.XPATH, self.update_data)
+        self.wait_to_click(By.XPATH, self.case_update_data)
         self.wait_to_click(By.XPATH, self.update_data_conf)
         time.sleep(2)
         self.driver.refresh()

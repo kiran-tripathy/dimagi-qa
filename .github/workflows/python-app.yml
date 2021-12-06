@@ -58,9 +58,9 @@ jobs:
         # Required mail subject:
         subject: Github Actions job result
         # Required recipients' addresses:
-        to: qa@dimagi.com
+        to: kbordoloi@dimagi.com,ktripathy@dimagi, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
-        from: no-reply <no-reply@dimagi.com> # <user@example.com>
+        from: <no-reply@dimagi.com> # <user@example.com>
         # Optional plain body:
         body: Build job of ${{github.repository}} completed successfully!
         # Optional attachments:
