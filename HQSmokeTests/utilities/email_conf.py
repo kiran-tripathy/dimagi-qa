@@ -1,4 +1,3 @@
-
 # imap host and email details
 imaphost = "imap.gmail.com"
 # username = settings["mail_username"]
