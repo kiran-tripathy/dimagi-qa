@@ -74,6 +74,3 @@ jobs:
         name: test-result-report
         path: /home/runner/work/dimagi-qa/dimagi-qa/report.html
         retention-days: 2
-    - name: show logs
-      if: always()
-      run: cat /home/runner/work/dimagi-qa/dimagi-qa/logs/chrome.log

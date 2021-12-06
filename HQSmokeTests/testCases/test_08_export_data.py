@@ -30,9 +30,9 @@ def test_04_daily_saved_exports(driver):
     export = ExportDataPage(driver)
     export.data_tab()
     export.daily_saved_exports_form()
-    export.delete_bulk_exports()
+    export.deletion()
     export.daily_saved_exports_case()
-    export.delete_bulk_exports()
+    export.deletion()
 
 
 def test_05_excel_dashboard_integration(driver):
