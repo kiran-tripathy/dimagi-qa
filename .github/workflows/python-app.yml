@@ -58,13 +58,13 @@ jobs:
         # Required mail subject:
         subject: Github Actions job result `r format(Sys.time(), "%d %B, %Y")`
         # Required recipients' addresses:
-        to: kbordoloi@dimagi.com,ktripathy@dimagi, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
+        to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
         from: <no-reply@dimagi.com> # <user@example.com>
         # Optional plain body:
         body: Build job of ${{github.repository}} completed successfully!
         # Optional HTML body read from file:
-        html_body: /home/runner/work/dimagi-qa/dimagi-qa/email.html
+        html_body: file://email.html
         # Optional attachments:
         attachments: /home/runner/work/dimagi-qa/dimagi-qa/report.html
         # Optional priority: 'high', 'normal' (default) or 'low'
