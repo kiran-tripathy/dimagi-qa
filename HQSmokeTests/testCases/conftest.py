@@ -71,7 +71,7 @@ def settings(environment_settings):
 
 
 @pytest.fixture(scope="module")
-def driver(request, settings):
+def driver(settings):
     chrome_options = webdriver.ChromeOptions()
     # xvfb = Xvfb(width=1920, height=1080)
     # xvfb.start()
@@ -164,6 +164,8 @@ def pytest_addoption(parser):
 
 def pytest_terminal_summary(terminalreporter, exitstatus):
     "add additional section in terminal summary reporting."
+    username = os.environ.get("DIMAGIQA_MAIL_USERNAME")
+    password = os.environ.get("DIMAGIQA_MAIL_PASSWORD")
     print("entering the terminal summery")
     if not hasattr(terminalreporter.config, 'workerinput'):
         print("terminalreporter has workerinput")
