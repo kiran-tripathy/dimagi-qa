@@ -43,9 +43,12 @@ jobs:
         
       run: |
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
+    - name: Get current time
+      uses: gerred/actions/current-time@master
+      id: current-time
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
-      if: success()
+      if: always()
       with:
         # Required mail server address:
         server_address: smtp.gmail.com
@@ -56,7 +59,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: Github Actions job result ${{ date }}
+        subject: Github Actions job result ${{ steps.current-time.outputs.time }}
         # Required recipients' addresses:
         to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
