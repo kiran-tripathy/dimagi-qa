@@ -56,7 +56,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: Github Actions job result ${{format(Sys.time(), "%d %B, %Y")}}
+        subject: Github Actions job result $date
         # Required recipients' addresses:
         to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
