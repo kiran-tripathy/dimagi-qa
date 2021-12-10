@@ -70,7 +70,7 @@ def settings(environment_settings):
     return settings["default"]
 
 
-@pytest.fixture(scope="module", autouse=True)
+@pytest.fixture(scope="function")
 def driver(settings):
     chrome_options = webdriver.ChromeOptions()
     # xvfb = Xvfb(width=1920, height=1080)
