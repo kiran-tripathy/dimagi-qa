@@ -70,7 +70,7 @@ def settings(environment_settings):
     return settings["default"]
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="module")
 def driver(settings):
     chrome_options = webdriver.ChromeOptions()
     # xvfb = Xvfb(width=1920, height=1080)
@@ -85,9 +85,9 @@ def driver(settings):
         chrome_options.add_argument("--disable-setuid-sandbox")
         chrome_options.add_argument('--start-maximized')
         chrome_options.add_argument('--disable-dev-shm-usage')
-        chrome_options.add_argument('--remote-debugging-port=9222')
+       # chrome_options.add_argument('--remote-debugging-port=9222')
         chrome_options.add_argument('--headless')
-        chrome_options.set_capability("browserVersion", "94.0.4606")
+        #chrome_options.set_capability("browserVersion", "94.0.4606")
         chrome_options.add_experimental_option("prefs", {
             "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
@@ -102,7 +102,7 @@ def driver(settings):
         # chrome_options.add_argument('--no-sandbox')
         # chrome_options.add_argument("--disable-extensions")
         # chrome_options.add_argument('--headless')
-        chrome_options.set_capability("browserVersion", "94.0.4606")
+        #chrome_options.set_capability("browserVersion", "94.0.4606")
         chrome_options.add_experimental_option("prefs", {
             "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
