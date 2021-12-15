@@ -44,8 +44,8 @@ jobs:
       run: |
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
     - name: Get current time
-       id: date
-       run: echo "::set-output name=date::$(date +'%Y-%m-%d')
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
       if: always()   
