@@ -46,6 +46,7 @@ jobs:
     - name: Get current time
       uses: gerred/actions/current-time@master
       id: current-time
+      if: always()
       env:
         TIME: "${{ steps.current-time.outputs.time }}"
     - name: Send mail
@@ -61,7 +62,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: Github Actions job result $TIME
+        subject: Github Actions job result ${{TIME}}
         # Required recipients' addresses:
         to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
