@@ -1,0 +1,4 @@
+# Requirements needed for running scripts
+robotframework = 3.2.2
+robotframework-pythonlibcore =3.0.0
+robotframework-seleniumlibrary >= 3.3.1
