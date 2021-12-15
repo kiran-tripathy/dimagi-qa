@@ -475,7 +475,7 @@ class ExportDataPage:
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.checkbox1)
         self.wait_to_click(By.XPATH, self.archive_button)
-        assert WebDriverWait(self.driver, 40).until(ec.presence_of_element_located((
+        assert WebDriverWait(self.driver, 100).until(ec.presence_of_element_located((
             By.XPATH, self.success_message))).is_displayed()
         print("Forms archival successful!!")
         time.sleep(5)
@@ -498,7 +498,7 @@ class ExportDataPage:
         try:
             self.wait_to_click(By.XPATH, self.checkbox1)
             self.wait_to_click(By.XPATH, self.archive_button)
-            assert WebDriverWait(self.driver, 40).until(ec.presence_of_element_located((
+            assert WebDriverWait(self.driver, 100).until(ec.presence_of_element_located((
                 By.XPATH, self.success_message))).is_displayed()
             print("Forms archival successful!!")
         except TimeoutException:
@@ -515,5 +515,23 @@ class ExportDataPage:
         self.driver.close()
         self.switch_back_to_prev_tab()
 
+
+    def delete_all_bulk_exports(self):
+        self.wait_to_click(By.LINK_TEXT, self.export_form_data_link)
+        try:
+            self.wait_to_click(By.XPATH, self.select_all_btn)
+            self.wait_to_click(By.XPATH, self.delete_selected_exports)
+            self.wait_to_click(By.XPATH, self.bulk_delete_confirmation_btn)
+            print("Bulk exports deleted for Export Form data")
+        except TimeoutException:
+            print("No exports available")
+        try:
+            self.wait_to_click(By.LINK_TEXT, self.export_case_data_link)
+            self.wait_to_click(By.XPATH, self.select_all_btn)
+            self.wait_to_click(By.XPATH, self.delete_selected_exports)
+            self.wait_to_click(By.XPATH, self.bulk_delete_confirmation_btn)
+            print("Bulk exports deleted for Export Case data")
+        except TimeoutException:
+            print("No exports available")
         
        
