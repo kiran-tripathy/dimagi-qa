@@ -43,35 +43,6 @@ jobs:
         
       run: |
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
-    - name: Get current time
-      id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d')
-    - name: Send mail
-      uses: dawidd6/action-send-mail@v3
-      if: always()   
-      with:
-        # Required mail server address:
-        server_address: smtp.gmail.com
-        # Required mail server port:
-        server_port: 465
-        # Optional (recommended): mail server username:
-        username: ${{secrets.DIMAGIQA_MAIL_USERNAME}}
-        # Optional (recommended) mail server password:
-        password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
-        # Required mail subject:
-        subject: Github Actions job result ${{steps.date.outputs.date}}
-        # Required recipients' addresses:
-        to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
-        # Required sender full name (address can be skipped):
-        from: <no-reply@dimagi.com> # <user@example.com>
-        # Optional plain body:
-        body: Build job of ${{github.repository}} completed successfully!
-        # Optional HTML body read from file:
-        html_body: file:////home/runner/work/dimagi-qa/dimagi-qa/HQSmokeTests/email.html
-        # Optional attachments:
-        attachments: /home/runner/work/dimagi-qa/dimagi-qa/report.html
-        # Optional priority: 'high', 'normal' (default) or 'low'
-        priority: normal
     - name: Archive test results
       if: failure()
       uses: actions/upload-artifact@v2

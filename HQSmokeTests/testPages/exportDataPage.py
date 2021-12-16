@@ -79,7 +79,7 @@ class ExportDataPage:
         self.update_data = "//button[@data-toggle='modal'][1]"
         self.form_update_data = "(//span[contains(text(),'Form Export DSE')]//following::button[@data-toggle='modal'])[1]"
         self.case_update_data = "(//span[contains(text(),'Case Export DSE')]//following::button[@data-toggle='modal'])[1]"
-        self.update_data_conf = "//button[@data-bind='click: emailedExport.updateData']"
+        self.update_data_conf = "(//button[@data-bind='click: emailedExport.updateData'])[1]"
         self.copy_dashfeed_link = "(//span[contains(@data-bind, 'copyLinkRequested')])[1]"
         self.dashboard_feed_link = "//span[@class='input-group-btn']//preceding::a[@class='btn btn-info btn-xs']"
 
@@ -142,7 +142,7 @@ class ExportDataPage:
         ID = get_url.split("/")[10]
         odata_feed_link_case = "https://staging.commcarehq.org/a/qa-automation/api/v0.5/odata/cases/" + ID + "/feed/"
         self.driver.back()
-        self.driver.execute_script("window.open('');")  # Open a new tab
+        # self.driver.execute_script("window.open('');")  # Open a new tab
         self.switch_to_new_tab()
         final_URL_case = f"https://{username}:{password}@{odata_feed_link_case[8:]}"
         self.driver.get(final_URL_case)
@@ -162,10 +162,13 @@ class ExportDataPage:
         self.driver.get(final_URL_form)
 
     def data_tab(self):
+        self.driver.refresh()
         self.wait_to_click(By.LINK_TEXT, self.data_dropdown)
         self.wait_to_click(By.LINK_TEXT, self.view_all_link)
 
     def deletion(self):
+        time.sleep(2)
+        self.driver.find_element(By.XPATH, self.select_all_btn).click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, self.delete_button).click()
         time.sleep(2)
@@ -364,8 +367,8 @@ class ExportDataPage:
             self.driver.find_element(By.XPATH, self.copy_dashfeed_link).click()
             dashboard_feed_link = self.driver.find_element(By.XPATH, self.dashboard_feed_link).get_attribute("href")
             print("Feed Link: "+dashboard_feed_link)
-            self.driver.execute_script("window.open('');")  # Open a new tab
-            self.switch_to_next_tab()
+            # self.driver.execute_script("window.open('');")  # Open a new tab
+            self.switch_to_new_tab()
             self.driver.get(dashboard_feed_link)
             dashboard_feed_data = self.driver.page_source
             if dashboard_feed_data != "":
@@ -404,8 +407,8 @@ class ExportDataPage:
             self.driver.find_element(By.XPATH, self.copy_dashfeed_link).click()
             dashboard_feed_link = self.driver.find_element(By.XPATH, self.dashboard_feed_link).get_attribute("href")
             print(dashboard_feed_link)
-            self.driver.execute_script("window.open('');")  # Open a new tab
-            self.switch_to_next_tab()
+            # self.driver.execute_script("window.open('');")  # Open a new tab
+            self.switch_to_new_tab()
             self.driver.get(dashboard_feed_link)
             dashboard_feed_data = self.driver.page_source
             if dashboard_feed_data != "":
