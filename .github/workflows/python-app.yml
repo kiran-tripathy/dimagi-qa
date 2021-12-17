@@ -40,7 +40,7 @@ jobs:
         DIMAGIQA_LOGIN_PASSWORD: ${{ secrets.DIMAGIQA_LOGIN_PASSWORD }}
         DIMAGIQA_MAIL_USERNAME: ${{ secrets.DIMAGIQA_MAIL_USERNAME }}
         DIMAGIQA_MAIL_PASSWORD: ${{ secrets.DIMAGIQA_MAIL_PASSWORD }}
-        RUN_NUMBER: ${{env.GITHUB_RUN_NUMBER}}
+        RUN_NUMBER: ${{github.run_number}}
         
       run: |
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
@@ -57,7 +57,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: Github Actions job result ${{RUN_NUMBER}}
+        subject: Github Actions job result ${{env.RUN_NUMBER}}
         # Required recipients' addresses:
         to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
