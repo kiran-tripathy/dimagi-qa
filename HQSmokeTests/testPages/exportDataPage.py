@@ -294,12 +294,18 @@ class ExportDataPage:
         self.driver.find_element(By.XPATH, self.export_name).send_keys(UserInputsData.form_export_name)
         self.wait_to_click(By.XPATH, self.create_DSE_checkbox)
         self.wait_to_click(By.XPATH, self.export_settings_create)
-        self.wait_to_click(By.XPATH, self.form_update_data)
+        self.wait_to_click(By.XPATH, self.update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        time.sleep(2)
+        time.sleep(5)
         self.driver.refresh()
-        self.wait_to_click(By.XPATH, self.download_dse_form)
+        if self.driver.find_element(By.XPATH, self.download_dse_form).is_displayed():
+            self.wait_to_click(By.XPATH, self.download_dse_form)
+        else:
+            self.wait_to_click(By.XPATH, self.update_data_conf)
+            time.sleep(5)
+            self.driver.refresh()
+            self.wait_to_click(By.XPATH, self.download_dse_form)
         time.sleep(3)
         newest_file = latest_download_file()
         print("Newest:", newest_file)
@@ -320,13 +326,20 @@ class ExportDataPage:
         self.driver.find_element(By.XPATH, self.export_name).send_keys(UserInputsData.case_export_name)
         self.wait_to_click(By.XPATH, self.create_DSE_checkbox)
         self.wait_to_click(By.XPATH, self.export_settings_create)
-        self.wait_to_click(By.XPATH, self.case_update_data)
+        self.wait_to_click(By.XPATH, self.update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        time.sleep(2)
+        time.sleep(5)
         self.driver.refresh()
-        self.wait_to_click(By.XPATH, self.download_dse_case)
-        time.sleep(3)
+        # self.wait_to_click(By.XPATH, self.download_dse_case)
+        # time.sleep(3)
+        if self.driver.find_element(By.XPATH, self.download_dse_case).is_displayed():
+            self.wait_to_click(By.XPATH, self.download_dse_case)
+        else:
+            self.wait_to_click(By.XPATH, self.update_data_conf)
+            time.sleep(5)
+            self.driver.refresh()
+            self.wait_to_click(By.XPATH, self.download_dse_case)
         newest_file = latest_download_file()
         print("Newest:", newest_file)
         modTimesinceEpoc = (UserInputsData.download_path / newest_file).stat().st_mtime
@@ -360,7 +373,7 @@ class ExportDataPage:
         self.wait_to_click(By.XPATH, self.form_update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        time.sleep(2)
+        time.sleep(5)
         self.driver.refresh()
         try:
             time.sleep(2)
@@ -540,5 +553,3 @@ class ExportDataPage:
             print("Bulk exports deleted for Export Case data")
         except TimeoutException:
             print("No exports available")
-        
-       
