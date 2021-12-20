@@ -301,11 +301,11 @@ class ExportDataPage:
         self.wait_to_click(By.XPATH, self.update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        time.sleep(2)
+        time.sleep(5)
         self.driver.refresh()
-        if self.driver.find_element(By.XPATH, self.download_dse_form).is_displayed():
+        try:
             self.wait_to_click(By.XPATH, self.download_dse_form)
-        else:
+        except (NoSuchElementException, TimeoutException):
             self.wait_to_click(By.XPATH, self.update_data_conf)
             time.sleep(5)
             self.driver.refresh()
