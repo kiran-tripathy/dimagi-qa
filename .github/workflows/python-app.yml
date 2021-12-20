@@ -43,6 +43,7 @@ jobs:
         RUN_NUMBER: ${{github.run_number}}
         
       run: |
+        echo 
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
@@ -57,7 +58,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: Github Actions job result $RUN_NUMBER
+        subject: Github Actions job result ${{github.run_number}}
         # Required recipients' addresses:
         to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
