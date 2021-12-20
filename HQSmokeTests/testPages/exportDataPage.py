@@ -169,8 +169,6 @@ class ExportDataPage:
 
     def deletion(self):
         time.sleep(2)
-        self.driver.find_element(By.XPATH, self.select_all_btn).click()
-        time.sleep(2)
         self.driver.find_element(By.XPATH, self.delete_button).click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, self.delete_confirmation_button).click()
