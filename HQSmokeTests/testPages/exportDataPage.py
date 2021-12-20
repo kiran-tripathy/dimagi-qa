@@ -221,10 +221,15 @@ class ExportDataPage:
         self.switch_back_to_prev_tab()
 
     def delete_bulk_exports(self):
-        self.wait_to_click(By.XPATH, self.select_all_btn)
-        self.wait_to_click(By.XPATH, self.delete_selected_exports)
-        self.wait_to_click(By.XPATH, self.bulk_delete_confirmation_btn)
-
+        try:
+            time.sleep(2)
+            self.wait_to_click(By.XPATH, self.select_all_btn)
+            time.sleep(2)
+            self.wait_to_click(By.XPATH, self.delete_selected_exports)
+            self.wait_to_click(By.XPATH, self.bulk_delete_confirmation_btn)
+            print("Exports Deleted successfully")
+        except TimeoutException:
+            print("No exports present")
     # Test Case 20_b - Verify Export functionality for Cases
     def add_case_exports(self):
         self.wait_to_click(By.LINK_TEXT, self.export_case_data_link)

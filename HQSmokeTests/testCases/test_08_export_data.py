@@ -29,11 +29,11 @@ def test_04_daily_saved_exports(driver):
     export = ExportDataPage(driver)
     export.data_tab()
     export.add_form_exports()
-    export.form_exports()
+    # export.form_exports()
     export.daily_saved_exports_form()
     export.deletion()
     export.add_case_exports()
-    export.case_exports()
+    # export.case_exports()
     export.daily_saved_exports_case()
     export.deletion()
 
