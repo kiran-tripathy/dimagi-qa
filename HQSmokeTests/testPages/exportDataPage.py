@@ -79,7 +79,7 @@ class ExportDataPage:
         self.update_data = "//button[@data-toggle='modal'][1]"
         self.form_update_data = "(//span[contains(text(),'Form Export DSE')]//following::button[@data-toggle='modal'])[1]"
         self.case_update_data = "(//span[contains(text(),'Case Export DSE')]//following::button[@data-toggle='modal'])[1]"
-        self.update_data_conf = "(//button[@data-bind='click: emailedExport.updateData'])[1]"
+        self.update_data_conf = "//button[@data-bind='click: emailedExport.updateData']"
         self.copy_dashfeed_link = "(//span[contains(@data-bind, 'copyLinkRequested')])[1]"
         self.dashboard_feed_link = "//span[@class='input-group-btn']//preceding::a[@class='btn btn-info btn-xs']"
 
@@ -145,6 +145,7 @@ class ExportDataPage:
         # self.driver.execute_script("window.open('');")  # Open a new tab
         self.switch_to_new_tab()
         final_URL_case = f"https://{username}:{password}@{odata_feed_link_case[8:]}"
+        print(final_URL_case)
         self.driver.get(final_URL_case)
 
     def get_url_paste_browser_form(self, username,password):
@@ -297,7 +298,7 @@ class ExportDataPage:
         self.wait_to_click(By.XPATH, self.update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        time.sleep(5)
+        time.sleep(2)
         self.driver.refresh()
         if self.driver.find_element(By.XPATH, self.download_dse_form).is_displayed():
             self.wait_to_click(By.XPATH, self.download_dse_form)
@@ -329,7 +330,7 @@ class ExportDataPage:
         self.wait_to_click(By.XPATH, self.update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        time.sleep(5)
+        time.sleep(2)
         self.driver.refresh()
         # self.wait_to_click(By.XPATH, self.download_dse_case)
         # time.sleep(3)
@@ -370,10 +371,9 @@ class ExportDataPage:
                     By.XPATH, self.export_name))).send_keys(UserInputsData.dashboard_feed_form)
         self.driver.find_element(By.XPATH, self.export_settings_create).click()
         print("Dashboard Form Feed created!!")
-        self.wait_to_click(By.XPATH, self.form_update_data)
-        time.sleep(2)
+        self.wait_to_click(By.XPATH, self.update_data)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        time.sleep(5)
+        time.sleep(2)
         self.driver.refresh()
         try:
             time.sleep(2)
@@ -410,8 +410,7 @@ class ExportDataPage:
         self.driver.find_element(By.XPATH, self.export_name).send_keys(UserInputsData.dashboard_feed_case)
         self.driver.find_element(By.XPATH, self.export_settings_create).click()
         print("Dashboard Form Feed created!!")
-        self.wait_to_click(By.XPATH, self.case_update_data)
-        time.sleep(2)
+        self.wait_to_click(By.XPATH, self.update_data)
         self.wait_to_click(By.XPATH, self.update_data_conf)
         time.sleep(2)
         self.driver.refresh()
