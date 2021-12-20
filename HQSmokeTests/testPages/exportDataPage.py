@@ -68,6 +68,7 @@ class ExportDataPage:
                                  "']//following::a[@class='btn btn-info btn-xs']"
         self.download_dse_case = "//span[text()='" + UserInputsData.case_export_name + \
                                  "']//following::a[@class='btn btn-info btn-xs']"
+        self.data_upload_msg = "//*[contains(text(),'Data update complete')]"
 
         # Excel Dashboard Integrations, form, case
         self.export_excel_dash_int_link = 'Excel Dashboard Integration'  # Excel Dashboard Integrations left panel
@@ -301,7 +302,8 @@ class ExportDataPage:
         self.wait_to_click(By.XPATH, self.form_update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        time.sleep(5)
+        display_msg = WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located(By.XPATH, self.data_upload_msg))
+        print("Display message:", display_msg.text)
         self.driver.refresh()
         try:
             self.wait_to_click(By.XPATH, self.download_dse_form)
@@ -333,7 +335,9 @@ class ExportDataPage:
         self.wait_to_click(By.XPATH, self.case_update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        time.sleep(5)
+        display_msg = WebDriverWait(self.driver, 20).until(
+            ec.visibility_of_element_located(By.XPATH, self.data_upload_msg))
+        print("Display message:", display_msg.text)
         self.driver.refresh()
         # self.wait_to_click(By.XPATH, self.download_dse_case)
         # time.sleep(3)
