@@ -302,7 +302,7 @@ class ExportDataPage:
         self.wait_to_click(By.XPATH, self.update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
-        display_msg = WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located(By.XPATH, self.data_upload_msg))
+        display_msg = WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located((By.XPATH, self.data_upload_msg)))
         print("Display message:", display_msg.text)
         self.driver.refresh()
         try:
@@ -336,7 +336,7 @@ class ExportDataPage:
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
         display_msg = WebDriverWait(self.driver, 20).until(
-            ec.visibility_of_element_located(By.XPATH, self.data_upload_msg))
+            ec.visibility_of_element_located((By.XPATH, self.data_upload_msg)))
         print("Display message:", display_msg.text)
         self.driver.refresh()
         # self.wait_to_click(By.XPATH, self.download_dse_case)
