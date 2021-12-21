@@ -305,6 +305,7 @@ class ExportDataPage:
         display_msg = WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located((By.XPATH, self.data_upload_msg)))
         print("Display message:", display_msg.text)
         self.driver.refresh()
+        time.sleep(5)
         try:
             self.wait_to_click(By.XPATH, self.download_dse_form)
         except (NoSuchElementException, TimeoutException):
@@ -340,7 +341,7 @@ class ExportDataPage:
         print("Display message:", display_msg.text)
         self.driver.refresh()
         # self.wait_to_click(By.XPATH, self.download_dse_case)
-        # time.sleep(3)
+        time.sleep(5)
         try:
             self.wait_to_click(By.XPATH, self.download_dse_case)
         except (NoSuchElementException, TimeoutException):
