@@ -299,7 +299,7 @@ class ExportDataPage:
         self.driver.find_element(By.XPATH, self.export_name).send_keys(UserInputsData.form_export_name)
         self.wait_to_click(By.XPATH, self.create_DSE_checkbox)
         self.wait_to_click(By.XPATH, self.export_settings_create)
-        self.wait_to_click(By.XPATH, self.update_data)
+        self.wait_to_click(By.XPATH, self.form_update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
         display_msg = WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located((By.XPATH, self.data_upload_msg)))
@@ -333,7 +333,7 @@ class ExportDataPage:
         self.driver.find_element(By.XPATH, self.export_name).send_keys(UserInputsData.case_export_name)
         self.wait_to_click(By.XPATH, self.create_DSE_checkbox)
         self.wait_to_click(By.XPATH, self.export_settings_create)
-        self.wait_to_click(By.XPATH, self.update_data)
+        self.wait_to_click(By.XPATH, self.case_update_data)
         time.sleep(2)
         self.wait_to_click(By.XPATH, self.update_data_conf)
         display_msg = WebDriverWait(self.driver, 20).until(
