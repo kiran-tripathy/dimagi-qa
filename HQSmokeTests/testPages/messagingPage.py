@@ -348,12 +348,21 @@ class MessagingPage:
         self.wait_to_click(By.LINK_TEXT, self.cond_alerts)
         time.sleep(2)
         self.driver.refresh()
+        cond_text = "cond_alert_" + fetch_random_string()
+        WebDriverWait(self.driver, 2).until(ec.element_to_be_clickable((
+            By.XPATH, self.search_box))).send_keys(cond_text)
+        self.wait_to_click(By.XPATH, self.search_box)
+        time.sleep(3)
         self.wait_to_click(By.XPATH, self.delete_cond_alert)
         obj = self.driver.switch_to.alert
         obj.accept()
         try:
             time.sleep(2)
             self.driver.refresh()
+            WebDriverWait(self.driver, 2).until(ec.element_to_be_clickable((
+                By.XPATH, self.search_box))).send_keys(cond_text)
+            self.wait_to_click(By.XPATH, self.search_box)
+            time.sleep(3)
             isPresent = self.driver.find_element(By.XPATH, self.cond_alert_created).is_displayed()
         except NoSuchElementException:
             isPresent = False
