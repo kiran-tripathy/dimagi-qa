@@ -49,6 +49,9 @@ class MessagingPage:
         self.save_button_xpath = "//button[@type='submit'and text()='Save']"
         self.delete_cond_alert = "//a[text()='" + "cond_alert_" + fetch_random_string() +\
                                  "']//preceding::button[@class='btn btn-danger'][1]"
+        self.search_box = "//form[@class='input-group']/input[@class='form-control']"
+        self.search_btn = "//form[@class='input-group']//button[@data-bind='click: clickAction, visible: !immediate']"
+
         # Condition Alerts : Download and Upload
         self.bulk_upload_button = "Bulk Upload SMS Alert Content"
         self.download_id = "download_link"
@@ -178,8 +181,9 @@ class MessagingPage:
     def create_cond_alert(self):
         self.wait_to_click(By.LINK_TEXT, self.cond_alerts)
         self.wait_to_click(By.LINK_TEXT, self.add_cond_alert)
+        cond_text = "cond_alert_" + fetch_random_string()
         WebDriverWait(self.driver, 2).until(ec.element_to_be_clickable((
-            By.XPATH, self.cond_alert_name))).send_keys("cond_alert_" + fetch_random_string())
+            By.XPATH, self.cond_alert_name))).send_keys(cond_text)
         self.wait_to_click(By.XPATH, self.continue_button_basic_tab)
         self.wait_to_click(By.XPATH, self.case_type)
         self.wait_to_click(By.XPATH, self.case_type_option_value)
@@ -187,8 +191,11 @@ class MessagingPage:
         self.wait_to_click(By.XPATH, self.recipients)
         self.wait_to_click(By.XPATH, self.select_recipient_type)
         WebDriverWait(self.driver, 2).until(ec.element_to_be_clickable((
-            By.XPATH, self.broadcast_message))).send_keys("Test Alert:" + "cond_alert_" + fetch_random_string())
+            By.XPATH, self.broadcast_message))).send_keys("Test Alert:" + cond_text)
         self.wait_to_click(By.XPATH, self.save_button_xpath)
+        WebDriverWait(self.driver, 2).until(ec.element_to_be_clickable((
+            By.XPATH, self.search_box))).send_keys(cond_text)
+        self.wait_to_click(By.XPATH, self.search_box)
         assert True == WebDriverWait(self.driver, 3).until(ec.presence_of_element_located((
             By.XPATH, self.cond_alert_created))).is_displayed()
         print("Conditional Alert created successfully!")
