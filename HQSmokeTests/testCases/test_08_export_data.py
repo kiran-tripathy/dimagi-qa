@@ -7,7 +7,7 @@ def test_01_form_exports(driver):
     export.add_form_exports()
     export.form_exports()
     export.validate_downloaded_form_exports()
-    export.delete_bulk_exports()
+    # export.delete_bulk_exports()
 
 
 def test_02_case_exports(driver):
@@ -16,7 +16,7 @@ def test_02_case_exports(driver):
     export.add_case_exports()
     export.case_exports()
     export.validate_downloaded_case_exports()
-    export.delete_bulk_exports()
+    # export.delete_bulk_exports()
 
 
 def test_03_sms_exports(driver):
@@ -28,12 +28,12 @@ def test_03_sms_exports(driver):
 def test_04_daily_saved_exports(driver):
     export = ExportDataPage(driver)
     export.data_tab()
-    export.add_form_exports()
+    # export.add_form_exports()
     # export.form_exports()
     export.daily_saved_exports_form()
     export.deletion()
     export.delete_bulk_exports()
-    export.add_case_exports()
+    # export.add_case_exports()
     # export.case_exports()
     export.daily_saved_exports_case()
     export.deletion()

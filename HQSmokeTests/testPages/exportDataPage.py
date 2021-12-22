@@ -306,13 +306,13 @@ class ExportDataPage:
         print("Display message:", display_msg.text)
         self.driver.refresh()
         time.sleep(5)
-        try:
-            self.wait_to_click(By.XPATH, self.download_dse_form)
-        except (NoSuchElementException, TimeoutException):
-            self.wait_to_click(By.XPATH, self.update_data_conf)
-            time.sleep(5)
-            self.driver.refresh()
-            self.wait_to_click(By.XPATH, self.download_dse_form)
+        # try:
+        self.wait_to_click(By.XPATH, self.download_dse_form)
+        # except (NoSuchElementException, TimeoutException):
+        #     self.wait_to_click(By.XPATH, self.update_data_conf)
+        #     time.sleep(5)
+        #     self.driver.refresh()
+        #     self.wait_to_click(By.XPATH, self.download_dse_form)
         time.sleep(3)
         newest_file = latest_download_file()
         print("Newest:", newest_file)
@@ -342,13 +342,13 @@ class ExportDataPage:
         self.driver.refresh()
         # self.wait_to_click(By.XPATH, self.download_dse_case)
         time.sleep(5)
-        try:
-            self.wait_to_click(By.XPATH, self.download_dse_case)
-        except (NoSuchElementException, TimeoutException):
-            self.wait_to_click(By.XPATH, self.update_data_conf)
-            time.sleep(5)
-            self.driver.refresh()
-            self.wait_to_click(By.XPATH, self.download_dse_case)
+        # try:
+        #     self.wait_to_click(By.XPATH, self.download_dse_case)
+        # except (NoSuchElementException, TimeoutException):
+        #     self.wait_to_click(By.XPATH, self.update_data_conf)
+        #     time.sleep(5)
+        #     self.driver.refresh()
+        self.wait_to_click(By.XPATH, self.download_dse_case)
         newest_file = latest_download_file()
         print("Newest:", newest_file)
         modTimesinceEpoc = (UserInputsData.download_path / newest_file).stat().st_mtime
