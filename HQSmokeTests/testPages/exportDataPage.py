@@ -64,10 +64,10 @@ class ExportDataPage:
         # Daily Saved Export variables, form, case
         self.edit_form_case_export = "(//a[@data-bind='click: editExport'])[1]"  # Edit an existing form/case export
         self.create_DSE_checkbox = '//*[@id="daily-saved-export-checkbox"]'  # Create a Daily Saved Export checkbox
-        self.download_dse_form = "//span[text()='" + UserInputsData.form_export_name + \
-                                 "']//following::a[@class='btn btn-info btn-xs']"
-        self.download_dse_case = "//span[text()='" + UserInputsData.case_export_name + \
-                                 "']//following::a[@class='btn btn-info btn-xs']"
+        self.download_dse_form = "(//span[text()='" + UserInputsData.form_export_name + \
+                                 "']//following::a[@class='btn btn-info btn-xs'])[1]"
+        self.download_dse_case = "(//span[text()='" + UserInputsData.case_export_name + \
+                                 "']//following::a[@class='btn btn-info btn-xs'])[1]"
         self.data_upload_msg = "//*[contains(text(),'Data update complete')]"
 
         # Excel Dashboard Integrations, form, case
