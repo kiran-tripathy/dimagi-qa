@@ -45,10 +45,14 @@ jobs:
       run: |
         echo 
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
-    - name: Set current date as env variable
-      run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-    - name: Echo current date
-      run: echo $NOW
+        echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+        echo $NOW
+    #- name: Set current date as env variable
+     # if: always
+     # run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+    #- name: Echo current date
+     # if: alway()
+     # run: echo $NOW
     - name: Send mail pass
       uses: dawidd6/action-send-mail@v3
       if: success()   
