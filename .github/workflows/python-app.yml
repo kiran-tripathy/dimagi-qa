@@ -45,7 +45,35 @@ jobs:
       run: |
         echo 
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
-    - name: Send mail
+    - name: Set current date as env variable
+      run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+    - name: Echo current date
+      run: echo $NOW
+    - name: Send mail pass
+      uses: dawidd6/action-send-mail@v3
+      if: success()   
+      with:
+        # Required mail server address:
+        server_address: smtp.gmail.com
+        # Required mail server port:
+        server_port: 465
+        # Optional (recommended): mail server username:
+        username: ${{secrets.DIMAGIQA_MAIL_USERNAME}}
+        # Optional (recommended) mail server password:
+        password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
+        # Required mail subject:
+        subject: Pass: Github Actions job result $NOW #${{github.run_number}}
+        # Required recipients' addresses:
+        to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
+        # Required sender full name (address can be skipped):
+        from: <no-reply@dimagi.com> # <user@example.com>
+        # Optional plain body:
+        body: Build job of ${{github.repository}} completed successfully!
+        # Optional HTML body read from file:
+        html_body: file:////home/runner/work/dimagi-qa/dimagi-qa/HQSmokeTests/email_pass.html
+        # Optional priority: 'high', 'normal' (default) or 'low'
+        priority: normal
+    - name: Send mail fail
       uses: dawidd6/action-send-mail@v3
       if: failure()   
       with:
@@ -58,7 +86,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: Github Actions job result ${{github.run_number}}
+        subject: Pass: Github Actions job result $NOW #${{github.run_number}}
         # Required recipients' addresses:
         to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
@@ -66,7 +94,7 @@ jobs:
         # Optional plain body:
         body: Build job of ${{github.repository}} completed successfully!
         # Optional HTML body read from file:
-        html_body: file:////home/runner/work/dimagi-qa/dimagi-qa/HQSmokeTests/email.html
+        html_body: file:////home/runner/work/dimagi-qa/dimagi-qa/HQSmokeTests/email_fail.html
         # Optional attachments:
         attachments: /home/runner/work/dimagi-qa/dimagi-qa/report.html
         # Optional priority: 'high', 'normal' (default) or 'low'
