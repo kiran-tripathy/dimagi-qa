@@ -45,7 +45,7 @@ jobs:
       run: |
         echo 
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
-        echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+        echo "NOW=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
         echo ${{env.NOW}}
     #- name: Set current date as env variable
      # if: always
@@ -96,7 +96,7 @@ jobs:
         # Required sender full name (address can be skipped):
         from: <no-reply@dimagi.com> # <user@example.com>
         # Optional plain body:
-        body: Build job of ${{github.repository}} completed successfully!
+        body: Build job of ${{github.repository}} completed with failure!
         # Optional HTML body read from file:
         html_body: file:////home/runner/work/dimagi-qa/dimagi-qa/HQSmokeTests/email_fail.html
         # Optional attachments:

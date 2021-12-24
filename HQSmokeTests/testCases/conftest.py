@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 from HQSmokeTests.UserInputs.userInputsData import UserInputsData
 from HQSmokeTests.testPages.loginPage import LoginPage
-from HQSmokeTests.utilities.email_pytest_report import Email_Pytest_Report
+# from HQSmokeTests.utilities.email_pytest_report import Email_Pytest_Report
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -148,7 +148,7 @@ def _capture_screenshot(driver):
     return driver.get_screenshot_as_base64()
 
 
-
+'''
 @pytest.fixture
 def email_pytest_report(req):
     "pytest fixture for device flag"
@@ -178,3 +178,4 @@ def pytest_terminal_summary(terminalreporter, exitstatus):
             # Send html formatted email body message with pytest report as an attachment
             email_obj.send_test_report_email(username,password,html_body_flag=True, attachment_flag=True, report_file_path='report.html')
             print("send email: Yes")
+'''
