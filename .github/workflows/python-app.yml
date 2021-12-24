@@ -46,7 +46,7 @@ jobs:
         echo 
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
         echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-        echo $NOW
+        echo ${{env.NOW}}
     #- name: Set current date as env variable
      # if: always
      # run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
@@ -66,7 +66,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: Pass - Github Actions job result $(date +'%Y-%m-%dT%H:%M:%S')  #${{github.run_number}}
+        subject: Pass - Github Actions job result ${{env.NOW}}  #${{github.run_number}}
         # Required recipients' addresses:
         to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
@@ -90,7 +90,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: Fail - Github Actions job result $(date +'%Y-%m-%dT%H:%M:%S')  #${{github.run_number}}
+        subject: Fail - Github Actions job result ${{env.NOW}}  #${{github.run_number}}
         # Required recipients' addresses:
         to: kbordoloi@dimagi.com,ktripathy@dimagi.com, avarshney@dimagi.com, btalbot@dimagi.com, nsaxena@dimagi.com, qa@dimagi.com
         # Required sender full name (address can be skipped):
