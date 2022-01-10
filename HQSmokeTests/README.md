@@ -14,8 +14,7 @@ pip install -r requires.txt
 
 Copy `settings-sample.cfg` to `settings.cfg` and populate `settings.cfg` for
 the environment you want to test.
-Also update recipient email ids in the utilities/email_conf.py, separated by "," for variable 'targets'
-For example- targets = ['abc@email.com', 'efc@email.com']
+
 
 Run tests
 
