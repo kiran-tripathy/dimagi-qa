@@ -36,7 +36,11 @@ def environment_settings():
         var = f"DIMAGIQA_{name.upper()}"
         if var in os.environ:
             settings[name] = os.environ[var]
-    print(settings)
+    if "url" not in settings:
+        env = os.environ.get("DIMAGIQA_ENV") or "staging"
+        subdomain = "www" if env == "production" else env
+        settings["url"] = f"https://{subdomain}.commcarehq.org/"
+        print(settings)
     return settings
 
 
@@ -46,14 +50,11 @@ def settings(environment_settings):
         settings = environment_settings
         settings["CI"] = "true"
         print(settings)
-        if not settings:
+        if any(x not in settings for x in ["url", "login_username", "login_password", "mail_username", "mail_password"]):
+            lines = load_settings_from_environment.__doc__.splitlines()
+            vars_ = "\n  ".join(line.strip() for line in lines if "DIMAGIQA_" in line)
             raise RuntimeError(
-                f"Environment variables not set:\n"
-                "  DIMAGIQA_URL\n"
-                "  DIMAGIQA_LOGIN_USERNAME\n"
-                "  DIMAGIQA_LOGIN_PASSWORD\n\n"
-                "  DIMAGIQA_MAIL_USERNAME\n"
-                "  DIMAGIQA_MAIL_PASSWORD\n\n"
+                f"Environment variables not set:\n  {vars_}\n\n"
                 "See https://docs.github.com/en/actions/reference/encrypted-secrets "
                 "for instructions on how to set them."
             )
@@ -62,7 +63,7 @@ def settings(environment_settings):
     if not path.exists():
         raise RuntimeError(
             f"Not found: {path}\n\n"
-            "Copy settings.cfg to settings.cfg and populate "
+            "Copy settings-sample.cfg to settings.cfg and populate "
             "it with values for the environment you want to test."
         )
     settings = ConfigParser()
