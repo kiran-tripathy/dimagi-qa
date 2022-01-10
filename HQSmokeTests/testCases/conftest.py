@@ -51,7 +51,7 @@ def settings(environment_settings):
         settings["CI"] = "true"
         print(settings)
         if any(x not in settings for x in ["url", "login_username", "login_password", "mail_username", "mail_password"]):
-            lines = load_settings_from_environment.__doc__.splitlines()
+            lines = environment_settings.__doc__.splitlines()
             vars_ = "\n  ".join(line.strip() for line in lines if "DIMAGIQA_" in line)
             raise RuntimeError(
                 f"Environment variables not set:\n  {vars_}\n\n"
