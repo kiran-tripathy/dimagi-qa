@@ -1,6 +1,7 @@
 from HQSmokeTests.testPages.dataPage import DataPage
 from HQSmokeTests.testPages.exportDataPage import ExportDataPage
 
+
 def test_01_auto_case_update(driver):
 
     export = ExportDataPage(driver)

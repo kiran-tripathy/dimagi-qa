@@ -1,7 +1,7 @@
 import time
 
-from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
-from HQSmokeTests.UserInputs.userInputsData import UserInputsData
+from HQSmokeTests.userInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.userInputs.userInputsData import UserInputsData
 from HQSmokeTests.testPages.organisationStructurePage import latest_download_file
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
 from selenium.webdriver.common.by import By
@@ -113,12 +113,10 @@ class MessagingPage:
         self.project_settings_menu = "Project Settings"
         self.project_settings_elements = "//form[@class='form form-horizontal']"
 
-
     def wait_to_click(self, *locator, timeout=10):
         try:
             clickable = ec.element_to_be_clickable(locator)
             WebDriverWait(self.driver, timeout).until(clickable).click()
-            
 
         except TimeoutException:
             print(TimeoutException)
@@ -165,7 +163,7 @@ class MessagingPage:
         
         try:
             while False:
-                if self.driver.find_element(By.XPATH, self.broadcast_created).is_displayed() == False:
+                if not self.driver.find_element(By.XPATH, self.broadcast_created).is_displayed():
                     self.wait_to_click(By.XPATH, self.next_btn)
                     time.sleep(5)
                     continue

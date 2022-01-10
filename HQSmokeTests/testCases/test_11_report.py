@@ -2,6 +2,7 @@ from HQSmokeTests.testPages.homePage import HomePage
 from HQSmokeTests.testPages.reportPage import ReportPage
 from selenium.common.exceptions import UnexpectedAlertPresentException
 
+
 def test_01_report_loading(driver):
 
     report = HomePage(driver)

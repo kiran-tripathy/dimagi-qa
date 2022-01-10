@@ -1,5 +1,6 @@
 from HQSmokeTests.testPages.applicationPage import ApplicationPage
 
+
 def test_01_create_new_app(driver):
 
     load = ApplicationPage(driver)

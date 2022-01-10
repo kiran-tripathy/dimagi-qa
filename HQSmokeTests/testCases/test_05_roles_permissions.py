@@ -1,6 +1,7 @@
 from HQSmokeTests.testPages.homePage import HomePage
 from HQSmokeTests.testPages.rolesPermissionsPage import RolesPermissionPage
 
+
 def test_01_open_roles_permissions_page(driver):
 
     menu = HomePage(driver)

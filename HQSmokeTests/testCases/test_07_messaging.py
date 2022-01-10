@@ -1,6 +1,7 @@
 from HQSmokeTests.testPages.homePage import HomePage
 from HQSmokeTests.testPages.messagingPage import MessagingPage
 
+
 def test_01_dashboard(driver):
 
     menu = HomePage(driver)

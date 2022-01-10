@@ -1,6 +1,6 @@
 import time
 
-from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.userInputs.generateUserInputs import fetch_random_string
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec

@@ -1,6 +1,6 @@
 import time
 
-from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.userInputs.generateUserInputs import fetch_random_string
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, StaleElementReferenceException, \
     UnexpectedAlertPresentException
 from selenium.webdriver.common.by import By
@@ -65,8 +65,8 @@ class ReportPage:
         self.application = "//select[@data-bind='value: application']"
         self.select_form_type_value = "form"
         self.select_app_value = "Village Health"
-        self.select_source_id= "//select[@id='id_source']"
-        self.select_source_id_form_value= "Case List / Registration Form"
+        self.select_source_id = "//select[@id='id_source']"
+        self.select_source_id_form_value = "Case List / Registration Form"
         self.select_source_id_case_value = "commcare-user"
 
         # Saved Reports

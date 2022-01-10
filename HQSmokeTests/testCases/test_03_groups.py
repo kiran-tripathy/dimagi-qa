@@ -1,6 +1,7 @@
 from HQSmokeTests.testPages.groupPage import GroupPage
 from HQSmokeTests.testPages.homePage import HomePage
 
+
 def test_01_user_groups(driver):
 
     menu = HomePage(driver)

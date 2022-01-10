@@ -1,4 +1,4 @@
-from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.userInputs.generateUserInputs import fetch_random_string
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
@@ -49,15 +49,12 @@ class DataPage:
         try:
             clickable = ec.element_to_be_clickable(locator)
             WebDriverWait(self.driver, timeout).until(clickable).click()
-            
 
         except NoSuchElementException:
             print(NoSuchElementException)
 
-
     def open_auto_case_update_page(self):
         self.wait_to_click(By.LINK_TEXT, self.auto_case_update_link)
-
 
     def add_new_rule(self):
         self.wait_to_click(By.ID, self.add_rule_button_id)
@@ -70,7 +67,6 @@ class DataPage:
         assert True == WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((
             By.XPATH, self.rule_created))).is_displayed()
         print("New Rule to Update Cases created successfully!")
-
 
     def remove_rule(self):
         self.open_auto_case_update_page()
@@ -85,7 +81,6 @@ class DataPage:
             assert True
             print("Rule removed successfully!")
 
-
     def create_lookup_table(self):
         self.wait_to_click(By.LINK_TEXT, self.manage_tables_link)
         self.wait_to_click(By.XPATH, self.add_table)
@@ -98,7 +93,6 @@ class DataPage:
             By.XPATH, self.table_created))).is_displayed()
         print("LookUp Table created successfully!")
 
-
     def view_lookup_table(self):
         self.wait_to_click(By.LINK_TEXT, self.view_tables_link)
         self.wait_to_click(By.ID, self.select_table_drop_down_id)
@@ -107,7 +101,6 @@ class DataPage:
         assert True == WebDriverWait(self.driver, 3).until(ec.presence_of_element_located((
             By.XPATH, self.column_name))).is_displayed()
         print("LookUp Table can be viewed successfully!")
-
 
     def delete_lookup_table(self):
         self.wait_to_click(By.LINK_TEXT, self.manage_tables_link)

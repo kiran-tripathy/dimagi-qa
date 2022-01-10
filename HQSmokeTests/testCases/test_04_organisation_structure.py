@@ -1,6 +1,7 @@
 from HQSmokeTests.testPages.homePage import HomePage
 from HQSmokeTests.testPages.organisationStructurePage import OrganisationStructurePage
 
+
 def test_01_open_organisation_page(driver):
 
     menu = HomePage(driver)

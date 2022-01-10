@@ -3,8 +3,8 @@ import os
 import time
 from datetime import date
 
-from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
-from HQSmokeTests.UserInputs.userInputsData import UserInputsData
+from HQSmokeTests.userInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.userInputs.userInputsData import UserInputsData
 from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
@@ -25,16 +25,6 @@ def latest_download_file():
             newest = max(files, key=os.path.getctime)
         print("File downloaded: " + newest)
         return newest
-        '''
-        for filename in files:
-            if filename.endswith(".xlsx"):
-                # newest = filename
-                newest = max(files, key=os.path.getctime)
-                if newest.endswith(".log"):
-                    newest = sorted(files, key=os.path.getctime)[-2]
-                print("File downloaded: " + newest)
-                return newest
-                '''
     finally:
         print("Restoring the path...")
         os.chdir(cwd)

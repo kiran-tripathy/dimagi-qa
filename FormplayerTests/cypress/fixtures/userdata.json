@@ -1,6 +1,3 @@
 {
-  "name": "TestA",
-  "QA_URL": "https://www.commcarehq.org/accounts/login/",
-  "LOGIN_USERNAME": "ktripathy+ush@dimagi.com",
-  "LOGIN_PASSWORD":"Kiran@123"
+  "name": "TestA"
 }

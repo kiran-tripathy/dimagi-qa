@@ -1,5 +1,6 @@
-from HQSmokeTests.UserInputs.generateUserInputs import fetch_random_string
+from HQSmokeTests.userInputs.generateUserInputs import fetch_random_string
 from HQSmokeTests.testPages.mobileWorkersPage import MobileWorkerPage
+
 
 def test_01_click_mobile_worker_menu(driver):
 

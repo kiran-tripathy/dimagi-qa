@@ -1,5 +1,6 @@
-from HQSmokeTests.UserInputs.userInputsData import UserInputsData
+from HQSmokeTests.userInputs.userInputsData import UserInputsData
 from HQSmokeTests.testPages.homePage import HomePage
+
 
 def test_01_reports_menu_visibility(driver):
 
