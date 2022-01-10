@@ -46,13 +46,7 @@ jobs:
         pytest -v --reruns 2 --capture=tee-sys --html=report.html --self-contained-html
         echo "NOW=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
         echo ${{env.NOW}}
-    #- name: Set current date as env variable
-     # if: always
-     # run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-    #- name: Echo current date
-     # if: alway()
-     # run: echo $NOW
-    - name: Send mail pass
+    - name: Send Pass Email
       uses: dawidd6/action-send-mail@v3
       if: success()   
       with:
@@ -65,7 +59,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: ${{ github.event.client_payload.environment }} - Pass - Github Actions job result ${{env.NOW}}  #${{github.run_number}}
+        subject: ${{ github.event.client_payload.environment }}  PASS - Github Actions job result ${{env.NOW}}  #${{github.run_number}}
         # Required recipients' addresses:
         to: qa@dimagi.com
         # Required sender full name (address can be skipped):
@@ -76,7 +70,7 @@ jobs:
         html_body: file:////home/runner/work/dimagi-qa/dimagi-qa/HQSmokeTests/email_pass.html
         # Optional priority: 'high', 'normal' (default) or 'low'
         priority: normal
-    - name: Send mail fail
+    - name: Send Failure Email
       uses: dawidd6/action-send-mail@v3
       if: failure()   
       with:
@@ -89,7 +83,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{secrets.DIMAGIQA_MAIL_PASSWORD}}
         # Required mail subject:
-        subject: ${{ github.event.client_payload.environment }} - Fail - Github Actions job result ${{env.NOW}}  #${{github.run_number}}
+        subject: ${{ github.event.client_payload.environment }} FAIL - Github Actions job result ${{env.NOW}}  #${{github.run_number}}
         # Required recipients' addresses:
         to: qa@dimagi.com
         # Required sender full name (address can be skipped):

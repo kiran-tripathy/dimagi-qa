@@ -101,7 +101,7 @@ def driver(settings):
             "download.default_directory": str(UserInputsData.download_path),
             "download.prompt_for_download": False,
             "safebrowsing.enabled": True})
-    web_driver = Service(executable_path=ChromeDriverManager().install(), service_args=['--verbose','log_path="/logs/chrome.log"'])
+    web_driver = Service(executable_path=ChromeDriverManager().install(), service_args=['--verbose', 'log_path="/logs/chrome.log"'])
     driver = webdriver.Chrome(service=web_driver, options=chrome_options)
     print("Chrome version:", driver.capabilities['browserVersion'])
     login = LoginPage(driver, settings["url"])
@@ -124,6 +124,7 @@ def pytest_runtest_makereport(item):
         print(report.when)
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
+            print("report skipped or failed")
             print("report skipped or failed")
             file_name = report.nodeid.replace("::", "_") + ".png"
             # file_name = None
