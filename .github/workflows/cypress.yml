@@ -2,9 +2,9 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master1 ]
   pull_request:
-    branches: [ master ]
+    branches: [ master1 ]
 #  repository_dispatch:
 #    types: [ deploy_success ]
     
