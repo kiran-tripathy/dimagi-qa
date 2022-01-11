@@ -119,7 +119,7 @@ def pytest_runtest_makereport(item):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
-    print(item.fixturenames)
+    # print(item.fixturenames)
     if report.when == "call" or report.when == "teardown":
         print(report.when)
         xfail = hasattr(report, 'wasxfail')
@@ -134,7 +134,7 @@ def pytest_runtest_makereport(item):
                        'onclick="window.open(this.src)" align="right"/></div>' % screen_img
                 extra.append(pytest_html.extras.html(html))
         report.extra = extra
-        print("extra added to report")
+        # print("extra added to report")
 
 
 def _capture_screenshot(driver):
