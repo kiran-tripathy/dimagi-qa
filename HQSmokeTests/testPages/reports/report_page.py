@@ -1,17 +1,12 @@
 import time
-from datetime import datetime, timedelta
 
 from HQSmokeTests.testPages.base.base_page import BasePage
 from HQSmokeTests.userInputs.generate_random_string import fetch_random_string
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
 from HQSmokeTests.userInputs.user_inputs import UserData
-from selenium.webdriver.support.select import Select
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
 
 
 class ReportPage(BasePage):
@@ -93,21 +88,6 @@ class ReportPage(BasePage):
         self.delete_selected = (By.XPATH,  "//a[@class='btn btn-danger']")
         self.delete_scheduled_confirm = (By.XPATH, "(//button[@data-bind='click: bulkDelete'])[1]")
         self.delete_success_scheduled = (By.XPATH, "//div[@class='alert alert-margin-top fade in alert-success']")
-
-        # Submit History
-        self.users_box = (By.XPATH, "//span[@class='select2-selection select2-selection--multiple']")
-        self.select_user = (By.XPATH, "//li[contains(text(),'[Web Users]')]")
-        self.application_select = "//select[@id='report_filter_form_app_id']"
-        self.module_select = "//select[@id='report_filter_form_module']"
-        self.form_select = "//select[@id='report_filter_form_xmlns']"
-        self.date_input = (By.XPATH, "//input[@id='filter_range']")
-        self.view_form_link = (By.XPATH, "//tbody/tr[1]/td[1]/a[.='View Form']")
-        self.case_name = (By.XPATH, "//td[div[contains(text(),'abc')]]")
-        self.submit_history_table = (By.XPATH, "//table[@id='report_table_submit_history']/tbody/tr")
-
-        # Case List
-        self.search_input = (By.XPATH, "//input[@id='report_filter_search_query']")
-        self.case_list_table = (By.XPATH, "//table[@id='report_table_case_list']/tbody/tr")
 
     def check_if_report_loaded(self):
         try:
@@ -244,74 +224,3 @@ class ReportPage(BasePage):
             print("Deleted Scheduled Report")
         except TimeoutException:
             print("No exports available")
-
-    def get_yesterday_tomorrow_dates(self):
-        # Get today's date
-        presentday = datetime.now()  # or presentday = datetime.today()
-        # Get Yesterday
-        yesterday = presentday - timedelta(1)
-        # Get Tomorrow
-        tomorrow = presentday + timedelta(1)
-
-        return yesterday.strftime('%Y-%m-%d')+" to "+tomorrow.strftime('%Y-%m-%d')
-
-    def verify_table_not_empty(self, locator):
-        clickable = ec.presence_of_all_elements_located(locator)
-        element = WebDriverWait(self.driver, 30).until(clickable, message="Couldn't find locator: "
-                                                                          + str(locator))
-        count = len(element)
-        if count > 0:
-            print(count, " rows are present in the web table")
-            return True
-        else:
-            print("No rows are present in the web table")
-            return False
-
-    def verify_form_data_submit_history(self, case_name):
-        self.wait_to_click(self.submit_history_rep)
-        self.wait_to_click(self.users_box)
-        self.wait_to_click(self.select_user)
-        select_app = Select(self.driver.find_element_by_xpath(self.application_select))
-        select_app.select_by_visible_text(UserData.web_app_name)
-        select_module = Select(self.driver.find_element_by_xpath(self.module_select))
-        select_module.select_by_visible_text(UserData.case_list_name)
-        select_form = Select(self.driver.find_element_by_xpath(self.form_select))
-        select_form.select_by_visible_text(UserData.form_name)
-        date_range = self.get_yesterday_tomorrow_dates()
-        self.clear(self.date_input)
-        self.send_keys(self.date_input, date_range+Keys.TAB)
-        self.wait_to_click(self.apply_id)
-        time.sleep(15)
-        self.scroll_to_bottom()
-        self.verify_table_not_empty(self.submit_history_table)
-        self.is_present_and_displayed(self.view_form_link)
-        form_link = self.get_attribute(self.view_form_link, "href")
-        print("View Form Link: ", form_link)
-        self.switch_to_new_tab()
-        self.driver.get(form_link)
-        # self.wait_and_sleep_to_click(self.view_form_link, 30)
-        # self.switch_to_next_tab()
-        time.sleep(3)
-        self.page_source_contains(case_name)
-        assert True, "Case name is present in Submit history"
-        self.driver.close()
-        self.switch_back_to_prev_tab()
-
-
-    def verify_form_data_case_list(self, case_name):
-        self.wait_to_click(self.case_list_rep)
-        self.wait_to_click(self.users_box)
-        self.wait_to_click(self.select_user)
-        self.send_keys(self.search_input, case_name)
-        self.wait_to_click(self.apply_id)
-        time.sleep(15)
-        self.scroll_to_bottom()
-        self.verify_table_not_empty(self.case_list_table)
-        self.page_source_contains(case_name)
-        self.wait_to_click_link(case_name)
-        self.switch_to_next_tab()
-        time.sleep(3)
-        self.page_source_contains(case_name)
-        assert True, "Case name is present in Case List"
-        self.driver.close()
-        self.switch_back_to_prev_tab()

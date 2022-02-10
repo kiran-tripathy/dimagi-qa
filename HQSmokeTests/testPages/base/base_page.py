@@ -180,15 +180,3 @@ class BasePage:
             print("alert accepted")
         except TimeoutException:
             print("no alert")
-
-    def page_source_contains(self, text):
-        assert text in self.driver.page_source
-
-    def scroll_to_bottom(self):
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-
-    def wait_to_click_link(self, link, timeout=20):
-        clickable = ec.element_to_be_clickable((By.LINK_TEXT, link))
-        element = WebDriverWait(self.driver, timeout).until(clickable, message="Couldn't find link: "
-                                                                               + str(link))
-        element.click()

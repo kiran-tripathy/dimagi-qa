@@ -1,6 +1,6 @@
 from HQSmokeTests.testPages.home.home_page import HomePage
 from HQSmokeTests.testPages.reports.report_page import ReportPage
-from HQSmokeTests.testPages.webapps.web_apps_page import WebAppsPage
+
 
 def test_case_14_report_loading(driver):
 
@@ -23,18 +23,6 @@ def test_case_14_report_loading(driver):
     load.sms_opt_out_report()
     load.scheduled_messaging_report()
 
-def test_case_15_16_41_submit_form_verify_formdata_casedata(driver):
-    home = HomePage(driver)
-    driver.refresh()
-    home.web_apps_menu()
-    webapps = WebAppsPage(driver)
-    webapps.verify_apps_presence()
-    case_name = webapps.submit_case_form()
-    report = HomePage(driver)
-    report.reports_menu()
-    load = ReportPage(driver)
-    load.verify_form_data_submit_history(case_name)
-    load.verify_form_data_case_list(case_name)
 
 def test_case_17_create_form_report(driver):
 
@@ -68,4 +56,3 @@ def test_case_20_scheduled_report(driver):
     load = ReportPage(driver)
     load.scheduled_report()
     load.delete_scheduled_and_saved_reports()
-

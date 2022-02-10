@@ -5,7 +5,7 @@ from HQSmokeTests.testPages.users.group_page import GroupPage
 from HQSmokeTests.testPages.users.roles_permissions_page import RolesPermissionPage
 from HQSmokeTests.testPages.users.org_structure_page import OrganisationStructurePage
 from HQSmokeTests.testPages.users.webapps_permission_page import WebAppPermissionPage
-from HQSmokeTests.testPages.users.web_user_page import WebUsersPage
+
 
 def test_case_02_create_mobile_worker(driver):
 
@@ -160,10 +160,3 @@ def test_cleanup_items_in_users_menu(driver):
 
     clean4.cleanup_location()
     print("Deleted the location and location field")
-
-def test_case_13_verify_user(driver):
-
-    webuser = WebUsersPage(driver)
-    webuser.invite_new_web_user('admin')
-    webuser.assert_invite()
-    webuser.delete_invite()
